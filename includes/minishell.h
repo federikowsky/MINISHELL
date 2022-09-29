@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/09/29 16:17:45 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/09/29 16:36:37 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int 			getCmd_aux(char *s, int *i);
 int    			ft_pipe_check(char *cmd);
 int    			ft_and_check(char *cmd);
 int    			ft_quote_check(char *cmd);
+int    			ft_bracket_check(char *cmd);
+int 			ft_check_operator(char *cmd);
 
 /* Main */
 int				main_loop(t_shell *s_shell);

@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/09/29 16:16:07 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/09/29 16:36:58 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_tree *tree = NULL;
 	char *s = "";
-	if (ft_pipe_check(argv[1]) || ft_and_check(argv[1]) || ft_quote_check(argv[1]))
+	if (ft_check_operator(argv[1]))
     {
         printf("Syntax Error\n");
         return (1);
