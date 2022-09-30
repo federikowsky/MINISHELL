@@ -3,16 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:15:07 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/09/29 16:17:33 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/09/30 14:36:57 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/minishell.h" 
 
-int    ft_pipe_check(char *cmd)
+char	*ft_arg_check(char *cmd, char **envp)
+{
+	char	**word;
+
+	word = ft_split(cmd, ' ');
+	printf("Comando da checkare:%s\n", word[0]);
+	if (ft_isbuiltin(word[0]) && ft_pathfinder(word[0], envp) == NULL)
+        perror("Minishell");
+	return (cmd);
+}
+
+int		ft_pipe_check(char *cmd)
 {
     int    i;
 

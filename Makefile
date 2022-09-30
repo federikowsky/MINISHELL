@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
+#    By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/09/29 16:18:09 by fefilipp         ###   ########.fr        #
+#    Updated: 2022/09/30 15:01:57 by agenoves         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,16 @@ READLINE = 		-L/usr/include -lreadline -L$(HOME)/.brew/opt/readline/lib -I$(HOME
 RM = 			rm -rf
 
 FILES = 		sources/main \
+				sources/parser \
+				sources/env \
+				utils/utils \
 				utils/utilsToken \
 				utils/utilsToken2 \
-				sources/parser \
+				utils/utilsToken3 \
 				# sources/builtin \
 				# sources/signal \
 				# sources/cd \
 				# sources/pwd \
-				# sources/env \
 				# sources/cmd_exec \
 				# sources/export \
 				# sources/echo \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/09/29 16:17:45 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:01:30 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,17 @@ typedef struct s_shell
 	int		is_pipe;
 }	t_shell;
 
-typedef struct s_tree
-{
-	char			*cmd;
-	int				operator;
-	int				subshell;
-	struct s_tree	*sx;
-	struct s_tree	*dx;
-}	t_tree;
-
 /* Signal */
 void			sig_handling_set(int signals);
 void			sighand(int sig);
 
 /* ReadLine */
 extern void		rl_replace_line(const char *text, int clear_undo);
+
+/* Utils */
+int				ft_strcmp(char *s1, char *s2);
+int				ft_isbuiltin(char *cmd);
+char			*ft_pathfinder(char *cmd, char **envp);
 
 /* Utils Token */
 char 			*ft_strip(char **s);
@@ -66,6 +62,10 @@ int 			getCmd_aux(char *s, int *i);
 int    			ft_pipe_check(char *cmd);
 int    			ft_and_check(char *cmd);
 int    			ft_quote_check(char *cmd);
+char			*ft_arg_check(char *cmd, char **envp);
+int				ft_bracket_aux(char *cmd);
+int				ft_bracket_check(char *cmd);
+int 			ft_check_operator(char *cmd);
 
 /* Main */
 int				main_loop(t_shell *s_shell);
@@ -80,10 +80,10 @@ void			ft_export(t_shell *shell);
 void			ft_echo(t_shell *shell);
 void			ft_unset(t_shell *shell);
 void 			ft_exec_builtin(char *cmd, t_shell *shell);
+void			ft_printenv(char **envp);
 
 /* Parsing */
-char			*getCmd(char *s);
-
+char			*getCmd(char *s, char **envp);
 
 /* Pipe */
 void 			exec_pipe(t_shell *shell);
