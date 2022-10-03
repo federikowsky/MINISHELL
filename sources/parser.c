@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/09/30 15:15:34 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:22:46 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*getCmd(char *s, char **envp)
 	}
 	i = -2;
 	temp = getSub(s, start, ft_strlen(s));
-	if (ft_strncmp(temp, "", 0))
+	if (*temp)
 		return(ft_arg_check(temp, envp));
 	return (NULL);
 }
