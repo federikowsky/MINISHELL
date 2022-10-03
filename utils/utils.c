@@ -6,11 +6,25 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:05:08 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/03 14:58:10 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/03 16:41:07 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	ft_is_subshell(char *token)
+{
+	int	i;
+
+	i = 0;
+	while (token[i])
+	{
+		if (ft_has(token[i], "|&"))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	free_matrix(char **matrix)
 {
@@ -52,7 +66,6 @@ char	*ft_pathfinder(char *cmd, char **envp)
 	free_matrix(mypaths);
 	return (NULL);
 }
-
 
 int	ft_strcmp(char *s1, char *s2)
 {

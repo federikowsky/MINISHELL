@@ -6,66 +6,58 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/09/30 11:07:38 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:14:19 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+/*
+	CMD:
+		-1 Ultimo comando
+		0  Primo comando
+		1  Altri casi
+*/
 
-void open_pipe(int pipes[], int no_pipes)
+void	exec_pipe(t_shell *shell, int nb_cmd)
 {
-	int i;
-	
-	i = -1;
-	while (++i < no_pipes)
-		pipe(pipes + i * 2);
-}
+	int	fd[2];
 
-void close_pipe(int pipes[], int no_pipes)
-{   
-    int j;
-
-    j = 0;
-    while (j < 2 * no_pipes)
-        close(pipes[j++]);
-}
-
-void exec_pipe(t_shell *shell)
-{
-	int i;
-	int j;
-	int pipes[2 * (shell->cmd_count - 1)];
-	int status;
-	
-	i = 0;
-	j = 0;
-	open_pipe(pipes, shell->cmd_count - 1);
-	while (shell->pipes[j])
+	if (pipe(fd) == -1)
 	{
-		if (fork() == 0)
-		{
-			if (shell->pipes[j + 1] != NULL)
-				dup2(pipes[i + 1], STDOUT_FILENO);
-			if (i != 0)
-				dup2(pipes[i - 2], STDIN_FILENO);
-			close_pipe(pipes, shell->cmd_count - 1);
-			shell->cmd = shell->pipes[j];
-			/* handle execution of command here: */
-			// ft_parser(shell, shell->pipes[j]);
-		}
-		else 
-			printf("%s\n", strerror(errno));
-		i += 2;
-		j++;
+		perror("Error Piping!");
+		return ;
 	}
-	close_pipe(pipes, shell->cmd_count - 1);
-	while (i-- > 0)
-		wait(NULL);
+	if (nb_cmd != -1)
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+	}
+	if (nb_cmd != 0)
+	{
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[1]);
+	}
+	if (nb_cmd == -1)
+	{
+		close(fd[0]);
+		close(fd[1]);
+	}
+	ft_exec_cmd(shell);
 }
 
-void exec_cmd(t_shell *shell)
+void	ft_pipe(t_shell *shell)
 {
-	shell->cmds = ft_cmd_count(shell->cmd);
-	shell->pipes = ft_split(shell->cmd, '|');
-	exec_pipe(shell);
+	static int	nb_cmd = 0;
+	
+	if (shell->operator == NULL)
+	{
+		nb_cmd = -1;
+		exec_pipe(shell, nb_cmd);
+		nb_cmd = 0;
+	}
+	else
+	{
+		exec_pipe(shell, nb_cmd);
+		nb_cmd = 1;
+	}
 }

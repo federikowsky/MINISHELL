@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/03 15:22:33 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/03 16:40:47 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main_loop(t_shell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	
+
 	(void) argc;
 	(void) argv;
 	(void) envp;
@@ -51,7 +51,7 @@ int	main(int argc, char **argv, char **envp)
 //     }
 // 	while (s != NULL)
 // 	{
-// 		s = getCmd(argv[1], envp);
+// 		s = getcmd(argv[1], envp);
 // 		if (s != NULL)
 // 			printf("%s\n", ft_strip(&s));
 // 		else

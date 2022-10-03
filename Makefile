@@ -6,7 +6,7 @@
 #    By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/03 15:23:01 by agenoves         ###   ########.fr        #
+#    Updated: 2022/10/03 19:14:39 by agenoves         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,10 @@ FILES = 		sources/main \
 				sources/env \
 				sources/parser \
 				sources/signal \
+				sources/bonus \
+				sources/pipe \
 				utils/utils \
+				utils/utils2 \
 				utils/utilsToken \
 				utils/utilsToken2 \
 				utils/utilsToken3 \

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:46:53 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/09/29 16:01:21 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/03 16:42:01 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char *ft_strip(char **s)
+char	*ft_strip(char **s)
 {
 	if (*s == NULL)
-		return NULL;
+		return (NULL);
 	while (**s == ' ')
 		(*s)++;
 	while ((*s)[ft_strlen(*s) - 1] == ' ')
@@ -23,7 +23,7 @@ char *ft_strip(char **s)
 	return (*s);
 }
 
-int	ft_contained(char c, char const *set)
+int	ft_has(char c, char const *set)
 {
 	int	i;
 
@@ -37,21 +37,21 @@ int	ft_contained(char c, char const *set)
 	return (0);
 }
 
-int findParenth(const char *s, int start)
+int	findparenth(const char *s, int start)
 {
 	int	found;
 
 	found = -1;
 	while (s[start])
 	{
-		if (ft_contained(s[start], ")\"'"))
+		if (ft_has(s[start], ")\"'"))
 			found = start;
 		start++;
 	}
-	return found;
+	return (found);
 }
 
-char *getSub(const char *s, int start, int end)
+char	*getsub(const char *s, int start, int end)
 {
 	char	*str;
 	int		i;
@@ -66,9 +66,9 @@ char *getSub(const char *s, int start, int end)
 	return (str);
 }
 
-int getCmd_aux(char *s, int *i)
+int	getcmd_aux(char *s, int *i)
 {
-	while(s[*i] == ' ' || s[*i] == ')')
+	while (s[*i] == ' ' || s[*i] == ')')
 		(*i)++;
 	return (*i);
 }
