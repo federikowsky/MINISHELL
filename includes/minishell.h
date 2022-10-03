@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/03 20:42:40 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:22:17 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void			ft_pwd(void);
 void			ft_cd(t_shell *shell);
 void			ft_update_env(t_shell *shell, char *path);
 void			ft_envhandle(char **envp, t_shell *shell);
-void			ft_export(t_shell *shell);
+int				ft_export(char *s, t_shell *shell);
 void			ft_echo(t_shell *shell);
 void			ft_unset(t_shell *shell);
 void			ft_exec_builtin(char *cmd, t_shell *shell);

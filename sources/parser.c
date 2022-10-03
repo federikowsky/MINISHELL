@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/03 23:40:38 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:08:35 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ char	*getcmd(char *s, char **envp)
 			i = findparenth(s, start) + 1;
 			return (ft_arg_check(getsub(s, start + 1, i - 1), envp));
 		}
-		else if (in_cmd_mode && !ft_isalpha(s[i]) && !ft_has(s[i], " -.*"))
+		else if (in_cmd_mode && !ft_isdigit(s[i]) && !ft_isalpha(s[i]) && !ft_has(s[i], " =-.*"))
 		{
 			in_cmd_mode = 0;
-			getsub(s, start, i);
+			// getsub(s, start, i);
 			return (ft_arg_check(getsub(s, start, i), envp));
 		}
 		else if (!in_cmd_mode && !ft_has(s[i], "|&"))

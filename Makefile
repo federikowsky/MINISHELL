@@ -6,7 +6,7 @@
 #    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/03 20:00:12 by fefilipp         ###   ########.fr        #
+#    Updated: 2022/10/04 00:22:58 by fefilipp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,11 @@ RM = 			rm -rf
 FILES = 		sources/main \
 				sources/cd \
 				sources/env \
+				sources/pipe \
+				sources/bonus \
+				sources/export \
 				sources/parser \
 				sources/signal \
-				sources/bonus \
-				sources/pipe \
 				utils/utils \
 				utils/utils2 \
 				utils/utilsToken \
@@ -32,7 +33,6 @@ FILES = 		sources/main \
 				# sources/builtin \
 				# sources/pwd \
 				# sources/cmd_exec \
-				# sources/export \
 				# sources/echo \
 				# sources/unset \
 				# sources/pipe \

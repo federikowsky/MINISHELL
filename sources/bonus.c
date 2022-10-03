@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:34:45 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/03 23:39:21 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/03 23:55:03 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_or(t_shell *shell)
 		}
 		shell->token++;
 	}
-	// ft_exec_cmd(shell);
 }
 
 void	ft_and(t_shell *shell)

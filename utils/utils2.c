@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 19:01:28 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/03 23:41:31 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:21:08 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	ft_builtin(char *token, t_shell *shell)
 	else if (ft_strcmp(cmd[0], "cd") == 0)
 		printf("il comando da eseguire é: %s\n", token);
 	else if (ft_strcmp(cmd[0], "env") == 0)
-		printf("il comando da eseguire é: %s\n", token);	
+		ft_printenv(shell->env);	
 	else if (ft_strcmp(cmd[0], "echo") == 0)
 		printf("il comando da eseguire é: %s\n", token);
 	else if (ft_strcmp(cmd[0], "unset") == 0)
 		printf("il comando da eseguire é: %s\n", token);
 	else if (ft_strcmp(cmd[0], "export") == 0)
-		printf("il comando da eseguire é: %s\n", token);
+		return (ft_export(token, shell));
 	else
 	{
 		printf("minishell: %s: command not found\n", token);
