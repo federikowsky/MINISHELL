@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/09/30 15:01:30 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:17:00 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,8 @@
 typedef struct s_shell
 {
 	char	**env;
-	char	**cmds;
-	char	**pipes;
-	char	*path;
 	char	*cmd;
 	char	*home;
-	int		cmd_count;
-	int		is_pipe;
 }	t_shell;
 
 /* Signal */
@@ -52,6 +47,8 @@ extern void		rl_replace_line(const char *text, int clear_undo);
 int				ft_strcmp(char *s1, char *s2);
 int				ft_isbuiltin(char *cmd);
 char			*ft_pathfinder(char *cmd, char **envp);
+char			*ft_get_home(t_shell *shell);
+int				ft_find_lenght(char **s);
 
 /* Utils Token */
 char 			*ft_strip(char **s);
@@ -84,9 +81,9 @@ void			ft_printenv(char **envp);
 
 /* Parsing */
 char			*getCmd(char *s, char **envp);
+void			ft_start(t_shell *shell);
 
 /* Pipe */
-void 			exec_pipe(t_shell *shell);
-void 			run_cmd(t_shell *shell);
+
 
 #endif

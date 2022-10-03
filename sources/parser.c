@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/09/30 16:22:46 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:16:34 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ char	*getCmd(char *s, char **envp)
 	static int		i = 0;
 	static int		in_cmd_mode = 1;
 	if (i == -2)
+	{
+		i = 0;
 		return NULL;
+	}
 	start = getCmd_aux(s, &i);
 	while (s[i])
 	{
@@ -47,4 +50,20 @@ char	*getCmd(char *s, char **envp)
 	if (*temp)
 		return(ft_arg_check(temp, envp));
 	return (NULL);
+}
+
+void	ft_start(t_shell *shell)
+{
+	char	*token;
+	char	*operator;
+
+	printf("Linea di comando:%s\n", shell->cmd);
+	token = getCmd(shell->cmd, shell->env);
+	printf("Cmd1: %s\n", token);
+	while (token != NULL)
+	{
+		operator = getCmd(shell->cmd, shell->env);
+		token = getCmd(shell->cmd, shell->env);
+		printf("Op: %s\nCmd2: %s\n", operator, token);
+	}
 }

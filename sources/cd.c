@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 13:10:33 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/03 14:47:47 by agenoves         ###   ########.fr       */
+/*   Created: 2022/10/03 14:41:50 by agenoves          #+#    #+#             */
+/*   Updated: 2022/10/03 14:42:12 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_envhandle(char **envp, t_shell *shell)
+char	*ft_get_home(t_shell *shell)
 {
 	int		i;
+	char	*home;
 
-	shell->env = malloc(sizeof(char *) * (ft_find_lenght(envp) + 1));
-	i = -1;
-	if (!shell->env)
-		exit(printf("Error allocating env\n"));
-	while (envp[++i])
+	i = 0;
+	while (shell->env[i] != 0)
 	{
-		shell->env[i] = ft_strdup(envp[i]);
-		if (!shell->env)
-			exit(printf("Error setting env\n"));
+		if (!ft_strncmp(shell->env[i], "HOME=", 5))
+			home = ft_split(shell->env[i], '=')[1];
+		i++;
 	}
-	shell->env[i] = 0;
-}
-
-void	ft_printenv(char **envp)
-{
-	int	i;
-
-	i = -1;
-	while (envp[++i] != 0)
-		printf("%s\n", envp[i]);
+	return (home);
 }
