@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/03 19:12:07 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:42:40 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ typedef struct s_shell
 	char	*cmd;
 	char	*home;
 	char 	**token;
+	char 	**token_temp;
 	char	**operator;
+	char	**operator_temp;
 	int		exitstatus;
 }	t_shell;
 
@@ -53,6 +55,8 @@ char			*ft_pathfinder(char *cmd, char **envp);
 char			*ft_get_home(t_shell *shell);
 int				ft_find_lenght(char **s);
 int				ft_is_subshell(char *token);
+void			ft_print_mat(char **ss);
+int				free_matrix(char **matrix);
 
 /* Utils Token */
 char			*ft_strip(char **s);

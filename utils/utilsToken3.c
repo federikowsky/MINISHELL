@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:02:41 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/03 19:12:29 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/03 23:22:30 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,21 @@ char **ft_addelement(char **ss, char *cmd)
 	char	**res;
 	int		i;
 
-	res = malloc(sizeof(char *) * ft_find_lenght(ss) + 2);
 	i = 0;
-	while (ss[i])
+	if (ss == NULL)
+		res = malloc(sizeof(char *) * 2);
+	else
 	{
-		res[i] = ss[i];
-		i++;
+		res = malloc(sizeof(char *) * (ft_find_lenght(ss) + 2));
+		while (ss[i])
+		{
+			res[i] = ss[i];
+			i++;
+		}
 	}
 	res[i++] = cmd;
 	res[i] = NULL;
-	free(ss);
+	// if (ss != NULL && *ss != NULL)
+	// 	free(ss);
 	return (res);
 }

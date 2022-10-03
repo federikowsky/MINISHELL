@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/03 16:40:47 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/03 23:33:15 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	main_loop(t_shell *shell)
 {
 	while (1)
 	{
+		shell->operator = NULL;
+		shell->token = NULL;
 		shell->cmd = readline(PROMPT);
 		if (!shell->cmd)
 			return (write (1, "\n", 1));
@@ -41,21 +43,5 @@ int	main(int argc, char **argv, char **envp)
 	main_loop(&shell);
 }
 
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	char *s = "";
-// 	if (ft_check_operator(argv[1]))
-//     {
-//         printf("Syntax Error\n");
-//         return (1);
-//     }
-// 	while (s != NULL)
-// 	{
-// 		s = getcmd(argv[1], envp);
-// 		if (s != NULL)
-// 			printf("%s\n", ft_strip(&s));
-// 		else
-// 			break;
-// 	}
-// 	return 0;
-// }
+// echo ciao || ls | grep ll && grep ciao
+// echo ciao && echo ll && ps || ls 

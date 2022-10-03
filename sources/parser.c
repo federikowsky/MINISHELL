@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/03 19:12:00 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/03 23:40:38 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,10 @@ void ft_exec_cmd(t_shell *shell)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (ft_builtin(*(shell->token), shell))
-			printf("ole\n");
-		else
-			printf("il comando da eseguire non é builtin\n");
-		exit(0);
-
+		exit(ft_builtin(*(shell->token), shell));
 	}
-	else
+	while(waitpid(pid, &status, 0) > 0)
 	{
-		wait(&status);
 		if (WIFEXITED(status))
 			shell->exitstatus = WEXITSTATUS(status);
 	}
@@ -47,6 +41,8 @@ void	ft_switch_op(t_shell *shell)
 		ft_or(shell);
 	else if (!ft_strcmp(*(shell->operator), "&&"))
 		ft_and(shell);
+	else if (*(shell->operator) == NULL && *(shell->token) != NULL)
+		ft_exec_cmd(shell);
 	
 }
 
@@ -109,9 +105,15 @@ void ft_creatematrix(t_shell *shell)
 void	ft_start(t_shell *shell)
 {
 	ft_creatematrix(shell);
-	while(shell->token)
+	// ft_print_mat(shell->token);
+	// ft_print_mat(shell->operator);
+	shell->operator_temp = shell->operator;
+	shell->token_temp = shell->token;
+	while(*(shell->token))
 	{
 		ft_switch_op(shell);
 	}
 	free(shell->cmd);
+	free_matrix(shell->token_temp);
+	free_matrix(shell->operator_temp);
 }

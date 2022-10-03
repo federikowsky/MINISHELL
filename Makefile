@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+         #
+#    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/03 19:14:39 by agenoves         ###   ########.fr        #
+#    Updated: 2022/10/03 20:00:12 by fefilipp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 			minishell
 CC = 			gcc
 LIBFT = 		libft/libft.a
-CFLAGS = 		-Wall -Werror -Wextra
+CFLAGS = 		-Wall -Werror -Wextra -g
 READLINE = 		-L/usr/include -lreadline -L$(HOME)/.brew/opt/readline/lib -I$(HOME)/.brew/opt/readline/include
 RM = 			rm -rf
 

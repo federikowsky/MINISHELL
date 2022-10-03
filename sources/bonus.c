@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:34:45 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/03 19:10:09 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/03 23:39:21 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,21 @@ void	ft_or(t_shell *shell)
 			shell->token++;
 			shell->operator++;
 		}
+		shell->token++;
 	}
-	shell->token++;
 	// ft_exec_cmd(shell);
 }
 
 void	ft_and(t_shell *shell)
 {
 	ft_exec_cmd(shell);
-	if (shell->exitstatus == 0)
-	{
-		shell->token++;
-		shell->operator++;
+	if (*(shell->operator) == NULL && *(shell->token) != NULL)
+		ft_exec_cmd(shell);
+	else if (shell->exitstatus == 0 && *(shell->token) != NULL)
 		ft_switch_op(shell);
+	else if (shell->exitstatus != 0)
+	{
+		printf("Minishell: %s: Command not found\n", *(shell->token));
+		*(shell->token) = NULL;
 	}
 }
