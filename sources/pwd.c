@@ -1,41 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/23 16:41:06 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/04 15:16:41 by agenoves         ###   ########.fr       */
+/*   Created: 2022/09/13 13:11:22 by agenoves          #+#    #+#             */
+/*   Updated: 2022/10/04 13:24:29 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_exit(t_shell *shell)
+void	ft_pwd(void)
 {
-	int	i;
-	int	check;
+	char	*pwdpath;
 
-	check = 0;
-	i = 0;
-	printf("exit\n");
-	if (ft_find_lenght(shell->cmds) > 2)
-		printf("too many arguments\n");
-	else if (ft_find_lenght(shell->cmds) == 2)
-	{
-		while (shell->cmds[1][i])
-		{
-			if (!ft_isdigit(shell->cmds[1][i]))
-			{
-				check = 1;
-				break ;
-			}
-			i++;
-		}
-		if (check)
-			printf("minishell: exit: %s: numeric argument required\n", \
-			shell->cmds[1]);
-	}
-	exit(0);
+	pwdpath = malloc(sizeof(char) * LEN_PATH);
+	pwdpath = getcwd(pwdpath, LEN_PATH);
+	printf("%s\n", pwdpath);
 }

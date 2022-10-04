@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
+#    By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/04 00:22:58 by fefilipp         ###   ########.fr        #
+#    Updated: 2022/10/04 15:10:01 by agenoves         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,21 +20,21 @@ RM = 			rm -rf
 FILES = 		sources/main \
 				sources/cd \
 				sources/env \
+				sources/pwd \
+				sources/echo \
 				sources/pipe \
 				sources/bonus \
 				sources/export \
 				sources/parser \
 				sources/signal \
+				sources/unset \
 				utils/utils \
 				utils/utils2 \
 				utils/utilsToken \
 				utils/utilsToken2 \
 				utils/utilsToken3 \
 				# sources/builtin \
-				# sources/pwd \
 				# sources/cmd_exec \
-				# sources/echo \
-				# sources/unset \
 				# sources/pipe \
 				# utils/utils
 				

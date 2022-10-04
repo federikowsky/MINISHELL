@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/03 19:14:19 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:17:07 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,46 +18,20 @@
 		1  Altri casi
 */
 
-void	exec_pipe(t_shell *shell, int nb_cmd)
+void	exec_pipe(t_shell *shell)
 {
-	int	fd[2];
+	int		fd[2];
 
 	if (pipe(fd) == -1)
-	{
-		perror("Error Piping!");
-		return ;
-	}
-	if (nb_cmd != -1)
-	{
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-	}
-	if (nb_cmd != 0)
-	{
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[1]);
-	}
-	if (nb_cmd == -1)
-	{
-		close(fd[0]);
-		close(fd[1]);
-	}
-	ft_exec_cmd(shell);
+		perror("Pipe Failed");
+	ft_exec_cmd(shell, fd);
 }
 
 void	ft_pipe(t_shell *shell)
 {
-	static int	nb_cmd = 0;
 	
 	if (shell->operator == NULL)
-	{
-		nb_cmd = -1;
-		exec_pipe(shell, nb_cmd);
-		nb_cmd = 0;
-	}
+		ft_exec_cmd(shell, NULL);
 	else
-	{
-		exec_pipe(shell, nb_cmd);
-		nb_cmd = 1;
-	}
+		exec_pipe(shell);
 }

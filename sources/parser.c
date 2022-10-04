@@ -3,29 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/04 00:08:35 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:33:33 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void ft_exec_cmd(t_shell *shell)
+void ft_exec_cmd(t_shell *shell, int fd[2])
 {
 	pid_t	pid;
 	int		status;
-
-	pid = fork();
-	if (pid == 0)
+	
+	if (ft_builtin(sstoken, shell))
 	{
-		exit(ft_builtin(*(shell->token), shell));
-	}
-	while(waitpid(pid, &status, 0) > 0)
-	{
-		if (WIFEXITED(status))
-			shell->exitstatus = WEXITSTATUS(status);
+		pid = fork();
+		if (pid == 0)
+		{
+			if (fd != NULL)
+			{
+				close(fd[0]);
+				dup2(fd[1], 1);
+			}
+			execve(ft_pathfinder(sstoken, shell->env), \
+				ft_split(sstoken, ' '), shell->env);
+			exit(EXIT_FAILURE);
+		}
+		if (fd != NULL)
+		{
+			close(fd[1]);
+			dup2(fd[0], 0);
+		}
+		while(waitpid(pid, &status, 0) > 0)
+		{
+			if (WIFEXITED(status))
+				shell->exitstatus = WEXITSTATUS(status);
+		}
 	}
 	shell->token++;
 	shell->operator++;
@@ -41,8 +56,8 @@ void	ft_switch_op(t_shell *shell)
 		ft_or(shell);
 	else if (!ft_strcmp(*(shell->operator), "&&"))
 		ft_and(shell);
-	else if (*(shell->operator) == NULL && *(shell->token) != NULL)
-		ft_exec_cmd(shell);
+	else if (*(shell->operator) == NULL && sstoken != NULL)
+		ft_exec_cmd(shell, NULL);
 	
 }
 
@@ -67,7 +82,8 @@ char	*getcmd(char *s, char **envp)
 			i = findparenth(s, start) + 1;
 			return (ft_arg_check(getsub(s, start + 1, i - 1), envp));
 		}
-		else if (in_cmd_mode && !ft_isdigit(s[i]) && !ft_isalpha(s[i]) && !ft_has(s[i], " =-.*"))
+		// else if (in_cmd_mode && !ft_isdigit(s[i]) && !ft_isalpha(s[i]) && !ft_has(s[i], " =-.*"))
+		else if (in_cmd_mode && !ft_isdigit(s[i]) && !ft_isalpha(s[i]) && ft_has(s[i], "|&"))
 		{
 			in_cmd_mode = 0;
 			// getsub(s, start, i);
@@ -109,7 +125,7 @@ void	ft_start(t_shell *shell)
 	// ft_print_mat(shell->operator);
 	shell->operator_temp = shell->operator;
 	shell->token_temp = shell->token;
-	while(*(shell->token))
+	while(sstoken)
 	{
 		ft_switch_op(shell);
 	}

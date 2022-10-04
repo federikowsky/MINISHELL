@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:34:45 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/03 23:55:03 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:14:32 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_or(t_shell *shell)
 {
-	ft_exec_cmd(shell);
+	ft_exec_cmd(shell, NULL);
 	if (shell->exitstatus == 0)
 	{
 		while (ft_strcmp(*(shell->operator), "|") == 0)
@@ -28,14 +28,14 @@ void	ft_or(t_shell *shell)
 
 void	ft_and(t_shell *shell)
 {
-	ft_exec_cmd(shell);
-	if (*(shell->operator) == NULL && *(shell->token) != NULL)
-		ft_exec_cmd(shell);
-	else if (shell->exitstatus == 0 && *(shell->token) != NULL)
-		ft_switch_op(shell);
-	else if (shell->exitstatus != 0)
+	ft_exec_cmd(shell, NULL);
+	if (shell->exitstatus == 0 && sstoken != NULL)
 	{
-		printf("Minishell: %s: Command not found\n", *(shell->token));
-		*(shell->token) = NULL;
+		if (*(shell->operator) == NULL)
+			ft_exec_cmd(shell, NULL);
+		else 
+			ft_switch_op(shell);
 	}
+	else if (shell->exitstatus != 0)
+		sstoken = NULL;
 }

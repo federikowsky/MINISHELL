@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/23 16:41:06 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/04 15:16:41 by agenoves         ###   ########.fr       */
+/*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
+/*   Updated: 2022/10/04 15:13:36 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_exit(t_shell *shell)
-{
-	int	i;
-	int	check;
+void	ft_echo(t_shell *shell)
+ {
+ 	char	**ss;
+ 	int		i;
 
-	check = 0;
-	i = 0;
-	printf("exit\n");
-	if (ft_find_lenght(shell->cmds) > 2)
-		printf("too many arguments\n");
-	else if (ft_find_lenght(shell->cmds) == 2)
-	{
-		while (shell->cmds[1][i])
-		{
-			if (!ft_isdigit(shell->cmds[1][i]))
-			{
-				check = 1;
-				break ;
-			}
-			i++;
-		}
-		if (check)
-			printf("minishell: exit: %s: numeric argument required\n", \
-			shell->cmds[1]);
-	}
-	exit(0);
-}
+ 	ss = ft_split(sstoken, ' ');
+ 	i = 1;
+ 	while (ss[i])
+ 	{
+ 		if (ft_strncmp(ss[i], "-n", 2) != 0)
+ 			printf("%s ", ss[i]);
+ 		i++;
+ 	}
+ 	if (!ss[1] || ft_strncmp(ss[1], "-n", 2) != 0)
+ 		printf("\n");
+	else
+		printf("\b");
+ }

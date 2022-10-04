@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/04 00:22:17 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:15:34 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 # define PROMPT "\e[1;3;37mmi\e[1;3;36mni\e[1;3;37msh\e[1;3;36mel\e[1;3;37ml$ "
 # define LEN_PATH 4096
+# define sstoken *(shell->token)
 
 typedef struct s_shell
 {
@@ -40,6 +41,7 @@ typedef struct s_shell
 	char	**operator_temp;
 	int		exitstatus;
 }	t_shell;
+
 
 /* Signal */
 void			sig_handling_set(int signals);
@@ -72,26 +74,27 @@ int				ft_bracket_aux(char *cmd);
 int				ft_bracket_check(char *cmd);
 int				ft_check_operator(char *cmd);
 char 			**ft_addelement(char **ss, char *cmd);
+int				ft_check_builtin(char *input);
 
 /* Main */
 int				main_loop(t_shell *s_shell);
 
 /* Built in */
 int				ft_builtin(char *cmd, t_shell *shell);
+int				ft_unset(t_shell *shell);
+int				ft_export(char *s, t_shell *shell);
 void			ft_pwd(void);
 void			ft_cd(t_shell *shell);
 void			ft_update_env(t_shell *shell, char *path);
 void			ft_envhandle(char **envp, t_shell *shell);
-int				ft_export(char *s, t_shell *shell);
 void			ft_echo(t_shell *shell);
-void			ft_unset(t_shell *shell);
 void			ft_exec_builtin(char *cmd, t_shell *shell);
 void			ft_printenv(char **envp);
 
 /* Parsing */
 char			*getcmd(char *s, char **envp);
 void			ft_start(t_shell *shell);
-void 			ft_exec_cmd(t_shell *shell);
+void 			ft_exec_cmd(t_shell *shell, int fd[2]);
 void			ft_switch_op(t_shell *shell);
 
 /* Pipe */

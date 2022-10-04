@@ -3,40 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 19:01:28 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/04 00:21:08 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:34:27 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	ft_check_builtin(char *input)
+{
+	char	**cmd;
+
+	cmd = ft_split(input, ' ');
+	if (ft_strcmp(cmd[0], "echo") == 0 || ft_strcmp(cmd[0], "pwd") == 0 \
+		|| ft_strcmp(cmd[0], "exit") == 0 \
+		|| ft_strcmp(cmd[0], "env") == 0 || ft_strcmp(cmd[0], "cd") == 0 \
+		|| ft_strcmp(cmd[0], "unset") == 0 \
+		|| ft_strcmp(cmd[0], "export") == 0)
+		return (0);
+	else
+		return (1);
+}
 
 int	ft_builtin(char *token, t_shell *shell)
 {
 	char	**cmd;
 
 	cmd = ft_split(token, ' ');
-	(void) shell;
 	if (ft_strcmp(cmd[0], "pwd") == 0)
-		printf("il comando da eseguire é: %s\n", token);
+		ft_pwd();
 	else if (ft_strcmp(cmd[0], "exit") == 0)
 		printf("il comando da eseguire é: %s\n", token);
 	else if (ft_strcmp(cmd[0], "cd") == 0)
-		printf("il comando da eseguire é: %s\n", token);
+		ft_cd(shell);
 	else if (ft_strcmp(cmd[0], "env") == 0)
-		ft_printenv(shell->env);	
+		ft_printenv(shell->env);
 	else if (ft_strcmp(cmd[0], "echo") == 0)
-		printf("il comando da eseguire é: %s\n", token);
-	else if (ft_strcmp(cmd[0], "unset") == 0)
-		printf("il comando da eseguire é: %s\n", token);
+		ft_echo(shell);
 	else if (ft_strcmp(cmd[0], "export") == 0)
-		return (ft_export(token, shell));
+		shell->exitstatus = ft_export(sstoken, shell);
+	else if (ft_strcmp(cmd[0], "unset") == 0)
+		shell->exitstatus = ft_unset(shell);
 	else
-	{
-		printf("minishell: %s: command not found\n", token);
 		return (1);
-	}
 	return (0);
 }
 

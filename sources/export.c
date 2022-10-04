@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 13:07:56 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/04 00:25:12 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:47:07 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,8 @@ int	ft_export(char *s, t_shell *shell)
 			shell->env = ft_addenv(shell->env, var);
 		else
 			printf("Error export variable!\n");
-		i = ft_countvar(ft_split(s, ' '));
+		i = ft_countvar(ft_split(s, ' '));  
 	}
-	ft_printenv(shell->env);
 	if (shell->exitstatus != 0)
 		return (1);
 	return (0);
