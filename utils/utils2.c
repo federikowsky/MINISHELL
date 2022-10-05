@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 19:01:28 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/04 16:34:27 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:44:59 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_builtin(char *token, t_shell *shell)
 	if (ft_strcmp(cmd[0], "pwd") == 0)
 		ft_pwd();
 	else if (ft_strcmp(cmd[0], "exit") == 0)
-		printf("il comando da eseguire é: %s\n", token);
+		ft_exit(shell);
 	else if (ft_strcmp(cmd[0], "cd") == 0)
 		ft_cd(shell);
 	else if (ft_strcmp(cmd[0], "env") == 0)
