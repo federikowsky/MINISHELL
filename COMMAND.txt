@@ -6,4 +6,11 @@ v ()
 v ((ls))
 // Precedenza operatore | su && e || 
 v ps | grep mini && echo ciao | grep c
-x ls | ps && echo ciao | grep c && ps | grep bash
+v ls | ps && echo ciao | grep c && ps | grep bash
+
+// Gestione multipli && e ||
+v ps | grep mini || echo ciao | grep ciao | grep c && ls
+x ps || ps | grep mini | wc -l && ls (funziona bene la prima, la seconda non termina premi ctrl+C per stoppare)
+x ec && ps && ls || echo ciao && ps
+// per questo tocca usa la variabile shell->last_operator 
+x echo ciao && ps && ls && echo ciao || ps

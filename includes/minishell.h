@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/05 13:52:05 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:37:15 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_shell
 	char 	**token_temp;
 	char	**operator;
 	char	**operator_temp;
+	char	*last_operator;
 	int		exitstatus;
 }	t_shell;
 

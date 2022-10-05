@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/05 15:30:05 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:37:37 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void ft_exec_cmd(t_shell *shell)
 		{
 			waitpid(pid, &status, 0);
 			shell->exitstatus = WEXITSTATUS(status);
+			printf("Stato di uscita: %d\n", shell->exitstatus);
 		}
 	}
+	shell->last_operator = ssoperator;
 	shell->token++;
 	shell->operator++;
 }

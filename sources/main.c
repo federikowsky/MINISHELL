@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/05 15:02:51 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:23:32 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,4 @@ int	main(int argc, char **argv, char **envp)
 }
 
 
-// ls | ps && echo ciao && grep c
+// ps | grep mini || echo ciao | grep ciao | grep c

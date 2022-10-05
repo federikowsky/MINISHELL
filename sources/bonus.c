@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:34:45 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/05 15:20:50 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:57:08 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,25 @@
 
 void	ft_or(t_shell *shell)
 {
-	if (ft_strcmp(*(shell->operator + 1), "|") == 0)
+	if (shell->exitstatus == 1 && ft_strcmp(*(shell->operator + 1), "|") == 0)
 	{
 		shell->operator++;
 		ft_exec_pipe(shell, ft_count_pipe(shell));
 	}
-	else if (shell->exitstatus == 0)
+	// else if (ft_strcmp(shell->last_operator, "||") != 0 || shell->exitstatus != 0)
+	else if (shell->exitstatus != 0)
 		ft_exec_cmd(shell);
-	ft_exec_cmd(shell);
 	if (shell->exitstatus == 0)
 	{
-		while (ft_strcmp(*(shell->operator), "|") == 0)
+		if (ft_strcmp(ssoperator, "||") == 0)
+			shell->operator++;
+		while (ft_strcmp(ssoperator, "|") == 0 || ft_strcmp(ssoperator, "||") == 0)
 		{
 			shell->token++;
 			shell->operator++;
 		}
-		shell->token++;
+		if (sstoken)
+			shell->token++;
 	}
 }
 
@@ -49,6 +52,14 @@ void	ft_and(t_shell *shell)
 		else 
 			ft_switch_op(shell);
 	}
-	else if (shell->exitstatus != 0)
-		sstoken = NULL;
+	else if (shell->exitstatus == 1)
+	{
+		while (ft_strcmp(ssoperator, "&&") == 0)
+		{
+			shell->token++;
+			shell->operator++;
+		}
+		if (sstoken)
+			shell->token++;
+	}
 }
