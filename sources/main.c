@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/04 13:08:13 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:22:03 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ int	main(int argc, char **argv, char **envp)
 	main_loop(&shell);
 }
 
-// echo ciao || ls | grep ll && grep ciao
+// echo ciao || ls | grep ll | wc -l && grep ciao
 // export 5ciao=p && grep HOME
+
+//echo ciao && ps | grep mini | wc -l

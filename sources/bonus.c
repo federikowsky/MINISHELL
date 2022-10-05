@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:34:45 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/04 16:14:32 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:13:10 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_or(t_shell *shell)
 {
-	ft_exec_cmd(shell, NULL);
+	ft_exec_cmd(shell);
 	if (shell->exitstatus == 0)
 	{
 		while (ft_strcmp(*(shell->operator), "|") == 0)
@@ -28,11 +28,11 @@ void	ft_or(t_shell *shell)
 
 void	ft_and(t_shell *shell)
 {
-	ft_exec_cmd(shell, NULL);
+	ft_exec_cmd(shell);
 	if (shell->exitstatus == 0 && sstoken != NULL)
 	{
 		if (*(shell->operator) == NULL)
-			ft_exec_cmd(shell, NULL);
+			ft_exec_cmd(shell);
 		else 
 			ft_switch_op(shell);
 	}

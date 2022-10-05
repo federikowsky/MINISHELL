@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/04 16:15:34 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:14:17 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define PROMPT "\e[1;3;37mmi\e[1;3;36mni\e[1;3;37msh\e[1;3;36mel\e[1;3;37ml$ "
 # define LEN_PATH 4096
 # define sstoken *(shell->token)
+# define ssoperator *(shell->operator)
 
 typedef struct s_shell
 {
@@ -94,11 +95,13 @@ void			ft_printenv(char **envp);
 /* Parsing */
 char			*getcmd(char *s, char **envp);
 void			ft_start(t_shell *shell);
-void 			ft_exec_cmd(t_shell *shell, int fd[2]);
+void 			ft_exec_cmd(t_shell *shell);
 void			ft_switch_op(t_shell *shell);
 
 /* Pipe */
+void 			ft_exec_pipe(t_shell *shell, int nb_pipe);
 void			ft_pipe(t_shell *shell);
+int 			ft_count_pipe(t_shell * shell);
 
 /* Bonus */
 void			ft_or(t_shell *shell);
