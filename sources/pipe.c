@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/04 16:17:07 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:16:44 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	exec_pipe(t_shell *shell)
 
 void	ft_pipe(t_shell *shell)
 {
-	
+
 	if (shell->operator == NULL)
 		ft_exec_cmd(shell, NULL);
 	else

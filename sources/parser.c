@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/04 16:33:33 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:25:29 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void ft_exec_cmd(t_shell *shell, int fd[2])
 		{
 			if (fd != NULL)
 			{
-				close(fd[0]);
+				// close(fd[0]);
+				close(fd[1]);
 				dup2(fd[1], 1);
 			}
 			execve(ft_pathfinder(sstoken, shell->env), \
@@ -33,7 +34,8 @@ void ft_exec_cmd(t_shell *shell, int fd[2])
 		}
 		if (fd != NULL)
 		{
-			close(fd[1]);
+			// close(fd[1]);
+			close(fd[0]);
 			dup2(fd[0], 0);
 		}
 		while(waitpid(pid, &status, 0) > 0)
