@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/04 15:13:36 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:23:04 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	ft_echo(t_shell *shell)
  	while (ss[i])
  	{
  		if (ft_strncmp(ss[i], "-n", 2) != 0)
- 			printf("%s ", ss[i]);
+ 			printf("%s", ss[i]);
+		if (ss[i + 1] != NULL)
+			printf(" ");
  		i++;
  	}
  	if (!ss[1] || ft_strncmp(ss[1], "-n", 2) != 0)

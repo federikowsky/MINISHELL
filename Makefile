@@ -6,7 +6,7 @@
 #    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/05 13:49:43 by fefilipp         ###   ########.fr        #
+#    Updated: 2022/10/05 16:25:09 by fefilipp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ all: ${NAME}
 ${NAME}: ${OBJECTS}
 
 clean: 
-	@make -s -C libft clean	
+	@make -s -C libft fclean	
 	@echo "Libft cleaned successfully"
 	@${RM} ${OBJECTS}
 	@echo "Minishell cleaned successfully"

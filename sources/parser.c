@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/05 14:41:49 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:30:05 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void ft_creatematrix(t_shell *shell)
 {
 	char	*token;
 	char	*operator;
+
 	token = " ";
 	operator = " ";
 	while (token != NULL && operator != NULL)
