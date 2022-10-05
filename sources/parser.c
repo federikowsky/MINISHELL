@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/05 13:51:04 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:41:49 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void ft_exec_cmd(t_shell *shell)
 		else
 		{
 			waitpid(pid, &status, 0);
-			if (WIFEXITED(status))
-				shell->exitstatus = WEXITSTATUS(status);
+			shell->exitstatus = WEXITSTATUS(status);
 		}
 	}
 	shell->token++;

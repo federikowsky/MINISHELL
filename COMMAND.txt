@@ -1,0 +1,7 @@
+COMANDI CHE DEVONO FUNZIONARE MA NON VENGONO GESTITI:
+x -> non gestito
+v -> gestito
+
+v ()
+v ((ls))
+x ls | ps && echo ciao | grep c && ps | grep bash

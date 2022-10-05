@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:34:45 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/05 13:13:10 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:58:31 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	ft_or(t_shell *shell)
 
 void	ft_and(t_shell *shell)
 {
-	ft_exec_cmd(shell);
+	if (shell->exitstatus == 0)
+		ft_exec_cmd(shell);
 	if (shell->exitstatus == 0 && sstoken != NULL)
 	{
 		if (*(shell->operator) == NULL)

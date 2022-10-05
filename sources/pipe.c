@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/05 13:36:36 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:02:24 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	ft_exec_cmd_fork(t_shell *shell)
 	if (ft_builtin(sstoken, shell))
 	{	
 		cmd = ft_split(sstoken, ' ');
-		execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);
-			shell->exitstatus = 1;
+		if (execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env) < 0 )
+			printf("EXIT FAILURE\n");
+		exit(EXIT_FAILURE);
 	}
 	exit(0);
 }
@@ -61,15 +62,19 @@ void close_pipe(int pipes[], int no_pipes)
 
 void ft_exec_pipe(t_shell *shell, int nb_pipe)
 {
-	int i;
-	int pipes[2 * nb_pipe];
-	int status;
+	int 	i;
+	int		j;
+	int 	pipes[2 * nb_pipe];
+	int 	status;
+	pid_t	pid;
 	
 	i = 0;
+	j = nb_pipe + 1;
 	open_pipe(pipes, nb_pipe);
-	while (sstoken)
+	while (sstoken && j-- > 0)
 	{
-		if (fork() == 0)
+		pid = fork();
+		if (pid == 0)
 		{
 			if (*(shell->token + 1) != NULL)
 				dup2(pipes[i + 1], STDOUT_FILENO);
@@ -80,12 +85,13 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 		}
 		i += 2;
 		shell->token++;
-		shell->operator++;
+		if (j)
+			shell->operator++;
 	}
 	close_pipe(pipes, nb_pipe);
 	while (i-- > 0)
-        wait(&status);
-		if (WIFEXITED(status))
-			printf("Stato di uscita: %d\n", WEXITSTATUS(status));
+        waitpid(pid, &status, 0);
+		shell->exitstatus = WEXITSTATUS(status);
+		printf("Stato di uscita: %d\n", shell->exitstatus);
 }
 
