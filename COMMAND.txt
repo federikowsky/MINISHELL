@@ -4,4 +4,6 @@ v -> gestito
 
 v ()
 v ((ls))
+// Precedenza operatore | su && e || 
+v ps | grep mini && echo ciao | grep c
 x ls | ps && echo ciao | grep c && ps | grep bash
