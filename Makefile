@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+         #
+#    By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/04 15:10:01 by agenoves         ###   ########.fr        #
+#    Updated: 2022/10/05 12:46:40 by md-aless         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ FILES = 		sources/main \
 				sources/parser \
 				sources/signal \
 				sources/unset \
+				sources/exit \
 				utils/utils \
 				utils/utils2 \
 				utils/utilsToken \

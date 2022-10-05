@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/04 16:15:34 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:45:31 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void			ft_cd(t_shell *shell);
 void			ft_update_env(t_shell *shell, char *path);
 void			ft_envhandle(char **envp, t_shell *shell);
 void			ft_echo(t_shell *shell);
+void			ft_exit(t_shell *shell);
 void			ft_exec_builtin(char *cmd, t_shell *shell);
 void			ft_printenv(char **envp);
 
