@@ -10,7 +10,8 @@ v ls | ps && echo ciao | grep c && ps | grep bash
 
 // Gestione multipli && e ||
 v ps | grep mini || echo ciao | grep ciao | grep c && ls
-x ps || ps | grep mini | wc -l && ls (funziona bene la prima, la seconda non termina premi ctrl+C per stoppare)
-x ec && ps && ls || echo ciao && ps
+v ps || ps | grep mini | wc -l && ls (Non funziona perché, una volta eseguito il primo ps, skippa tutto fino a che l'operatore non é &&, entra nell'and, ma il comando con cui si presenta all'esecuzione é "wc -l" invece di ls.
+
+v ec && ps && ls || echo ciao && ps
 // per questo tocca usa la variabile shell->last_operator 
 x echo ciao && ps && ls && echo ciao || ps

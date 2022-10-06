@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:34:45 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/05 18:57:08 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:28:33 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_and(t_shell *shell)
 		shell->operator++;
 		ft_exec_pipe(shell, ft_count_pipe(shell));
 	}
-	else if (shell->exitstatus == 0)
+	else if (shell->exitstatus != 0 || shell->exitstatus == 0)
 		ft_exec_cmd(shell);
 	if (shell->exitstatus == 0 && sstoken != NULL)
 	{
