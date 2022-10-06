@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/06 15:20:09 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/06 22:20:46 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,6 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	while (i-- > 0)
         waitpid(pid, &status, 0);
 		shell->exitstatus = WEXITSTATUS(status);
-		// printf("Stato di uscita: %d\n", shell->exitstatus);
+		shell->prev_exitstatus = shell->exitstatus;
 }
 

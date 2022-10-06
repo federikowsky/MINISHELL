@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:01:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/06 19:03:09 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/07 01:11:09 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ void	ft_run_new_shell(t_shell *shell)
 		env_copy = ft_mat_copy(shell->env);
 		ft_increase_shlvl(&env_copy);
 		main_loop(&newshell, env_copy);
+		// exit(0);
 	}
-	waitpid(pid, &status, 0);
-	shell->exitstatus = WEXITSTATUS(status);
+	else
+	{
+		waitpid(pid, &status, 0);
+		shell->exitstatus = WEXITSTATUS(status);
+	}
 }

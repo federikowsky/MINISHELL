@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/06 18:27:59 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/07 00:59:15 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void ft_exec_cmd(t_shell *shell)
 		{
 			waitpid(pid, &status, 0);
 			shell->exitstatus = WEXITSTATUS(status);
-			// printf("Stato di uscita: %d\n", shell->exitstatus);
+			shell->prev_exitstatus = shell->exitstatus;
 		}
 	}
 	shell->last_operator = ssoperator;
@@ -46,7 +46,10 @@ void	ft_switch_op(t_shell *shell)
 	// if (!ft_is_subshell(shell->token))
 	// 	ft_subshell();
 	if (ft_strcmp(sstoken, "./minishell") == 0)
+	{
 		ft_run_new_shell(shell);
+		sstoken = NULL;
+	}
 	else if (!ft_strcmp(*(shell->operator), "|"))
 		ft_exec_pipe(shell, ft_count_pipe(shell));
 	else if (!ft_strcmp(*(shell->operator), "||"))
