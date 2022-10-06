@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/06 14:19:31 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:15:50 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main_loop(t_shell *shell)
 	{
 		shell->operator = NULL;
 		shell->token = NULL;
-		shell->exitstatus = -1;
+		// shell->exitstatus = -1;
 		shell->cmd = readline(PROMPT);
 		if (!shell->cmd)
 			return (write (1, "\n", 1));

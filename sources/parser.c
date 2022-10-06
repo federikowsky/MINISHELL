@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/06 13:01:59 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:19:20 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void ft_exec_cmd(t_shell *shell)
 		if (pid == 0)
 		{
 			cmd = ft_split(sstoken, ' ');
-			execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);
-			exit(EXIT_FAILURE);
+			status = execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);
+			exit(status);
 		}
 		else
 		{
 			waitpid(pid, &status, 0);
 			shell->exitstatus = WEXITSTATUS(status);
-			printf("Stato di uscita: %d\n", shell->exitstatus);
+			// printf("Stato di uscita: %d\n", shell->exitstatus);
 		}
 	}
 	shell->last_operator = ssoperator;

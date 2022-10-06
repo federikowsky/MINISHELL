@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/05 16:23:04 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:21:24 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ void	ft_echo(t_shell *shell)
  	char	**ss;
  	int		i;
 
+	if (ft_strcmp(sstoken, "echo $?") == 0)
+	{
+		printf("%d\n", shell->exitstatus);
+		shell->exitstatus = 0;
+		return ;
+	}
  	ss = ft_split(sstoken, ' ');
  	i = 1;
  	while (ss[i])

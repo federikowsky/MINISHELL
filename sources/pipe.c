@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/05 15:02:24 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:20:09 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 void	ft_exec_cmd_fork(t_shell *shell)
 {
 	char	**cmd;
+	int		status;
 
 	shell->exitstatus = 0;
+	status = 0;
 	if (ft_builtin(sstoken, shell))
 	{	
 		cmd = ft_split(sstoken, ' ');
-		if (execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env) < 0 )
-			printf("EXIT FAILURE\n");
-		exit(EXIT_FAILURE);
+		status = execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);
+			exit(status);
 	}
 	exit(0);
 }
@@ -92,6 +93,6 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	while (i-- > 0)
         waitpid(pid, &status, 0);
 		shell->exitstatus = WEXITSTATUS(status);
-		printf("Stato di uscita: %d\n", shell->exitstatus);
+		// printf("Stato di uscita: %d\n", shell->exitstatus);
 }
 

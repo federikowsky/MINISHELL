@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:15:07 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/03 16:43:37 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:11:17 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 char	*ft_arg_check(char *cmd, char **envp)
 {
 	char	**word;
-
+	
 	word = ft_split(cmd, ' ');
 	if (ft_isbuiltin(word[0]) && ft_pathfinder(word[0], envp) == NULL)
-		perror("Minishell");
+		printf("Minishell: command not found: %s\n", word[0]);
 	return (cmd);
 }
 
