@@ -6,14 +6,14 @@
 #    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/05 16:25:09 by fefilipp         ###   ########.fr        #
+#    Updated: 2022/10/06 19:00:33 by fefilipp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 			minishell
 CC = 			gcc
 LIBFT = 		libft/libft.a
-CFLAGS = 		-Wall -Werror -Wextra -g
+CFLAGS = 		 -g
 READLINE = 		-L/usr/include -lreadline -L$(HOME)/.brew/opt/readline/lib -I$(HOME)/.brew/opt/readline/include
 RM = 			rm -rf
 
@@ -24,6 +24,7 @@ FILES = 		sources/main \
 				sources/echo \
 				sources/pipe \
 				sources/bonus \
+				sources/newshell \
 				sources/export \
 				sources/parser \
 				sources/signal \

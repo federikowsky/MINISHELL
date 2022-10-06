@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/06 15:51:57 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:27:59 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	ft_switch_op(t_shell *shell)
 {
 	// if (!ft_is_subshell(shell->token))
 	// 	ft_subshell();
-	if (!ft_strcmp(*(shell->operator), "|"))
+	if (ft_strcmp(sstoken, "./minishell") == 0)
+		ft_run_new_shell(shell);
+	else if (!ft_strcmp(*(shell->operator), "|"))
 		ft_exec_pipe(shell, ft_count_pipe(shell));
 	else if (!ft_strcmp(*(shell->operator), "||"))
 		ft_or(shell);
@@ -53,7 +55,6 @@ void	ft_switch_op(t_shell *shell)
 		ft_and(shell);
 	else if (*(shell->operator) == NULL && sstoken != NULL)
 		ft_exec_cmd(shell);
-	
 }
 
 char	*getcmd(char *s, char **envp)

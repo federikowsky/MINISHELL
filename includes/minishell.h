@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/05 18:37:15 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:35:15 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ char 			**ft_addelement(char **ss, char *cmd);
 int				ft_check_builtin(char *input);
 
 /* Main */
-int				main_loop(t_shell *s_shell);
+int				main_loop(t_shell *s_shell, char **envp);
 
 /* Built in */
 int				ft_builtin(char *cmd, t_shell *shell);
 int				ft_unset(t_shell *shell);
 int				ft_export(char *s, t_shell *shell);
-void			ft_pwd(void);
+char			*ft_pwd(void);
 void			ft_cd(t_shell *shell);
 void			ft_update_env(t_shell *shell, char *path);
 void			ft_envhandle(char **envp, t_shell *shell);
@@ -108,5 +108,8 @@ int 			ft_count_pipe(t_shell * shell);
 /* Bonus */
 void			ft_or(t_shell *shell);
 void			ft_and(t_shell *shell);
+
+/* Subshell */
+void			ft_run_new_shell(t_shell *shell);
 
 #endif

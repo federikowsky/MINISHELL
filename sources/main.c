@@ -6,19 +6,22 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/06 15:15:50 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:47:33 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main_loop(t_shell *shell)
+int	main_loop(t_shell *shell, char **envp)
 {
+	ft_envhandle(envp, shell);
+	shell->home = ft_get_home(shell);
+	sig_handling_set(1);
 	while (1)
 	{
 		shell->operator = NULL;
 		shell->token = NULL;
-		// shell->exitstatus = -1;
+		shell->exitstatus = -1;
 		shell->cmd = readline(PROMPT);
 		if (!shell->cmd)
 			return (write (1, "\n", 1));
@@ -38,8 +41,5 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	(void) envp;
-	ft_envhandle(envp, &shell);
-	shell.home = ft_get_home(&shell);
-	sig_handling_set(1);
-	main_loop(&shell);
+	main_loop(&shell, envp);
 }
