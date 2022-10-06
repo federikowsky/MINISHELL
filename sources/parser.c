@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/06 15:19:20 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:51:57 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void ft_exec_cmd(t_shell *shell)
 	pid_t 	pid;
 	int		status;
 	char	**cmd;
-
+	
+	if (access(ft_split(sstoken, ' ')[0], F_OK) == 0)
+		sstoken = ft_split(sstoken, '/')[ft_find_lenght(ft_split(sstoken, '/')) - 1];
 	if (ft_builtin(sstoken, shell))
 	{	
 		pid = fork();
