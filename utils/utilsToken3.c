@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:02:41 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/03 23:22:30 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/07 03:31:00 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	ft_bracket_check(char *cmd)
 		perror("Bracket check Problem: Minishell");
 		return (1);
 	}
-	return (ft_bracket_aux(cmd));
+	// return (ft_bracket_aux(cmd));
+	return (0);
 }
 
 int	ft_bracket_aux(char *cmd)
@@ -58,7 +59,7 @@ int	ft_bracket_aux(char *cmd)
 			is_op = 1;
 		if (ft_has(cmd[i], "(") && !is_op)
 		{
-			perror("Minishell");
+			perror("Bracket check Problem (aux): Minishell");
 			return (1);
 		}
 		if (ft_isalpha(cmd[i]) && is_op)

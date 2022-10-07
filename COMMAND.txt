@@ -15,3 +15,7 @@ V echo ciao && ps && ls && echo ciao || ps
 // La EXECVE non returna errore settando exitstatus = 0
 X ec && ps && ls || echo ciao && ps
 X ls | ps && echo ciao && p || echo bella
+
+// ft_bracket_aux da sistemare
+X (echo ciao | grep c)
+X (echo ciao)

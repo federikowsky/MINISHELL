@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 19:01:28 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/07 02:21:55 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/07 02:55:07 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,33 @@ void	ft_print_mat(char **ss)
 		printf("%s\n", ss[i]);
 		i++;	
 	}
+}
+
+char	**ft_mat_copy(char **mat)
+{
+	char	**res;
+	int		i;
+	
+	res = (char **)malloc(sizeof(char *) * ft_find_lenght(mat));
+	i = 0;
+	while (mat[i])
+	{
+		res[i] = ft_strdup(mat[i]);
+		i++;
+	}
+	res[i] = NULL;
+	return (res);
+}
+
+void	ft_increase_shlvl(char ***mat)
+{
+	int 	i;
+	char 	*value;
+	
+	i = 0;
+	while(ft_strncmp((*mat)[i], "SHLVL", 5))
+		i++;
+	value = ft_itoa(ft_atoi(&(*mat)[i][6]) + 1);
+	(*mat)[i] = ft_strjoin("SHLVL=", value);
+	free(value);
 }

@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/07 00:59:15 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/07 04:12:30 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,12 @@ void ft_exec_cmd(t_shell *shell)
 
 void	ft_switch_op(t_shell *shell)
 {
-	// if (!ft_is_subshell(shell->token))
-	// 	ft_subshell();
 	if (ft_strcmp(sstoken, "./minishell") == 0)
-	{
 		ft_run_new_shell(shell);
-		sstoken = NULL;
-	}
-	else if (!ft_strcmp(*(shell->operator), "|"))
+	if (!ft_strcmp(*(shell->operator), "|"))
 		ft_exec_pipe(shell, ft_count_pipe(shell));
+	else if (ft_is_subshell(sstoken))
+		ft_subshell(shell, sstoken);
 	else if (!ft_strcmp(*(shell->operator), "||"))
 		ft_or(shell);
 	else if (!ft_strcmp(*(shell->operator), "&&"))
@@ -67,9 +64,10 @@ char	*getcmd(char *s, char **envp)
 	static int		i = 0;
 	static int		in_cmd_mode = 1;
 
-	if (i == -2)
+	if (i == -2 || i == ft_strlen(s))
 	{
 		i = 0;
+		in_cmd_mode = 1;
 		return (NULL);
 	}
 	start = getcmd_aux(s, &i);
@@ -81,7 +79,6 @@ char	*getcmd(char *s, char **envp)
 			i = findparenth(s, start) + 1;
 			return (ft_arg_check(getsub(s, start + 1, i - 1), envp));
 		}
-		// else if (in_cmd_mode && !ft_isdigit(s[i]) && !ft_isalpha(s[i]) && !ft_has(s[i], " =-.*"))
 		else if (in_cmd_mode && !ft_isdigit(s[i]) && !ft_isalpha(s[i]) && ft_has(s[i], "|&"))
 		{
 			in_cmd_mode = 0;
@@ -119,7 +116,7 @@ void ft_creatematrix(t_shell *shell)
 	}
 }
 
-void	ft_start(t_shell *shell)
+int	ft_start(t_shell *shell)
 {
 	ft_creatematrix(shell);
 	shell->operator_temp = shell->operator;
@@ -129,4 +126,5 @@ void	ft_start(t_shell *shell)
 	free(shell->cmd);
 	free_matrix(shell->token_temp);
 	free_matrix(shell->operator_temp);
+	return (shell->exitstatus);
 }

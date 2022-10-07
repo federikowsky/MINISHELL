@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/07 02:19:13 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/07 04:25:11 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 			if (i != 0)
 				dup2(pipes[i - 2], STDIN_FILENO);
 			close_pipe(pipes, nb_pipe);
-			ft_exec_cmd_fork(shell);
+			if (ft_is_subshell(sstoken))
+				ft_subshell(shell, sstoken);
+			else
+				ft_exec_cmd_fork(shell);
 		}
 		i += 2;
 		shell->token++;

@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:05:08 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/06 15:33:34 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/07 03:16:36 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	ft_is_subshell(char *token)
 	while (token[i])
 	{
 		if (ft_has(token[i], "|&"))
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	free_matrix(char **matrix)
