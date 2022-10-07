@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/06 22:20:46 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/07 02:19:13 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 		i += 2;
 		shell->token++;
 		if (j)
+		{
+			shell->last_operator = ssoperator;	
 			shell->operator++;
+		}
 	}
 	close_pipe(pipes, nb_pipe);
 	while (i-- > 0)

@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/06 22:20:31 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/07 02:23:38 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define LEN_PATH 4096
 # define sstoken *(shell->token)
 # define ssoperator *(shell->operator)
+# define sslastop   (shell->last_operator)
 
 typedef struct s_shell
 {
