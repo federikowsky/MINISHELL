@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 03:16:01 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 19:01:555 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void ft_exec_cmd(t_shell *shell)
 	int		status;
 	char	**cmd;
 	
+	if (fcntl(shell->redirec, F_GETFD) != 1)
+	{
+		dup2(shell->redirec, STDOUT_FILENO);
+		close(shell->redirec);
+	}
 	if (access(ft_split(sstoken, ' ')[0], F_OK) == 0)
 		sstoken = ft_split(sstoken, '/')[ft_mat_lenght(ft_split(sstoken, '/')) - 1];
 	if (ft_builtin(sstoken, shell))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/08 17:04:46 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:511:40 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_shell
 	int		fd_in;
 	int		fd_out;
 	int		fd_debug;
+	int 	redirec;
 }	t_shell;
 
 
@@ -81,6 +82,7 @@ char			*ft_arg_check(char *cmd, char **envp);
 int				ft_bracket_aux(char *cmd);
 int				ft_bracket_check(char *cmd);
 int				ft_check_operator(char *cmd);
+int				ft_redir_check(char *cmd);
 char 			**ft_addelement(char **ss, char *cmd);
 int				ft_check_builtin(char *input);
 
@@ -122,5 +124,9 @@ void			ft_run_new_shell(t_shell *shell);
 int				ft_is_subshell(char *s);
 void 			ft_subshell(t_shell *shell, char *s);
 void 			ft_debug(t_shell *shell, int pipes[], int i);
+
+/* Redirection*/
+int 			ft_right_redir(t_shell *shell ,char *op);
+
 
 #endif

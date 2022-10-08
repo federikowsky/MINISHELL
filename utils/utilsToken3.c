@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:02:41 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:46:08 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_check_operator(char *cmd)
 {
 	if (ft_bracket_check(cmd) || ft_quote_check(cmd) || ft_and_check(cmd) \
-	|| ft_pipe_check(cmd))
+	|| ft_pipe_check(cmd) || ft_redir_check(cmd))
 		return(1);
 	return (0);
 }

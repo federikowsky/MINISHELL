@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/08 17:48:45 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:52:2:15 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void close_pipe(int pipes[], int no_pipes)
 void ft_debug(t_shell *shell, int pipes[], int i)
 {
 	if (fork() == 0)
-	{		
+	{	
+		// ft_putstr_fd("comando corrente: ", shell->fd_debug);
+		// ft_putstr_fd(sstoken, shell->fd_debug);
+		// ft_putendl_fd(" ", shell->fd_debug);
 		ft_putstr_fd("stdin: ", shell->fd_debug);
 		ft_putstr_fd(ft_itoa(shell->fd_in), shell->fd_debug);
 		ft_putstr_fd("     ", shell->fd_debug);
@@ -87,15 +90,19 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	ft_putendl_fd("ESEGUO PIPE", shell->fd_debug);
 	while (sstoken && j-- > 0)
 	{
+		int newin;
 		pid = fork();
 		if (pid == 0)
 		{
 			ft_debug(shell, pipes, i);	
-			if (*(shell->token + 1) != NULL)
+			if (ft_has((*(shell->operator + 1))[0], ">"))
+				dup2(shell->redirec, STDOUT_FILENO);
+			else if (*(shell->token + 1) != NULL)
 				dup2(pipes[i + 1], STDOUT_FILENO);
 			if (shell->fd_in)
 			{
-				dup2(shell->fd_in, STDIN_FILENO);
+				newin = dup(shell->fd_in);
+				dup2(newin, STDIN_FILENO);
 				shell->fd_in = 0;
 			}
 			else if (i != 0)

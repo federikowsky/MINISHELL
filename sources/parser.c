@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/08 16:06:54 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 18:58:32 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	ft_switch_op(t_shell *shell)
 		ft_or(shell);
 	else if (!ft_strcmp(*(shell->operator), "&&"))
 		ft_and(shell);
+	else if (!ft_strcmp(*(shell->operator), ">"))
+		ft_right_redir(shell, ssoperator);
 	else if (*(shell->operator) == NULL && sstoken != NULL)
 		ft_exec_cmd(shell);
 }
@@ -50,12 +52,12 @@ char	*getcmd(char *s, char **envp)
 			i = findparenth(s, start) + 1;
 			return (ft_arg_check(getsub(s, start + 1, i - 1), envp));
 		}
-		else if (in_cmd_mode && !ft_isdigit(s[i]) && !ft_isalpha(s[i]) && ft_has(s[i], "|&"))
+		else if (in_cmd_mode && !ft_isdigit(s[i]) && !ft_isalpha(s[i]) && ft_has(s[i], "|&><"))
 		{
 			in_cmd_mode = 0;
 			return (ft_arg_check(getsub(s, start, i), envp));
 		}
-		else if (!in_cmd_mode && !ft_has(s[i], "|&"))
+		else if (!in_cmd_mode && !ft_has(s[i], "|&><"))
 		{
 			in_cmd_mode = 1;
 			return (getsub(s, start, i));

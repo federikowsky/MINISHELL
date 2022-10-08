@@ -6,7 +6,7 @@
 #    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/08 03:18:10 by fefilipp         ###   ########.fr        #
+#    Updated: 2022/10/08 18:57:08 by fefilipp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,13 @@ FILES = 		sources/main \
 				sources/export  \
 				sources/exec_cmd \
 				sources/newshell \
+				sources/redirections \
 				utils/utils \
 				utils/utils2 \
 				utils/utilsToken \
 				utils/utilsToken2 \
 				utils/utilsToken3 \
+				utils/utilsToken4 \
 				# sources/builtin \
 				# sources/cmd_exec \
 				# sources/pipe \
