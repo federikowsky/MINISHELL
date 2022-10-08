@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 19:01:28 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/07 02:55:07 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**ft_mat_copy(char **mat)
 	char	**res;
 	int		i;
 	
-	res = (char **)malloc(sizeof(char *) * ft_find_lenght(mat));
+	res = (char **)malloc(sizeof(char *) * ft_mat_lenght(mat));
 	i = 0;
 	while (mat[i])
 	{

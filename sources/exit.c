@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:41:06 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/05 13:51:28 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	ft_exit(t_shell *shell)
 	check = 0;
 	i = 0;
 	printf("exit\n");
-	if (ft_find_lenght(cmds) > 2)
+	if (ft_mat_lenght(cmds) > 2)
 		printf("too many arguments\n");
-	else if (ft_find_lenght(cmds) == 2)
+	else if (ft_mat_lenght(cmds) == 2)
 	{
 		while (cmds[1][i])
 		{

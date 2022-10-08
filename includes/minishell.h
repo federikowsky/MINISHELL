@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/07 03:55:42 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:04:46 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ typedef struct s_shell
 	char	*last_operator;
 	int		exitstatus;
 	int		prev_exitstatus;
-	int		fd;
+	int		fd_in;
+	int		fd_out;
+	int		fd_debug;
 }	t_shell;
 
 
@@ -60,7 +62,7 @@ int				ft_strcmp(char *s1, char *s2);
 int				ft_isbuiltin(char *cmd);
 char			*ft_pathfinder(char *cmd, char **envp);
 char			*ft_get_home(t_shell *shell);
-int				ft_find_lenght(char **s);
+int				ft_mat_lenght(char **s);
 void			ft_print_mat(char **ss);
 int				free_matrix(char **matrix);
 char			**ft_mat_copy(char **mat);
@@ -84,6 +86,7 @@ int				ft_check_builtin(char *input);
 
 /* Main */
 int				main_loop(t_shell *s_shell, char **envp);
+void			ft_initializer(t_shell *shell);
 
 /* Built in */
 int				ft_builtin(char *cmd, t_shell *shell);
@@ -102,6 +105,7 @@ void			ft_printenv(char **envp);
 char			*getcmd(char *s, char **envp);
 int				ft_start(t_shell *shell);
 void 			ft_exec_cmd(t_shell *shell);
+void			ft_exec_cmd_fork(t_shell *shell);
 void			ft_switch_op(t_shell *shell);
 
 /* Pipe */
@@ -117,5 +121,6 @@ void			ft_and(t_shell *shell);
 void			ft_run_new_shell(t_shell *shell);
 int				ft_is_subshell(char *s);
 void 			ft_subshell(t_shell *shell, char *s);
+void 			ft_debug(t_shell *shell, int pipes[], int i);
 
 #endif

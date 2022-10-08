@@ -6,40 +6,11 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/07 04:12:30 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:06:54 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void ft_exec_cmd(t_shell *shell)
-{
-	pid_t 	pid;
-	int		status;
-	char	**cmd;
-	
-	if (access(ft_split(sstoken, ' ')[0], F_OK) == 0)
-		sstoken = ft_split(sstoken, '/')[ft_find_lenght(ft_split(sstoken, '/')) - 1];
-	if (ft_builtin(sstoken, shell))
-	{	
-		pid = fork();
-		if (pid == 0)
-		{
-			cmd = ft_split(sstoken, ' ');
-			status = execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);
-			exit(status);
-		}
-		else
-		{
-			waitpid(pid, &status, 0);
-			shell->exitstatus = WEXITSTATUS(status);
-			shell->prev_exitstatus = shell->exitstatus;
-		}
-	}
-	shell->last_operator = ssoperator;
-	shell->token++;
-	shell->operator++;
-}
 
 void	ft_switch_op(t_shell *shell)
 {
@@ -126,5 +97,5 @@ int	ft_start(t_shell *shell)
 	free(shell->cmd);
 	free_matrix(shell->token_temp);
 	free_matrix(shell->operator_temp);
-	return (shell->exitstatus);
+	return (shell->fd_out);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 13:07:56 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/04 12:47:07 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**ft_addenv(char **matr, char *var)
 	int		i;
 	int		j;
 
-	lenght = ft_find_lenght(matr) + 1;
+	lenght = ft_mat_lenght(matr) + 1;
 	newmatr = malloc(sizeof(char *) * (lenght));
 	i = 0;
 	j = 0;

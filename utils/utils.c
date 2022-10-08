@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:05:08 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/07 03:16:36 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-int	ft_find_lenght(char **s)
+int	ft_mat_lenght(char **s)
 {
 	int		i;
 

@@ -6,23 +6,32 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/07 03:26:28 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 15:44:32 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+void	ft_initializer(t_shell *shell)
+{
+	shell->operator = NULL;
+	shell->token = NULL;
+	shell->exitstatus = -1;
+	shell->cmd = readline(PROMPT);
+	shell->fd_in = 0;
+	shell->fd_out = 1;
+	shell->last_operator = "";
+}
+
 int	main_loop(t_shell *shell, char **envp)
 {
+	sig_handling_set(1);
 	ft_envhandle(envp, shell);
 	shell->home = ft_get_home(shell);
-	sig_handling_set(1);
+	shell->fd_debug = open("FILE DEBUG", O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	while (1)
 	{
-		shell->operator = NULL;
-		shell->token = NULL;
-		shell->exitstatus = -1;
-		shell->cmd = readline(PROMPT);
+		ft_initializer(shell);
 		if (!shell->cmd)
 			return (write (1, "\n", 1));
 		if (shell->cmd)

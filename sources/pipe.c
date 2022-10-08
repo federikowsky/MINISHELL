@@ -6,27 +6,11 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/07 04:25:11 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:48:45 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	ft_exec_cmd_fork(t_shell *shell)
-{
-	char	**cmd;
-	int		status;
-
-	shell->exitstatus = 0;
-	status = 0;
-	if (ft_builtin(sstoken, shell))
-	{	
-		cmd = ft_split(sstoken, ' ');
-		status = execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);
-			exit(status);
-	}
-	exit(0);
-}
 
 int ft_count_pipe(t_shell * shell)
 {
@@ -61,6 +45,34 @@ void close_pipe(int pipes[], int no_pipes)
         close(pipes[j++]);
 }
 
+void ft_debug(t_shell *shell, int pipes[], int i)
+{
+	if (fork() == 0)
+	{		
+		ft_putstr_fd("stdin: ", shell->fd_debug);
+		ft_putstr_fd(ft_itoa(shell->fd_in), shell->fd_debug);
+		ft_putstr_fd("     ", shell->fd_debug);
+		
+		ft_putstr_fd("stdout: ", shell->fd_debug);
+		ft_putendl_fd(ft_itoa(shell->fd_out), shell->fd_debug);
+		
+		ft_putstr_fd("pipe_out: ", shell->fd_debug);
+		ft_putstr_fd(ft_itoa(pipes[i + 1]), shell->fd_debug);
+		ft_putstr_fd("     ", shell->fd_debug);
+		
+		ft_putstr_fd("pipe_in: ", shell->fd_debug);
+		if (i != 0)
+			ft_putendl_fd(ft_itoa(pipes[i - 2]), shell->fd_debug);
+		else
+			ft_putendl_fd("-1", shell->fd_debug);
+		ft_putendl_fd(" ", shell->fd_debug);
+		_exit(0);
+	}
+	else
+		wait(NULL);
+
+}
+
 void ft_exec_pipe(t_shell *shell, int nb_pipe)
 {
 	int 	i;
@@ -72,23 +84,31 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	i = 0;
 	j = nb_pipe + 1;
 	open_pipe(pipes, nb_pipe);
+	ft_putendl_fd("ESEGUO PIPE", shell->fd_debug);
 	while (sstoken && j-- > 0)
 	{
 		pid = fork();
 		if (pid == 0)
 		{
+			ft_debug(shell, pipes, i);	
 			if (*(shell->token + 1) != NULL)
 				dup2(pipes[i + 1], STDOUT_FILENO);
-			if (i != 0)
+			if (shell->fd_in)
+			{
+				dup2(shell->fd_in, STDIN_FILENO);
+				shell->fd_in = 0;
+			}
+			else if (i != 0)
 				dup2(pipes[i - 2], STDIN_FILENO);
 			close_pipe(pipes, nb_pipe);
 			if (ft_is_subshell(sstoken))
-				ft_subshell(shell, sstoken);
+				ft_subshell(shell, sstoken);	
 			else
 				ft_exec_cmd_fork(shell);
 		}
 		i += 2;
 		shell->token++;
+		shell->fd_out = pipes[i + 1];
 		if (j)
 		{
 			shell->last_operator = ssoperator;	
@@ -98,7 +118,7 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	close_pipe(pipes, nb_pipe);
 	while (i-- > 0)
         waitpid(pid, &status, 0);
-		shell->exitstatus = WEXITSTATUS(status);
-		shell->prev_exitstatus = shell->exitstatus;
+	shell->exitstatus = WEXITSTATUS(status);
+	shell->prev_exitstatus = shell->exitstatus;	
 }
 

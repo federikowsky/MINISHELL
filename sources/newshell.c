@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:01:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/07 04:24:24 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:49:31 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void ft_subshell(t_shell *shell, char *s)
 		newshell.exitstatus = -1;
 		newshell.cmd = ft_strdup(s); 
 		newshell.last_operator = "";
-		// 	if (ft_check_operator(s))
-		// ft_start(&newshell);
-		exit(ft_start(&newshell));		
+		newshell.fd_in = shell->fd_out;
+		newshell.fd_debug = shell->fd_debug;    
+		exit(ft_start(&newshell));
 	}
 	else
 	{
 		waitpid(pid, &status, 0);
-		shell->exitstatus = WEXITSTATUS(status);
+		shell->fd_in = WEXITSTATUS(status);
 		shell->token++;
 		shell->operator++;
 	}

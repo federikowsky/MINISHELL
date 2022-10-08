@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 18:58:41 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/04 15:14:42 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_remove(char **matr, char **cmds, int to_remove, int bool)
 	int		j;
 	int		k;
 
-	newmatr = malloc(sizeof(char *) * (ft_find_lenght(matr) - to_remove));
+	newmatr = malloc(sizeof(char *) * (ft_mat_lenght(matr) - to_remove));
 	i = 0;
 	j = 0;
 	while (matr[i])

@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:02:41 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/07 03:31:00 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char **ft_addelement(char **ss, char *cmd)
 		res = malloc(sizeof(char *) * 2);
 	else
 	{
-		res = malloc(sizeof(char *) * (ft_find_lenght(ss) + 2));
+		res = malloc(sizeof(char *) * (ft_mat_lenght(ss) + 2));
 		while (ss[i])
 		{
 			res[i] = ss[i];
