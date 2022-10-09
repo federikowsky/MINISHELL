@@ -99,5 +99,7 @@ int	ft_start(t_shell *shell)
 	free(shell->cmd);
 	free_matrix(shell->token_temp);
 	free_matrix(shell->operator_temp);
+	// if (fcntl(shell->redirec, F_GETFD) != -1)
+	// 	close(shell->redirec);
 	return (shell->fd_out);
 }
