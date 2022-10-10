@@ -94,23 +94,24 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 		pid = fork();
 		if (pid == 0)
 		{
+			sleep(10);
 			// ft_debug(shell, pipes, i);	
 			// if (ft_has((*(shell->operator + 1))[0], ">"))
 			// 	dup2(shell->redirec, STDOUT_FILENO);
 			if (*(shell->token + 1) != NULL)
 				dup2(pipes[i + 1], STDOUT_FILENO);
-			// if (shell->fd_in)
-			// {
-			// 	newin = dup(shell->fd_in);
-			// 	dup2(newin, STDIN_FILENO);
-			// 	shell->fd_in = 0;
-			// }
+			if (shell->fd_in)
+			{
+				newin = dup(shell->fd_in);
+				dup2(newin, STDIN_FILENO);
+				shell->fd_in = 0;
+			}
 			if (i != 0)
 				dup2(pipes[i - 2], STDIN_FILENO);
 			close_pipe(pipes, nb_pipe);
-			// if (ft_is_subshell(sstoken))
-			// 	ft_subshell(shell, sstoken);	
-			// else
+			if (ft_is_subshell(sstoken))
+				ft_subshell(shell, sstoken);	
+			else
 				ft_exec_cmd_fork(shell);
 		}
 		i += 2;

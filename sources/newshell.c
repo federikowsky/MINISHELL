@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:01:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/08 16:49:31 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/10 13:50:29 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_run_new_shell(t_shell *shell)
 	{
 		waitpid(pid, &status, 0);
 		shell->exitstatus = WEXITSTATUS(status);
-		sstoken = NULL;	
+		shell->token++;
+		// sstoken = NULL;	
 	}
 }
