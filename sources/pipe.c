@@ -94,7 +94,7 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 		pid = fork();
 		if (pid == 0)
 		{
-			sleep(10);
+			// sleep(10);
 			// ft_debug(shell, pipes, i);	
 			// if (ft_has((*(shell->operator + 1))[0], ">"))
 			// 	dup2(shell->redirec, STDOUT_FILENO);
