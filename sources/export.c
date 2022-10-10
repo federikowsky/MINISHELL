@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 13:07:56 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:19:06 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	ft_exist(char *s_env, char *s)
 
 	src = ft_split(s, '=')[0];
 	to_check = ft_split(s_env, '=')[0];
-	if (ft_strncmp(src, to_check, ft_strlen(src)) == 0)
+	if (ft_strncmp(src, to_check, ft_strlen(src)) == 0 && \
+		ft_strlen(src) == ft_strlen(to_check))
 		return (1);
 	return (0);
 }
