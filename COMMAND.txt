@@ -19,3 +19,9 @@ X ls | ps && echo ciao && p || echo bella
 // ft_bracket_aux da sistemare
 X (echo ciao | grep c)
 X (echo ciao)
+
+
+Funzionano sia le > che le >>, con pipe o senza. 
+L'unico problema è con le pipe che facendo fork 2 volte
+quando termina il primo stampa un prompt in piu,
+pero il resto funziona tutto

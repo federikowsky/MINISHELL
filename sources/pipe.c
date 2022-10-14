@@ -12,21 +12,6 @@
 
 #include "../includes/minishell.h"
 
-void ft_redir_pipe(t_shell *shell)
-{
-	int		fileout;
-
-	fileout = dup(STDOUT_FILENO);
-	if ((!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>")) && shell->redirec)
-	{
-    	dup2(shell->redirec, STDOUT_FILENO);
-		close(shell->redirec);
-	}
-	ft_exec_cmd_fork(shell);
-	dup2(fileout, STDOUT_FILENO);
-	close(fileout);
-}
-
 int ft_count_pipe(t_shell * shell)
 {
 	int	i;
@@ -83,7 +68,7 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 				dup2(pipes[i - 2], STDIN_FILENO);
 			close_pipe(pipes, nb_pipe);
 			if (!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>"))
-				ft_redir_pipe(shell);
+				ft_exec_cmd(shell);
 			else
 				ft_exec_cmd_fork(shell);
 		}

@@ -66,4 +66,5 @@ void ft_exec_cmd(t_shell *shell)
 	}
 	shell->last_operator = ssoperator;
 	shell->token++;
-	shell->operator++;}
+	shell->operator++;
+}

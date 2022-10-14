@@ -43,3 +43,14 @@ int ft_right_redir(t_shell *shell)
         shell->token++;
     return (0);
 }
+
+void ft_skip_redirection(t_shell *shell)
+{
+    while (!ft_strcmp(ssoperator, ">"))
+    {
+        shell->operator++;
+        shell->token++;
+    }
+    if (sstoken)
+        shell->token++;
+}

@@ -40,6 +40,8 @@ void	ft_switch_op(t_shell *shell)
 		ft_right_redir(shell);
 	else if (*(shell->operator) == NULL && sstoken != NULL)
 		ft_exec_cmd(shell);
+	if (!ft_strcmp(*(shell->operator), ">") || !ft_strcmp(*(shell->operator), ">>"))
+		ft_skip_redirection(shell);
 }
 
 char	*getcmd(char *s, char **envp)
