@@ -51,7 +51,7 @@ HEADER = 		${SOURCES_DIR}includes/minishell.h
 
 ${NAME}:
 	@make -s -C libft
-	${CC} ${CFLAGS} ${READLINE} ${SOURCES} $(LIBFT) -o $@
+	${CC} ${CFLAGS} ${SOURCES} $(LIBFT) -o $@ -lreadline
 
 all: ${NAME} 
 ${NAME}: ${OBJECTS}

@@ -68,7 +68,10 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 				dup2(pipes[i - 2], STDIN_FILENO);
 			close_pipe(pipes, nb_pipe);
 			if (!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>"))
+			{
 				ft_exec_cmd(shell);
+				exit(0);
+			}
 			else
 				ft_exec_cmd_fork(shell);
 		}
