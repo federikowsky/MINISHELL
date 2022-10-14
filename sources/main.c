@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/14 14:53:48 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:16:11 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_initializer(t_shell *shell)
 {
-	shell->filename = NULL;
 	shell->operator = NULL;
 	shell->token = NULL;
 	shell->exitstatus = -1;

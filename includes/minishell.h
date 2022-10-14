@@ -42,7 +42,6 @@ typedef struct s_shell
 	char	**operator;
 	char	**operator_temp;
 	char	*last_operator;
-	char	*filename;
 	int		exitstatus;
 	int		prev_exitstatus;
 	int		fd_in;
@@ -80,7 +79,7 @@ int				getcmd_aux(char *s, int *i);
 int				ft_pipe_check(char *cmd);
 int				ft_and_check(char *cmd);
 int				ft_quote_check(char *cmd);
-char			*ft_arg_check(char *cmd, char **envp);
+char			*ft_arg_check(char *cmd, char **envp, int redi);
 int				ft_bracket_aux(char *cmd);
 int				ft_bracket_check(char *cmd);
 int				ft_check_operator(char *cmd);

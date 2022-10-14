@@ -6,14 +6,14 @@
 #    By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/14 12:25:20 by agenoves         ###   ########.fr        #
+#    Updated: 2022/10/14 15:36:27 by agenoves         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 			minishell
 CC = 			gcc
 LIBFT = 		libft/libft.a
-CFLAGS = 		 -Wall -Werror -Wextra -g
+CFLAGS = 		-Wall -Werror -Wextra -g
 READLINE = 		-L/usr/include -lreadline -L$(HOME)/.brew/opt/readline/lib -I$(HOME)/.brew/opt/readline/include
 RM = 			rm -rf
 

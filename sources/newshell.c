@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:01:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/14 15:17:52 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:39:21 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ft_run_new_shell(t_shell *shell)
 	char	*path;
 
 	path = ft_strjoin(ft_get_pwd(shell), "/./minishell");
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	pid = fork();
 	if (!pid)
 	{
@@ -63,6 +65,5 @@ void	ft_run_new_shell(t_shell *shell)
 		waitpid(pid, &status, 0);
 		shell->exitstatus = WEXITSTATUS(status);
 		shell->token++;
-		// sstoken = NULL;	
 	}
 }

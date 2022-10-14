@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/14 14:45:17 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:05:03 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*getcmd(char *s, char **envp)
 	char			*temp;
 	static int		i = 0;
 	static int		in_cmd_mode = 1;
+	static int		is_red = 0;
 
 	if (i == -2 || i == ft_strlen(s))
 	{
@@ -46,16 +47,19 @@ char	*getcmd(char *s, char **envp)
 	start = getcmd_aux(s, &i);
 	while (s[i])
 	{
+		if (ft_has(s[i], "<>"))
+			is_red = 1;
 		if (in_cmd_mode && ft_has(s[i], "(\"'"))
 		{
 			in_cmd_mode = 0;
+			is_red = 0;
 			i = findparenth(s, start) + 1;
-			return (ft_arg_check(getsub(s, start + 1, i - 1), envp));
+			return (ft_arg_check(getsub(s, start + 1, i - 1), envp, is_red));
 		}
 		else if (in_cmd_mode && !ft_isdigit(s[i]) && !ft_isalpha(s[i]) && ft_has(s[i], "|&><"))
 		{
 			in_cmd_mode = 0;
-			return (ft_arg_check(getsub(s, start, i), envp));
+			return (ft_arg_check(getsub(s, start, i), envp, is_red));
 		}
 		else if (!in_cmd_mode && !ft_has(s[i], "|&><"))
 		{
@@ -67,7 +71,7 @@ char	*getcmd(char *s, char **envp)
 	i = -2;
 	temp = getsub(s, start, ft_strlen(s));
 	if (*temp)
-		return (ft_arg_check(temp, envp));
+		return (ft_arg_check(temp, envp, is_red));
 	return (NULL);
 }
 

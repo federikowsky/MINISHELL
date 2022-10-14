@@ -23,7 +23,7 @@ void	ft_exec_cmd_fork(t_shell *shell)
 	{	
 		cmd = ft_split(sstoken, ' ');
 		status = execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);
-			exit(status);
+			exit(127);
 	}
 	exit(0);
 }
@@ -50,7 +50,7 @@ void ft_exec_cmd(t_shell *shell)
 		{
 			cmd = ft_split(sstoken, ' ');
 			status = execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);
-			exit(status);
+			exit(127);
 		}
 		else
 		{
@@ -59,9 +59,11 @@ void ft_exec_cmd(t_shell *shell)
 			shell->prev_exitstatus = shell->exitstatus;
 		}
 	}
-	dup2(fileout, STDOUT_FILENO);
-	close(fileout);
+	if (!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>"))
+	{
+		dup2(fileout, STDOUT_FILENO);
+		close(fileout);
+	}
 	shell->last_operator = ssoperator;
 	shell->token++;
-	shell->operator++;
-}
+	shell->operator++;}
