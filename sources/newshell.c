@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:01:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/14 12:26:40 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:17:52 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ void	ft_run_new_shell(t_shell *shell)
 	char	**env_copy;
 	int		status;
 	pid_t 	pid;
-	t_shell newshell;
+	char	*path;
 
-	(void) newshell;
+	path = ft_strjoin(ft_get_pwd(shell), "/./minishell");
 	pid = fork();
 	if (!pid)
 	{
 		env_copy = ft_mat_copy(shell->env);
 		ft_increase_shlvl(&env_copy);
 		// main_loop(&newshell, env_copy);
-		execve("/Users/agenoves/Documents/minishell/./minishell", &shell->cmd, shell->env);
+		execve(path, &shell->cmd, env_copy);
 	}
 	else
 	{

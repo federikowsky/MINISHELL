@@ -69,6 +69,7 @@ void			ft_print_mat(char **ss);
 int				free_matrix(char **matrix);
 char			**ft_mat_copy(char **mat);
 void			ft_increase_shlvl(char ***mat);
+char			*ft_get_pwd(t_shell *shell);
 
 /* Utils Token */
 char			*ft_strip(char **s);

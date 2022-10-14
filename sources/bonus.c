@@ -6,16 +6,11 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:34:45 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/14 12:25:29 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:50:48 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// void ft_wildcard(t_shell *shell)
-// {
-
-// }
 
 void	ft_or(t_shell *shell)
 {

@@ -45,37 +45,6 @@ void close_pipe(int pipes[], int no_pipes)
         close(pipes[j++]);
 }
 
-void ft_debug(t_shell *shell, int pipes[], int i)
-{
-	if (fork() == 0)
-	{	
-		// ft_putstr_fd("comando corrente: ", shell->fd_debug);
-		// ft_putstr_fd(sstoken, shell->fd_debug);
-		// ft_putendl_fd(" ", shell->fd_debug);
-		ft_putstr_fd("stdin: ", shell->fd_debug);
-		ft_putstr_fd(ft_itoa(shell->fd_in), shell->fd_debug);
-		ft_putstr_fd("     ", shell->fd_debug);
-		
-		ft_putstr_fd("stdout: ", shell->fd_debug);
-		ft_putendl_fd(ft_itoa(shell->fd_out), shell->fd_debug);
-		
-		ft_putstr_fd("pipe_out: ", shell->fd_debug);
-		ft_putstr_fd(ft_itoa(pipes[i + 1]), shell->fd_debug);
-		ft_putstr_fd("     ", shell->fd_debug);
-		
-		ft_putstr_fd("pipe_in: ", shell->fd_debug);
-		if (i != 0)
-			ft_putendl_fd(ft_itoa(pipes[i - 2]), shell->fd_debug);
-		else
-			ft_putendl_fd("-1", shell->fd_debug);
-		ft_putendl_fd(" ", shell->fd_debug);
-		_exit(0);
-	}
-	else
-		wait(NULL);
-
-}
-
 void ft_exec_pipe(t_shell *shell, int nb_pipe)
 {
 	int 	i;
@@ -94,10 +63,6 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 		pid = fork();
 		if (pid == 0)
 		{
-			// sleep(10);
-			// ft_debug(shell, pipes, i);	
-			// if (ft_has((*(shell->operator + 1))[0], ">"))
-			// 	dup2(shell->redirec, STDOUT_FILENO);
 			if (*(shell->token + 1) != NULL)
 				dup2(pipes[i + 1], STDOUT_FILENO);
 			if (shell->fd_in)
@@ -125,7 +90,7 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	}
 	close_pipe(pipes, nb_pipe);
 	while (i-- > 0)
-        waitpid(pid, &status, 0);
+        waitpid(-1, &status, 0);
 	shell->exitstatus = WEXITSTATUS(status);
 	shell->prev_exitstatus = shell->exitstatus;	
 }

@@ -12,6 +12,21 @@
 
 #include "../includes/minishell.h"
 
+char	*ft_get_pwd(t_shell *shell)
+{
+	int		i;
+	char	*pwd;
+
+	i = 0;
+	while (shell->env[i] != 0)
+	{
+		if (!ft_strncmp(shell->env[i], "PWD=", 4))
+			pwd = ft_split(shell->env[i], '=')[1];
+		i++;
+	}
+	return (pwd);
+}
+
 int	ft_redir_check(char *cmd)
 {
 	int	i;

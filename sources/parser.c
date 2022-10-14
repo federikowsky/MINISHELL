@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/14 11:55:04 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:45:17 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,5 @@ int	ft_start(t_shell *shell)
 	free(shell->cmd);
 	free_matrix(shell->token_temp);
 	free_matrix(shell->operator_temp);
-	// if (fcntl(shell->redirec, F_GETFD) != -1)
-	// 	close(shell->redirec);
 	return (shell->fd_out);
 }
