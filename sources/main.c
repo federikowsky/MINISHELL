@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/08 15:44:32 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:47:34 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_initializer(t_shell *shell)
 {
+	shell->filename = NULL;
 	shell->operator = NULL;
 	shell->token = NULL;
 	shell->exitstatus = -1;
@@ -21,16 +22,17 @@ void	ft_initializer(t_shell *shell)
 	shell->fd_in = 0;
 	shell->fd_out = 1;
 	shell->last_operator = "";
+	shell->redirec = 0;
 }
 
 int	main_loop(t_shell *shell, char **envp)
 {
-	sig_handling_set(1);
 	ft_envhandle(envp, shell);
 	shell->home = ft_get_home(shell);
-	shell->fd_debug = open("FILE DEBUG", O_CREAT | O_TRUNC | O_WRONLY, 0777);
+	// shell->fd_debug = open("FILE DEBUG", O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	while (1)
 	{
+		sig_handling_set(1);
 		ft_initializer(shell);
 		if (!shell->cmd)
 			return (write (1, "\n", 1));

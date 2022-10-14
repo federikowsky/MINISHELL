@@ -14,18 +14,21 @@
 
 int ft_right_redir(t_shell *shell ,char *op)
 {
-
-    if ((shell->last_operator)[0] =='\0')
-        ft_exec_cmd(shell);
-    while (ft_has((*(shell->operator + 1))[0], ">"))
+    if (!ft_strncmp(op, ">>", 2))
     {
-        if (!ft_strncmp(op, ">>", 2))
-            shell->redirec = open(sstoken, O_CREAT | O_APPEND | O_WRONLY, 0777);
-        else if (!ft_strncmp(op, ">", 1))
-            shell->redirec = open(sstoken, O_CREAT | O_TRUNC | O_WRONLY, 0777);
-        shell->token++;
-        shell->operator++;
+        sstoken++;
+        shell->filename = sstoken;  
+        shell->redirec = open(shell->filename, O_CREAT | O_APPEND | O_WRONLY, 0777);
+        sstoken--;
     }
+    else if (!ft_strncmp(op, ">", 1))
+    {
+        sstoken++;
+        shell->filename = sstoken;
+        shell->redirec = open(shell->filename, O_CREAT | O_TRUNC | O_WRONLY, 0777);
+        sstoken--;
+    }
+    ft_exec_cmd(shell);
     if (sstoken)
         shell->token++;
     return (0);

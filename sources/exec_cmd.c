@@ -34,11 +34,8 @@ void ft_exec_cmd(t_shell *shell)
 	int		status;
 	char	**cmd;
 	
-	// if (fcntl(shell->redirec, F_GETFD) != -1)
-	// {
-	// 	printf("%d\n", fcntl(shell->fd_debug, F_GETFD));
-	// 	dup2(shell->redirec, STDOUT_FILENO);
-	// }
+	if (!ft_strcmp(ssoperator, ">"))
+    	dup2(shell->redirec, STDOUT_FILENO);
 	if (access(ft_split(sstoken, ' ')[0], F_OK) == 0)
 		sstoken = ft_split(sstoken, '/')[ft_mat_lenght(ft_split(sstoken, '/')) - 1];
 	if (ft_builtin(sstoken, shell))
@@ -55,10 +52,11 @@ void ft_exec_cmd(t_shell *shell)
 			waitpid(pid, &status, 0);
 			shell->exitstatus = WEXITSTATUS(status);
 			shell->prev_exitstatus = shell->exitstatus;
-			// close(shell->redirec);
+			close(shell->redirec);
 		}
 	}
-	// close(shell->redirec);
+	if (shell->redirec)
+		close(shell->redirec);
 	shell->last_operator = ssoperator;
 	shell->token++;
 	shell->operator++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   newshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:01:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/10 13:50:29 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:26:40 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,14 @@ void	ft_run_new_shell(t_shell *shell)
 	pid_t 	pid;
 	t_shell newshell;
 
+	(void) newshell;
 	pid = fork();
 	if (!pid)
 	{
 		env_copy = ft_mat_copy(shell->env);
 		ft_increase_shlvl(&env_copy);
-		main_loop(&newshell, env_copy);
+		// main_loop(&newshell, env_copy);
+		execve("/Users/agenoves/Documents/minishell/./minishell", &shell->cmd, shell->env);
 	}
 	else
 	{

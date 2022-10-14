@@ -42,6 +42,7 @@ typedef struct s_shell
 	char	**operator;
 	char	**operator_temp;
 	char	*last_operator;
+	char	*filename;
 	int		exitstatus;
 	int		prev_exitstatus;
 	int		fd_in;
