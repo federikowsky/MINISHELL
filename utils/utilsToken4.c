@@ -47,3 +47,18 @@ int	ft_redir_check(char *cmd)
 	}
 	return (0);
 }
+
+int	ft_find_redir(t_shell *shell)
+{
+	int	i;
+
+	i = 0;
+	while (shell->operator[i])
+	{
+		if (!ft_strcmp(shell->operator[i], ">") || \
+				!ft_strcmp(shell->operator[i], ">>"))
+			return (1);
+		i++;
+	}
+	return (0);
+}

@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/14 16:05:03 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:24:03 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void ft_redir_exec(t_shell *shell)
+{
+	int		fileout;
+
+	fileout = dup(STDOUT_FILENO);
+    dup2(shell->redirec, STDOUT_FILENO);
+	close(shell->redirec);
+	ft_right_redir(shell);
+	dup2(fileout, STDOUT_FILENO);
+	close(fileout);
+}
 
 void	ft_switch_op(t_shell *shell)
 {
@@ -25,7 +37,7 @@ void	ft_switch_op(t_shell *shell)
 	else if (!ft_strcmp(*(shell->operator), "&&"))
 		ft_and(shell);
 	else if (!ft_strcmp(*(shell->operator), ">"))
-		ft_right_redir(shell, ssoperator);
+		ft_right_redir(shell);
 	else if (*(shell->operator) == NULL && sstoken != NULL)
 		ft_exec_cmd(shell);
 }
@@ -98,6 +110,7 @@ int	ft_start(t_shell *shell)
 	ft_creatematrix(shell);
 	shell->operator_temp = shell->operator;
 	shell->token_temp = shell->token;
+	ft_redirection(shell);
 	while(sstoken)
 		ft_switch_op(shell);
 	free(shell->cmd);

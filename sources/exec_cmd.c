@@ -36,7 +36,7 @@ void ft_exec_cmd(t_shell *shell)
 	int		fileout;
 
 	fileout = dup(STDOUT_FILENO);
-	if (!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>"))
+	if ((!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>")) && shell->redirec)
 	{
     	dup2(shell->redirec, STDOUT_FILENO);
 		close(shell->redirec);
@@ -59,7 +59,7 @@ void ft_exec_cmd(t_shell *shell)
 			shell->prev_exitstatus = shell->exitstatus;
 		}
 	}
-	if (!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>"))
+	if ((!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>")) && shell->redirec)
 	{
 		dup2(fileout, STDOUT_FILENO);
 		close(fileout);

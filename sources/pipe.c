@@ -12,6 +12,21 @@
 
 #include "../includes/minishell.h"
 
+void ft_redir_pipe(t_shell *shell)
+{
+	int		fileout;
+
+	fileout = dup(STDOUT_FILENO);
+	if ((!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>")) && shell->redirec)
+	{
+    	dup2(shell->redirec, STDOUT_FILENO);
+		close(shell->redirec);
+	}
+	ft_exec_cmd_fork(shell);
+	dup2(fileout, STDOUT_FILENO);
+	close(fileout);
+}
+
 int ft_count_pipe(t_shell * shell)
 {
 	int	i;
@@ -56,32 +71,24 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	i = 0;
 	j = nb_pipe + 1;
 	open_pipe(pipes, nb_pipe);
-	ft_putendl_fd("ESEGUO PIPE", shell->fd_debug);
 	while (sstoken && j-- > 0)
 	{
 		int newin;
 		pid = fork();
 		if (pid == 0)
 		{
-			if (*(shell->token + 1) != NULL)
+			if (*(shell->token + 1) != NULL && !(!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>")))
 				dup2(pipes[i + 1], STDOUT_FILENO);
-			if (shell->fd_in)
-			{
-				newin = dup(shell->fd_in);
-				dup2(newin, STDIN_FILENO);
-				shell->fd_in = 0;
-			}
 			if (i != 0)
 				dup2(pipes[i - 2], STDIN_FILENO);
 			close_pipe(pipes, nb_pipe);
-			if (ft_is_subshell(sstoken))
-				ft_subshell(shell, sstoken);	
+			if (!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>"))
+				ft_redir_pipe(shell);
 			else
 				ft_exec_cmd_fork(shell);
 		}
 		i += 2;
 		shell->token++;
-		shell->fd_out = pipes[i + 1];
 		if (j)
 		{
 			shell->last_operator = ssoperator;	

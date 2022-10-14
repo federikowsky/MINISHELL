@@ -86,6 +86,8 @@ int				ft_check_operator(char *cmd);
 int				ft_redir_check(char *cmd);
 char 			**ft_addelement(char **ss, char *cmd);
 int				ft_check_builtin(char *input);
+int				ft_find_redir(t_shell *shell);
+void 			ft_redirection(t_shell *shell);
 
 /* Main */
 int				main_loop(t_shell *s_shell, char **envp);
@@ -127,7 +129,7 @@ void 			ft_subshell(t_shell *shell, char *s);
 void 			ft_debug(t_shell *shell, int pipes[], int i);
 
 /* Redirection*/
-int 			ft_right_redir(t_shell *shell ,char *op);
+int 			ft_right_redir(t_shell *shell);
 
 
 #endif

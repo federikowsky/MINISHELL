@@ -12,19 +12,27 @@
 
 #include "../includes/minishell.h"
 
-int ft_right_redir(t_shell *shell ,char *op)
+void ft_redirection(t_shell *shell)
 {
     int	i;
+    int j;
 
 	i = 1;
+    j = 0;
 	while (shell->token[i])
     {
-        if (!ft_strncmp(op, ">>", 2))
+        if (!ft_strncmp(shell->operator[j], ">>", 2))
             shell->redirec = open(shell->token[i], O_CREAT | O_APPEND | O_WRONLY, 0777);
-        else if (!ft_strncmp(op, ">", 1))
+        else if (!ft_strncmp(shell->operator[j], ">", 1))
             shell->redirec = open(shell->token[i], O_CREAT | O_TRUNC | O_WRONLY, 0777);
         i++;
-    }
+        j++;
+    } 
+}
+
+int ft_right_redir(t_shell *shell)
+{
+    ft_redirection(shell);
     ft_exec_cmd(shell);
     while (!ft_strcmp(ssoperator, ">"))
     {
