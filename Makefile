@@ -6,7 +6,7 @@
 #    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/14 16:49:48 by fefilipp         ###   ########.fr        #
+#    Updated: 2022/10/15 21:38:52 by fefilipp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ HEADER = 		${SOURCES_DIR}includes/minishell.h
 
 ${NAME}:
 	@make -s -C libft
-	${CC} ${CFLAGS} ${SOURCES} $(LIBFT) -o $@ -lreadline
+	${CC} ${CFLAGS} ${READLINE} ${SOURCES} $(LIBFT) -o $@
 
 all: ${NAME} 
 ${NAME}: ${OBJECTS}
