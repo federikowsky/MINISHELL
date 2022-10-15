@@ -75,7 +75,7 @@ char			*ft_strip(char **s);
 int				ft_has(char c, char const *set);
 int				findparenth(const char *s, int start);
 char			*getsub(const char *s, int start, int end);
-int				getcmd_aux(char *s, int *i);
+int				ft_get_cmd_aux(char *s, int *i);
 int				ft_pipe_check(char *cmd);
 int				ft_and_check(char *cmd);
 int				ft_quote_check(char *cmd);
@@ -110,11 +110,13 @@ void			ft_exec_builtin(char *cmd, t_shell *shell);
 void			ft_printenv(char **envp);
 
 /* Parsing */
-char			*getcmd(char *s, char **envp);
+char			*ft_get_cmd(char *s, char **envp);
 int				ft_start(t_shell *shell);
 void 			ft_exec_cmd(t_shell *shell);
 void			ft_exec_cmd_fork(t_shell *shell);
 void			ft_switch_op(t_shell *shell);
+void 			ft_creatematrix(t_shell *shell);
+void 			ft_append_cmd(t_shell *shell);
 
 /* Pipe */
 void 			ft_exec_pipe(t_shell *shell, int nb_pipe);
@@ -133,6 +135,7 @@ void 			ft_debug(t_shell *shell, int pipes[], int i);
 
 /* Redirection*/
 int 			ft_right_redir(t_shell *shell);
+void 			ft_redir_exec(t_shell *shell);
 
 
 #endif

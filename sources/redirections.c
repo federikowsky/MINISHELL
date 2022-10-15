@@ -12,6 +12,18 @@
 
 #include "../includes/minishell.h"
 
+void ft_redir_exec(t_shell *shell)
+{
+	int		fileout;
+
+	fileout = dup(STDOUT_FILENO);
+    dup2(shell->redirec, STDOUT_FILENO);
+	close(shell->redirec);
+	ft_right_redir(shell);
+	dup2(fileout, STDOUT_FILENO);
+	close(fileout);
+}
+
 void ft_redirection(t_shell *shell)
 {
     int	i;

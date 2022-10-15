@@ -58,7 +58,6 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	open_pipe(pipes, nb_pipe);
 	while (sstoken && j-- > 0)
 	{
-		int newin;
 		pid = fork();
 		if (pid == 0)
 		{

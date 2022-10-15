@@ -6,7 +6,7 @@
 #    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/15 21:38:52 by fefilipp         ###   ########.fr        #
+#    Updated: 2022/10/16 00:40:34 by fefilipp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ FILES = 		sources/main \
 				sources/redirections \
 				utils/utils \
 				utils/utils2 \
+				utils/utilsParser \
 				utils/utilsToken \
 				utils/utilsToken2 \
 				utils/utilsToken3 \

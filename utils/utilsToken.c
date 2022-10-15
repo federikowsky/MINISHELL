@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:46:53 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/03 16:42:01 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/16 00:39:33 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*getsub(const char *s, int start, int end)
 	return (str);
 }
 
-int	getcmd_aux(char *s, int *i)
+int	ft_get_cmd_aux(char *s, int *i)
 {
 	while (s[*i] == ' ' || s[*i] == ')')
 		(*i)++;
