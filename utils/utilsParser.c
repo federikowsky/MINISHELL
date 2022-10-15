@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/16 01:14:59 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:44:41 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,14 @@ char	*ft_get_cmd(char *s, char **envp)
 	{
 		if (ft_has(s[i], "<>"))
 			is_red = 1;
-		if (in_cmd_mode && ft_has(s[i], "(\"'"))
+		if (in_cmd_mode && ft_has(s[i], "\"\'"))
+		{
+			in_cmd_mode = 0;
+			is_red = 0;
+			i = ft_findquote(s, start) + 1;
+			return (ft_arg_check(getsub(s, start, i), envp, is_red));
+		}
+		if (in_cmd_mode && ft_has(s[i], "("))
 		{
 			in_cmd_mode = 0;
 			is_red = 0;

@@ -86,6 +86,7 @@ int				ft_check_operator(char *cmd);
 int				ft_redir_check(char *cmd);
 char 			**ft_addelement(char **ss, char *cmd);
 int				ft_check_builtin(char *input);
+int				ft_findquote(char *s, int start);
 
 /* Utils Redirection */
 int				ft_find_redir(t_shell *shell);

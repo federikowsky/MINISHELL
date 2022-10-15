@@ -12,6 +12,20 @@
 
 #include "../includes/minishell.h"
 
+int	ft_findquote(char *s, int start)
+{
+	int	found;
+
+	found = -1;
+	while (s[start])
+	{
+		if (ft_has(s[start], "\"\'"))
+			found = start;
+		start++;
+	}
+	return (found);
+}
+
 char	*ft_get_pwd(t_shell *shell)
 {
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:46:53 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/16 00:39:33 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:44:32 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	findparenth(const char *s, int start)
 	found = -1;
 	while (s[start])
 	{
-		if (ft_has(s[start], ")\"'"))
+		if (ft_has(s[start], ")"))
 			found = start;
 		start++;
 	}
