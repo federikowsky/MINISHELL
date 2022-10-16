@@ -138,5 +138,7 @@ void 			ft_debug(t_shell *shell, int pipes[], int i);
 int 			ft_right_redir(t_shell *shell);
 void 			ft_redir_exec(t_shell *shell);
 
+void 			ft_left_redir(t_shell *shell);
+
 
 #endif

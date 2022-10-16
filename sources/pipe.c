@@ -75,7 +75,8 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 				ft_exec_cmd_fork(shell);
 		}
 		i += 2;
-		shell->token++;
+		if (ft_strcmp(ssoperator, "<"))
+			shell->token++;
 		if (j)
 		{
 			shell->last_operator = ssoperator;	
@@ -85,6 +86,8 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	close_pipe(pipes, nb_pipe);
 	while (i-- > 0)
         waitpid(-1, &status, 0);
+	if (!ft_strcmp(ssoperator, "<"))
+		ft_left_redir(shell);
 	shell->exitstatus = WEXITSTATUS(status);
 	shell->prev_exitstatus = shell->exitstatus;	
 }

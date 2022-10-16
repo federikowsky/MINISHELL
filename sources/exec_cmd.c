@@ -15,15 +15,13 @@
 void	ft_exec_cmd_fork(t_shell *shell)
 {
 	char	**cmd;
-	int		status;
 
 	shell->exitstatus = 0;
-	status = 0;
 	if (ft_builtin(sstoken, shell))
 	{	
 		cmd = ft_split(sstoken, ' ');
-		status = execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);
-			exit(127);
+		execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);
+		exit(127);
 	}
 	exit(0);
 }
@@ -67,4 +65,4 @@ void ft_exec_cmd(t_shell *shell)
 	shell->last_operator = ssoperator;
 	shell->token++;
 	shell->operator++;
-}
+} 

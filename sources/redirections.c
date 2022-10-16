@@ -44,9 +44,8 @@ void ft_redirection(t_shell *shell)
 
 int ft_right_redir(t_shell *shell)
 {
-    ft_redirection(shell);
     ft_exec_cmd(shell);
-    while (!ft_strcmp(ssoperator, ">"))
+    while (!ft_strcmp(ssoperator, ">") || !ft_strcmp(*(shell->operator), ">>"))
     {
         shell->operator++;
         shell->token++;
