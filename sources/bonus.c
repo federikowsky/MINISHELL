@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:34:45 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/16 01:26:11 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:19:51 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	ft_or(t_shell *shell)
 
 void	ft_and(t_shell *shell)
 {
-	if (ft_strcmp(*(shell->operator + 1), "|") == 0 && sslastop[0] != '\0')
+	// if (ft_strcmp(*(shell->operator + 1), "|") == 0 && sslastop[0] != '\0')
+	if (ft_strcmp(*(shell->operator + 1), "|") == 0)
 	{
 		shell->operator++;
 		ft_exec_pipe(shell, ft_count_pipe(shell));

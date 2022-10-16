@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/16 13:16:54 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/16 14:46:59 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_switch_op(t_shell *shell)
 		ft_right_redir(shell);
 	else if (!ft_strcmp(*(shell->operator), "<"))
 		ft_left_redir(shell);
+	// else if (!ft_strcmp(*(shell->operator), "<<")
 	else if (*(shell->operator) == NULL && sstoken != NULL)
 		ft_exec_cmd(shell);
 	if (!ft_strcmp(*(shell->operator), ">") || !ft_strcmp(*(shell->operator), ">>"))

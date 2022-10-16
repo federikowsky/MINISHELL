@@ -118,6 +118,7 @@ void			ft_exec_cmd_fork(t_shell *shell);
 void			ft_switch_op(t_shell *shell);
 void 			ft_creatematrix(t_shell *shell);
 void 			ft_append_cmd(t_shell *shell);
+char			*ft_get_op(t_shell *shell, int heredoc);
 
 /* Pipe */
 void 			ft_exec_pipe(t_shell *shell, int nb_pipe);
@@ -140,5 +141,7 @@ void 			ft_redir_exec(t_shell *shell);
 
 void 			ft_left_redir(t_shell *shell);
 
+/* Heredoc*/
+void 			ft_heredoc(t_shell *shell);
 
 #endif

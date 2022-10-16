@@ -6,13 +6,13 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:14:13 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/16 13:41:35 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:17:42 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_redir_in_exec(char * token, t_shell *shell)
+static void	ft_redir_in_exec(char * token, t_shell *shell)
 {
 	char	**cmd;
 
@@ -25,7 +25,7 @@ void	ft_redir_in_exec(char * token, t_shell *shell)
 	exit(0);
 }
 
-void	ft_in_redir(char *cmd, t_shell *shell)
+static void	ft_in_redir(char *cmd, t_shell *shell)
 {
 	int		filein;
 	int		status;
@@ -57,5 +57,6 @@ void	ft_left_redir(t_shell *shell)
 		ft_in_redir(curr_cmd, shell);
 		shell->operator++;
 	}
-	
+	if (sstoken)
+		shell->token++;
 }

@@ -6,13 +6,13 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/16 01:44:41 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:12:16 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_get_op(t_shell *shell)
+char	*ft_get_op(t_shell *shell, int heredoc)
 {
 	int		i;
 	char	*res;
@@ -20,6 +20,7 @@ char	*ft_get_op(t_shell *shell)
 
 	i = 0;
 	curr_op = "";
+	res = "";
 	while(shell->operator[i])
 	{
 		if (i != 0 && !ft_strcmp(shell->operator[i], "|"))
@@ -31,6 +32,8 @@ char	*ft_get_op(t_shell *shell)
 		res = ft_strjoin(res, curr_op);
 		i++;
 	}
+	if (heredoc)
+		res = ft_strjoin(res, "heredoc ");
 	res = ft_strjoin(res, "\b> ");
 	return (res);
 }
@@ -39,7 +42,7 @@ void ft_append_cmd(t_shell *shell)
 {
 	char	*prompt;
 	
-	prompt = ft_get_op(shell);
+	prompt = ft_get_op(shell, 0);
 	shell->cmd = readline(prompt);
 	while (*(shell->cmd) == '\0')
 		shell->cmd = readline(prompt);
@@ -108,14 +111,22 @@ void ft_creatematrix(t_shell *shell)
 	operator = " ";
 	while (token != NULL && operator != NULL)
 	{
-		token = ft_get_cmd(shell->cmd, shell->env);
-		token = ft_strip(&token);
+		if (ft_strcmp(operator, "<<"))
+		{
+			token = ft_get_cmd(shell->cmd, shell->env);
+			token = ft_strip(&token);
+			shell->token = ft_addelement(shell->token, token);
+		}
 		if (!token)
 			break;
 		operator = ft_get_cmd(shell->cmd, shell->env);
 		operator = ft_strip(&operator);
-		shell->token = ft_addelement(shell->token, token);
-		shell->operator = ft_addelement(shell->operator, operator);
+		if (!ft_strcmp(operator, "<<"))
+		{
+			ft_heredoc(shell);
+		}
+		else
+			shell->operator = ft_addelement(shell->operator, operator);
 	}
 	if (ft_mat_lenght(shell->token) == ft_mat_lenght(shell->operator))
 		ft_append_cmd(shell);
