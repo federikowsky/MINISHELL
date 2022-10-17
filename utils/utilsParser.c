@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/17 14:11:30 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/17 14:27:27 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*ft_check_quote(char **token)
 	int	i;
 
 	i = 0;
+	if (!(*token))
+		return (NULL);
 	while (*token[i])
 	{
 		if ((*token)[i] == 34)
@@ -160,12 +162,11 @@ void ft_creatematrix(t_shell *shell)
 		operator = ft_get_cmd(shell->cmd, shell->env);
 		operator = ft_strip(&operator);
 		if (!ft_strcmp(operator, "<<"))
-		{
 			ft_heredoc(shell);
-		}
 		else
 			shell->operator = ft_addelement(shell->operator, operator);
 	}
-	if (ft_mat_lenght(shell->token) == ft_mat_lenght(shell->operator))
+	if (shell->token && shell->operator && \
+			ft_mat_lenght(shell->token) == ft_mat_lenght(shell->operator))
 		ft_append_cmd(shell);
 }

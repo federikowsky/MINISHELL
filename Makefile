@@ -6,7 +6,7 @@
 #    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/16 14:45:28 by fefilipp         ###   ########.fr        #
+#    Updated: 2022/10/17 14:28:35 by fefilipp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,8 @@ clean:
 	@echo "Minishell cleaned successfully"
 
 fclean: clean
-	@${RM} ${NAME}
+	@${RM} ${NAME} 
+	rm -rf minishell.dSYM
 
 re: fclean all
 
