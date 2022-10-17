@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:15:07 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/14 15:58:06 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:55:10 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int	ft_quote_check(char *cmd)
 	}
 	if (quote % 2 != 0 || doublequote % 2 != 0)
 	{
-		perror("Quote check Problem: Minishell");
+		if (ft_get_echo(cmd) == NULL)
+			perror("Quote check Problem: Minishell");
 		return (1);
 	}
 	return (0);

@@ -144,4 +144,7 @@ void 			ft_left_redir(t_shell *shell);
 /* Heredoc*/
 void 			ft_heredoc(t_shell *shell);
 
+/* Echo */
+char 			*ft_get_echo(char *s);
+
 #endif

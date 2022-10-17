@@ -37,6 +37,7 @@ FILES = 		sources/main \
 				utils/utils2 \
 				utils/heredoc \
 				utils/utilsParser \
+				utils/utilsEcho \
 				utils/utilsToken \
 				utils/utilsToken2 \
 				utils/utilsToken3 \
