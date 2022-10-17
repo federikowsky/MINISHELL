@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/17 14:27:27 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/17 14:34:56 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_remove_quote(char *str, char c)
 	{
 		len = ft_strlen(temp);
 		if (*temp == c)
-			ft_memmove(temp, temp + 1, len );
+			ft_memmove(temp, temp + 1, len);
 		temp++;
 	}
 }

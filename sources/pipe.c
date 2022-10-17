@@ -82,6 +82,8 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 			shell->last_operator = ssoperator;	
 			shell->operator++;
 		}
+		if (sstoken[0] == '\0')
+			j = 0;
 	}
 	close_pipe(pipes, nb_pipe);
 	while (i-- > 0)
