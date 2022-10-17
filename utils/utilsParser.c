@@ -6,11 +6,48 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/16 15:12:16 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/17 14:11:30 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_remove_quote(char *str, char c)
+{
+	char	*temp;
+	int		len;
+
+	temp = str;
+	while (*temp)
+	{
+		len = ft_strlen(temp);
+		if (*temp == c)
+			ft_memmove(temp, temp + 1, len );
+		temp++;
+	}
+}
+
+char	*ft_check_quote(char **token)
+{
+	int	i;
+
+	i = 0;
+	while (*token[i])
+	{
+		if ((*token)[i] == 34)
+		{
+			ft_remove_quote(*token, 34);
+			break;
+		}
+		if ((*token)[i] == 39)
+		{
+			ft_remove_quote(*token, 39);
+			break;
+		}	
+		i++;
+	}
+	return (*token);
+}
 
 char	*ft_get_op(t_shell *shell, int heredoc)
 {
@@ -115,6 +152,7 @@ void ft_creatematrix(t_shell *shell)
 		{
 			token = ft_get_cmd(shell->cmd, shell->env);
 			token = ft_strip(&token);
+			token = ft_check_quote(&token);
 			shell->token = ft_addelement(shell->token, token);
 		}
 		if (!token)

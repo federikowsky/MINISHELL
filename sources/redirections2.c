@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:14:13 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/16 15:17:42 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/17 13:52:22 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,6 @@ void	ft_left_redir(t_shell *shell)
 	if (sstoken)
 		shell->token++;
 }
+
+
+// echo "ciao"
