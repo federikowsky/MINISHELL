@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:41:06 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/19 03:17:30 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_exit(t_shell *shell)
 		if (check)
 			printf("minishell: exit: %s: numeric argument required\n", \
 			cmds[1]);
+		exit(ft_atoi(cmds[1]));
 	}
 	exit(0);
 }
