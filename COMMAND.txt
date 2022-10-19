@@ -23,3 +23,5 @@ X (echo ciao)
 
 X ps | > ls && echo ciao
 X ps | > f1 echo ciao
+
+X echo ciao && echo bella && echo come || echo che && ls && echo " ciao ' lsls " ' ' "    '   lllll ' "

@@ -6,21 +6,22 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/19 03:01:17 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:48:41 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// 34 "
-// 39 '
-
 char	*ft_get_echo2(char *token)
 {
 	char	*cmd;
 	char	*temp;
+	char	*copy;
 	
-	cmd = ft_strnstr(token, "echo", ft_strlen(token));
+	copy = ft_strdup(token);
+	cmd = ft_strnstr(copy, "echo", ft_strlen(copy));
+	if (!cmd)
+		return (" ");
 	temp = cmd + 5;
 	while(*temp)
 	{
@@ -52,6 +53,7 @@ char	*ft_get_echo2(char *token)
 		}
 		temp++;
 	}
+	free(copy);
 	return (ft_substr(cmd, 0, temp - cmd));
 }
 

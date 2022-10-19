@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/19 03:13:23 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:24:58 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,13 @@ char	*ft_get_cmd(char *s, char **envp)
 	{
 		if (ft_has(s[i], "<>"))
 			is_red = 1;
-		// char *x = ft_get_echo2(s + i);
-		// if (ft_strncmp(s + i, "echo", 4) && ft_get_echo2(s + i) != NULL)
-		// {
-		// 	int curr_ind = i;
-		// 	i += ft_strlen(ft_get_echo2(s + i));
-		// 	return (ft_get_echo2(s + curr_ind));
-		// }
+		if (in_cmd_mode && !ft_strncmp(s + i, "echo", 4) && ft_get_echo2(s + i) != NULL)
+		{
+			int curr_ind = i;
+			in_cmd_mode = 0;
+			i += ft_strlen(ft_get_echo(s + i));
+			return (ft_get_echo2(s + curr_ind));
+		}
 		if (in_cmd_mode && ft_has(s[i], "\"\'"))
 		{
 			in_cmd_mode = 0;
