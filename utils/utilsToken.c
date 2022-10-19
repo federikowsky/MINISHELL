@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:46:53 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/16 01:44:32 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:18:51 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ int	ft_has(char c, char const *set)
 	return (0);
 }
 
-int	findparenth(const char *s, int start)
+int	findparenth(const char *s, int start, char *c)
 {
 	int	found;
 
 	found = -1;
 	while (s[start])
 	{
-		if (ft_has(s[start], ")"))
+		if (ft_has(s[start], c))
 			found = start;
 		start++;
 	}

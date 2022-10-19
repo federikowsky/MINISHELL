@@ -6,11 +6,12 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/17 17:26:01 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/19 03:02:19 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
 
 void	ft_initializer(t_shell *shell)
 {
@@ -35,7 +36,7 @@ int	main_loop(t_shell *shell, char **envp)
 			return (write (1, "\n", 1));
 		if (shell->cmd)
 			add_history(shell->cmd);
-		// printf("%s\n", ft_get_echo(shell->cmd));
+		// printf("%s\n", ft_get_echo2(shell->cmd));
 		if (ft_check_operator(shell->cmd))
 			printf("Waiting for new command...\n");
 		else

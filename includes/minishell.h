@@ -73,7 +73,7 @@ char			*ft_get_pwd(t_shell *shell);
 /* Utils Token */
 char			*ft_strip(char **s);
 int				ft_has(char c, char const *set);
-int				findparenth(const char *s, int start);
+int				findparenth(const char *s, int start, char *c);
 char			*getsub(const char *s, int start, int end);
 int				ft_get_cmd_aux(char *s, int *i);
 int				ft_pipe_check(char *cmd);
@@ -119,6 +119,7 @@ void			ft_switch_op(t_shell *shell);
 void 			ft_creatematrix(t_shell *shell);
 void 			ft_append_cmd(t_shell *shell);
 char			*ft_get_op(t_shell *shell, int heredoc);
+char			*ft_get_echo2(char *token);
 
 /* Pipe */
 void 			ft_exec_pipe(t_shell *shell, int nb_pipe);

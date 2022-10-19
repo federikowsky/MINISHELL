@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:22:48 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/17 17:22:23 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/19 02:58:19 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*return_s(char *temp, char *last_quote, char *echo)
 	temp++;
 	*temp = '\0';
 	return echo;
+	
+
 }
 
 char	*ft_get_echo(char *s)
