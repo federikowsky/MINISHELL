@@ -46,8 +46,8 @@ typedef struct s_shell
 	int		prev_exitstatus;
 	int		fd_in;
 	int		fd_out;
-	int		fd_debug;
 	int 	redirec;
+	int		is_subshell;
 }	t_shell;
 
 

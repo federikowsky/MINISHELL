@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   newshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:01:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/21 12:15:05 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:15:36 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ void	ft_subshell(t_shell *shell, char *s)
 		newshell.operator = NULL;
 		newshell.token = NULL;
 		newshell.exitstatus = -1;
-		newshell.cmd = ft_strdup(s); 
+		newshell.cmd = ft_strdup(s);
 		newshell.last_operator = "";
 		newshell.fd_in = shell->fd_out;
-		newshell.fd_debug = shell->fd_debug;
+		newshell.is_subshell = 1;
 		exit(ft_start(&newshell));
 	}
 	else
 	{
 		waitpid(pid, &status, 0);
-		shell->fd_in = WEXITSTATUS(status);
+		shell->exitstatus = WEXITSTATUS(status);
 		shell->token++;
 		shell->operator++;
 	}
@@ -57,7 +57,6 @@ void	ft_run_new_shell(t_shell *shell)
 	{
 		env_copy = ft_mat_copy(shell->env);
 		ft_increase_shlvl(&env_copy);
-		// main_loop(&newshell, env_copy);
 		execve(path, &shell->cmd, env_copy);
 	}
 	else

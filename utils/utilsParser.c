@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsParser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/21 12:17:14 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:41:25 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_check_quote(char **token)
 	i = 0;
 	if (!(*token))
 		return (NULL);
-	while (*token[i])
+	while ((*token)[i])
 	{
 		if ((*token)[i] == 34)
 		{

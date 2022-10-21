@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsEcho.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:22:48 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/21 12:09:31 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:44:41 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ char	*return_s(char *temp, char *last_quote, char *echo, char *copy)
 {
 	int	i;
 
+	if (!ft_strcmp(echo, "echo $?"))
+		return (echo);
 	if (!(*last_quote))
 	{
 		i = 0;
-		while (!ft_has(echo[i], "&|<>"))
+		while (echo[i] && !ft_has(echo[i], "&|<>"))
 			i++;
 		return (getsub(echo, 0, i));
 	}

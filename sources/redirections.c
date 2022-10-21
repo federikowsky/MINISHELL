@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 02:49:57 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/21 12:20:04 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:13:13 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,20 @@ void	ft_redir_exec(t_shell *shell)
 
 void	ft_redirection(t_shell *shell)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	**fname;
 
 	i = 1;
 	j = 0;
 	while (shell->token[i])
 	{
+		fname = ft_split(shell->token[i], ' ');
 		if (!ft_strncmp(shell->operator[j], ">>", 2))
-			shell->redirec = open(shell->token[i], \
+			shell->redirec = open(fname[0], \
 				O_CREAT | O_APPEND | O_WRONLY, 0777);
 		else if (!ft_strncmp(shell->operator[j], ">", 1))
-			shell->redirec = open(shell->token[i], \
+			shell->redirec = open(fname[0], \
 				O_CREAT | O_TRUNC | O_WRONLY, 0777);
 		i++;
 		j++;

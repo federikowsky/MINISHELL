@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:05:08 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/21 12:08:51 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:33:43 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 int	ft_is_subshell(char *token)
 {
-	// int	i;
+	int	i;
 
-	// i = 0;
-	// while (token[i])
-	// {
-	// 	if (ft_has(token[i], "|&"))
-	// 		return (1);
-	// 	i++;
-	// }
+	if (!ft_strncmp(token, "echo", 4))
+		return (0);
+	i = 0;
+	while (token[i])
+	{
+		if (ft_has(token[i], "|&"))
+			return (1);
+		i++;
+	}
 	return (0);
 }
 
@@ -43,15 +45,15 @@ char	*ft_pathfinder(char *cmd, char **envp)
 {
 	char	**mypaths;
 	char	*pathnoslash;
-	char	*pathinenv;
 	char	*finalpath;
 	int		i;
 
 	i = 0;
-	while (ft_strncmp("PATH", envp[i], 4) != 0)
+	while (envp[i] && ft_strncmp("PATH", envp[i], 4) != 0)
 		i++;
-	pathinenv = envp[i] + 5;
-	mypaths = ft_split(pathinenv, ':');
+	if (!envp[i])
+		return (NULL);
+	mypaths = ft_split(envp[i] + 5, ':');
 	i = 0;
 	while (mypaths[i])
 	{

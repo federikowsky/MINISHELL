@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/21 12:15:53 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:17:29 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 			if (i != 0)
 				dup2(pipes[i - 2], STDIN_FILENO);
 			close_pipe(pipes, nb_pipe);
+			if (ft_is_subshell(sstoken))
+				ft_subshell(shell, sstoken);
 			if (!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>"))
 			{
 				ft_exec_cmd(shell);
@@ -91,6 +93,8 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	if (!ft_strcmp(ssoperator, "<"))
 		ft_left_redir(shell);
 	shell->exitstatus = WEXITSTATUS(status);
-	shell->prev_exitstatus = shell->exitstatus;	
+	shell->prev_exitstatus = shell->exitstatus;
+	if (shell->is_subshell)
+		exit(shell->exitstatus);
 }
 

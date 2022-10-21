@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/21 12:14:45 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:16:14 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_initializer(t_shell *shell)
 	shell->fd_in = 0;
 	shell->fd_out = 1;
 	shell->last_operator = "";
+	shell->is_subshell = 0;
 }
 
 int	main_loop(t_shell *shell, char **envp)
@@ -35,8 +36,6 @@ int	main_loop(t_shell *shell, char **envp)
 			return (write (1, "\n", 1));
 		if (shell->cmd)
 			add_history(shell->cmd);
-		// printf("%s\n", ft_get_echo(shell->cmd));
-		// char *x = ft_get_echo2(shell->cmd);
 		if (ft_check_operator(shell->cmd))
 			printf("Waiting for new command...\n");
 		else

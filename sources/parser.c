@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/21 12:15:23 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:30:48 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ int	ft_start(t_shell *shell)
 	free(shell->cmd);
 	free_matrix(shell->token_temp);
 	free_matrix(shell->operator_temp);
-	return (shell->fd_out);
+	return (shell->exitstatus);
 }
