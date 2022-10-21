@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utilsEcho.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:22:48 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/19 15:06:59 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:09:31 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 char	*return_s(char *temp, char *last_quote, char *echo, char *copy)
 {
@@ -33,8 +32,6 @@ char	*return_s(char *temp, char *last_quote, char *echo, char *copy)
 	*temp = '\0';
 	free(copy);
 	return (echo);
-	
-
 }
 
 char	*ft_get_echo(char *s)
@@ -55,15 +52,15 @@ char	*ft_get_echo(char *s)
 		if (*temp == 34)
 		{
 			last_quote = ft_strrchr(echo, 34);
-			break;
+			break ;
 		}
 		if (*temp == 39)
 		{
 			last_quote = ft_strrchr(echo, 39);
-			break;
+			break ;
 		}
 		if (ft_has(*temp, "&|<>"))
-			break;
+			break ;
 		temp++;
 	}
 	return (return_s(temp, last_quote, echo, copy));

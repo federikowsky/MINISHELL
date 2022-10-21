@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:34:45 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/19 14:31:46 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:12:59 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ void	ft_or(t_shell *shell)
 		shell->operator++;
 		ft_exec_pipe(shell, ft_count_pipe(shell));
 	}
-	if (shell->exitstatus > 0 || sslastop[0] == '\0' || !ft_strcmp(sslastop, "&&"))
+	if (shell->exitstatus > 0 || sslastop[0] == '\0' || \
+		!ft_strcmp(sslastop, "&&"))
 		ft_exec_cmd(shell);
 	if (shell->exitstatus == 0)
 	{
 		if (ft_strcmp(ssoperator, "||") == 0)
 			shell->operator++;
-		while (ft_strcmp(ssoperator, "|") == 0 || ft_strcmp(ssoperator, "||") == 0)
+		while (ft_strcmp(ssoperator, "|") == 0 || \
+			ft_strcmp(ssoperator, "||") == 0)
 		{
 			shell->token++;
 			shell->operator++;
@@ -46,7 +48,7 @@ void	ft_and(t_shell *shell)
 	if (sstoken)
 		ft_exec_cmd(shell);
 	if (shell->exitstatus == 0 && sstoken != NULL)
-			ft_switch_op(shell);
+		ft_switch_op(shell);
 	else if (shell->exitstatus > 0)
 	{
 		while (ft_strcmp(ssoperator, "&&") == 0)

@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   newshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:01:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/14 15:39:21 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:15:05 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void ft_subshell(t_shell *shell, char *s)
+void	ft_subshell(t_shell *shell, char *s)
 {
 	pid_t	pid;
-	t_shell newshell;
-	int	status;
-	
+	t_shell	newshell;
+	int		status;
+
 	pid = fork();
 	if (!pid)
 	{
@@ -30,7 +30,7 @@ void ft_subshell(t_shell *shell, char *s)
 		newshell.cmd = ft_strdup(s); 
 		newshell.last_operator = "";
 		newshell.fd_in = shell->fd_out;
-		newshell.fd_debug = shell->fd_debug;    
+		newshell.fd_debug = shell->fd_debug;
 		exit(ft_start(&newshell));
 	}
 	else
@@ -46,7 +46,7 @@ void	ft_run_new_shell(t_shell *shell)
 {
 	char	**env_copy;
 	int		status;
-	pid_t 	pid;
+	pid_t	pid;
 	char	*path;
 
 	path = ft_strjoin(ft_get_pwd(shell), "/./minishell");

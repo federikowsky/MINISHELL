@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/08 18:52:2:15 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:15:53 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int ft_count_pipe(t_shell * shell)
+int	ft_count_pipe(t_shell* shell)
 {
 	int	i;
 	int	count;
@@ -27,17 +27,17 @@ int ft_count_pipe(t_shell * shell)
 	return (count);
 }
 
-void open_pipe(int pipes[], int no_pipes)
+void	open_pipe(int pipes[], int no_pipes)
 {
-	int i;
-	
+	int	i;
+
 	i = -1;
 	while (++i < no_pipes)
 		pipe(pipes + i * 2);
 }
 
-void close_pipe(int pipes[], int no_pipes)
-{   
+void	close_pipe(int pipes[], int no_pipes)
+{
     int j;
 
     j = 0;

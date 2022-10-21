@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirections2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:14:13 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/17 14:13:26 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:20:36 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	ft_redir_in_exec(char * token, t_shell *shell)
+static void	ft_redir_in_exec(char *token, t_shell *shell)
 {
 	char	**cmd;
 
@@ -30,7 +30,7 @@ static void	ft_in_redir(char *cmd, t_shell *shell)
 	int		filein;
 	int		status;
 	int		fd;
-	pid_t 	pid;
+	pid_t	pid;
 
 	fd = open(sstoken, O_RDONLY, 0777);
 	filein = dup(STDIN_FILENO);
@@ -60,5 +60,3 @@ void	ft_left_redir(t_shell *shell)
 	if (sstoken)
 		shell->token++;
 }
-
-

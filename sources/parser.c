@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/17 16:50:19 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:15:23 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ void	ft_switch_op(t_shell *shell)
 		ft_or(shell);
 	else if (!ft_strcmp(*(shell->operator), "&&"))
 		ft_and(shell);
-	else if (!ft_strcmp(*(shell->operator), ">") || !ft_strcmp(*(shell->operator), ">>"))
+	else if (!ft_strcmp(*(shell->operator), ">") || \
+		!ft_strcmp(*(shell->operator), ">>"))
 		ft_right_redir(shell);
 	else if (!ft_strcmp(*(shell->operator), "<"))
 		ft_left_redir(shell);
 	else if (*(shell->operator) == NULL && sstoken != NULL)
 		ft_exec_cmd(shell);
-	if (!ft_strcmp(*(shell->operator), ">") || !ft_strcmp(*(shell->operator), ">>"))
+	if (!ft_strcmp(*(shell->operator), ">") || \
+		!ft_strcmp(*(shell->operator), ">>"))
 		ft_skip_redirection(shell);
 }
 
@@ -40,7 +42,7 @@ int	ft_start(t_shell *shell)
 	shell->operator_temp = shell->operator;
 	shell->token_temp = shell->token;
 	ft_redirection(shell);
-	while(sstoken)
+	while (sstoken)
 		ft_switch_op(shell);
 	free(shell->cmd);
 	free_matrix(shell->token_temp);

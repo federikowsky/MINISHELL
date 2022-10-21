@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 18:58:41 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:20:52 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int	ft_inenv(t_shell *shell)
 
 int	ft_unset(t_shell *shell)
 {
-	char **cmds;
-	
+	char	**cmds;
+
 	cmds = ft_split(sstoken, ' ');
 	ft_check_unset(shell);
 	shell->env = ft_remove(shell->env, cmds, ft_inenv(shell), 0);

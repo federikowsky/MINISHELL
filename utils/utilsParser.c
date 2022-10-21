@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsParser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/19 14:24:58 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:17:14 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ char	*ft_check_quote(char **token)
 		if ((*token)[i] == 34)
 		{
 			ft_remove_quote(*token, 34);
-			break;
+			break ;
 		}
 		if ((*token)[i] == 39)
 		{
 			ft_remove_quote(*token, 39);
-			break;
+			break ;
 		}	
 		i++;
 	}
@@ -60,7 +60,7 @@ char	*ft_get_op(t_shell *shell, int heredoc)
 	i = 0;
 	curr_op = "";
 	res = "";
-	while(shell->operator[i])
+	while (shell->operator[i])
 	{
 		if (i != 0 && !ft_strcmp(shell->operator[i], "|"))
 			curr_op = "pipe ";
@@ -77,16 +77,15 @@ char	*ft_get_op(t_shell *shell, int heredoc)
 	return (res);
 }
 
-void ft_append_cmd(t_shell *shell)
+void	ft_append_cmd(t_shell *shell)
 {
 	char	*prompt;
-	
+
 	prompt = ft_get_op(shell, 0);
 	shell->cmd = readline(prompt);
 	while (*(shell->cmd) == '\0')
 		shell->cmd = readline(prompt);
 	ft_creatematrix(shell);
-	
 }
 
 char	*ft_get_cmd(char *s, char **envp)
@@ -165,7 +164,7 @@ void ft_creatematrix(t_shell *shell)
 			shell->token = ft_addelement(shell->token, token);
 		}
 		if (!token)
-			break;
+			break ;
 		operator = ft_get_cmd(shell->cmd, shell->env);
 		operator = ft_strip(&operator);
 		if (!ft_strcmp(operator, "<<"))

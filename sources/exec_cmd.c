@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 03:16:01 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/08 19:01:555 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:14:15 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	ft_exec_cmd_fork(t_shell *shell)
 	exit(0);
 }
 
-void ft_exec_cmd(t_shell *shell)
+void	ft_exec_cmd(t_shell *shell)
 {
-	pid_t 	pid;
+	pid_t	pid;
 	int		status;
 	char	**cmd;
 	int		fileout;
@@ -36,7 +36,7 @@ void ft_exec_cmd(t_shell *shell)
 	fileout = dup(STDOUT_FILENO);
 	if ((!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>")) && shell->redirec)
 	{
-    	dup2(shell->redirec, STDOUT_FILENO);
+		dup2(shell->redirec, STDOUT_FILENO);
 		close(shell->redirec);
 	}
 	if (access(ft_split(sstoken, ' ')[0], F_OK) == 0)
@@ -65,4 +65,4 @@ void ft_exec_cmd(t_shell *shell)
 	shell->last_operator = ssoperator;
 	shell->token++;
 	shell->operator++;
-} 
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 19:01:28 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:09:12 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_print_mat(char **ss)
 	while (ss[i])
 	{
 		printf("%s\n", ss[i]);
-		i++;	
+		i++;
 	}
 }
 
@@ -68,7 +68,7 @@ char	**ft_mat_copy(char **mat)
 {
 	char	**res;
 	int		i;
-	
+
 	res = (char **)malloc(sizeof(char *) * ft_mat_lenght(mat));
 	i = 0;
 	while (mat[i])
@@ -82,11 +82,11 @@ char	**ft_mat_copy(char **mat)
 
 void	ft_increase_shlvl(char ***mat)
 {
-	int 	i;
-	char 	*value;
-	
+	int		i;
+	char	*value;
+
 	i = 0;
-	while(ft_strncmp((*mat)[i], "SHLVL", 5))
+	while (ft_strncmp((*mat)[i], "SHLVL", 5))
 		i++;
 	value = ft_itoa(ft_atoi(&(*mat)[i][6]) + 1);
 	(*mat)[i] = ft_strjoin("SHLVL=", value);

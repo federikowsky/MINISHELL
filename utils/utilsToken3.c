@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:02:41 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/19 14:15:02 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:11:53 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 int	ft_check_operator(char *cmd)
 {
 	if (ft_get_echo2(cmd) == NULL)
-		return(1);
+		return (1);
 	if ((ft_bracket_check(cmd) || ft_quote_check(cmd) || ft_and_check(cmd) \
-			|| ft_pipe_check(cmd) || ft_redir_check(cmd)) && ft_get_echo2(cmd) == NULL)
+			|| ft_pipe_check(cmd) || ft_redir_check(cmd)) \
+			&& ft_get_echo2(cmd) == NULL)
 		return (1);
 	return (0);
 }
@@ -27,7 +28,7 @@ int	ft_bracket_check(char *cmd)
 	int	open;
 	int	close;
 	int	i;
-	
+
 	open = 0;
 	close = 0;
 	i = 0;
@@ -83,7 +84,7 @@ int	ft_isbuiltin(char *cmd)
 		return (1);
 }
 
-char **ft_addelement(char **ss, char *cmd)
+char	**ft_addelement(char **ss, char *cmd)
 {
 	char	**res;
 	int		i;

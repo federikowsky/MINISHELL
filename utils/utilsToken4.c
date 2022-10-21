@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:37:59 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/08 18:43:03:02 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:12:18 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*ft_get_pwd(t_shell *shell)
 int	ft_redir_check(char *cmd)
 {
 	int	i;
+
 	i = 0;
 	while (cmd[i] != '\0')
 	{
