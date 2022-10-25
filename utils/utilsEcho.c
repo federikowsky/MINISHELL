@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:22:48 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/25 18:38:22 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:51:52 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,19 @@ char	*return_s(char *temp, char *last_quote, char *echo, char *copy)
 	(void) temp;
 	if (!ft_strcmp(echo, "echo $?"))
 		return (echo);
-	i = 0;
-	while (echo[i] && !ft_has(echo[i], "&|<>"))
+	i = 5;
+	while (echo[i])
+	{
+		if (echo[i] == 34)
+			while (echo[++i] != 34)
+				;
+		else if (echo[i] == 39)
+			while (echo[++i] != 39)
+				;
+		if (ft_has(echo[i], "&|<>"))
+			break ;
 		i++;
+	}
 	return (getsub(echo, 0, i));
 }
 

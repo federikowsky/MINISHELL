@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/25 18:25:12 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:25:10 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,10 @@ char	*ft_get_echo2(char *token)
 	{
 		while (*temp == 32)
 			temp++;
+		if (*temp == 34)
+			temp = ft_strchr(temp + 1, 34);
+		if (*temp == 39)
+			temp = ft_strchr(temp + 1, 39);
 		if (ft_has(*temp, "|&<>"))
 			break ;
 		temp++;
