@@ -6,34 +6,49 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:22:48 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/21 14:44:41 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:38:22 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+char	*ft_charjoin(char *s1, char s2)
+{
+	size_t	i;
+	char	*str;
+
+	if (!s1)
+	{
+		s1 = (char *)malloc(1 * sizeof(char));
+		s1[0] = '\0';
+	}
+	if (!s1)
+		return (NULL);
+	str = malloc((ft_strlen(s1) + 2) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	i = -1;
+	if (s1)
+		while (s1[++i] != '\0')
+			str[i] = s1[i];
+	str[i++] = s2;
+	str[ft_strlen(s1) + 1] = '\0';
+	return (str);
+}
+
 char	*return_s(char *temp, char *last_quote, char *echo, char *copy)
 {
 	int	i;
 
+	free(copy);
+	(void) last_quote;
+	(void) temp;
 	if (!ft_strcmp(echo, "echo $?"))
 		return (echo);
-	if (!(*last_quote))
-	{
-		i = 0;
-		while (echo[i] && !ft_has(echo[i], "&|<>"))
-			i++;
-		return (getsub(echo, 0, i));
-	}
-	else
-	{
-		while (*temp && ft_strcmp(temp, last_quote))
-			temp++;
-	}
-	temp++;
-	*temp = '\0';
-	free(copy);
-	return (echo);
+	i = 0;
+	while (echo[i] && !ft_has(echo[i], "&|<>"))
+		i++;
+	return (getsub(echo, 0, i));
 }
 
 char	*ft_get_echo(char *s)

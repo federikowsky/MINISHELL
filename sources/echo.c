@@ -3,14 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/21 12:13:46 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:25:12 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+// char	*ft_dollar_echo(char *cmd, t_shell *shell)
+// {
+// 	char	**mypaths;
+// 	int		i;
+
+// 	i = 0;
+// 	while (shell->env[i] && ft_strncmp(cmd, shell->env[i], 4) != 0)
+// 		i++;
+// 	if (!shell->env[i])
+// 		return (NULL);
+// 	mypaths = ft_split(shell->env[i], '=');
+// 	return (mypaths[1]);
+// }
+
+int	ft_quoteparent(char *s, char c)
+{
+	int	i;
+
+	i = 1;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_echo_quote(char	*str, t_shell *shell)
+{
+	int		i;
+	int		j;
+	char	*echo;
+	char	*temp;
+
+	i = 0;
+	j = 0;
+	(void) shell;
+	echo = "";
+	while (str[i])
+	{
+		while (str[i + 1] && str[i + 1] == 32)
+			i++;
+		if (str[i] == 34)
+		{
+			j = ft_quoteparent(str + i, '\"');
+			temp = ft_substr(str, i + 1, j - 1);
+			echo = ft_strjoin(echo, temp);
+			free(temp);
+			i += j;
+		}
+		else if (str[i] == 39)
+		{
+			j = ft_quoteparent(str + i, '\'');
+			temp = ft_substr(str, i + 1, j - 1);
+			echo = ft_strjoin(echo, temp);
+			free(temp);
+			i += j;
+		}
+		else
+			echo = ft_charjoin(echo, str[i]);
+		i++;
+	}
+	if (echo)
+		return (echo);
+	else
+		return (str);
+}
 
 char	*ft_get_echo2(char *token)
 {
@@ -29,28 +98,6 @@ char	*ft_get_echo2(char *token)
 			temp++;
 		if (ft_has(*temp, "|&<>"))
 			break ;
-		if (*temp == 34)
-		{
-			ft_memmove(temp, temp + 1, ft_strlen(temp));
-			temp = ft_strchr(temp + 1, 34);
-			if (!temp)
-			{
-				perror("Error: unclosed quote");
-				return (NULL);
-			}
-			ft_memmove(temp, temp + 1, ft_strlen(temp));
-		}
-		if (*temp == 39)
-		{
-			ft_memmove(temp, temp + 1, ft_strlen(temp));
-			temp = ft_strchr(temp + 1, 39);
-			if (!temp)
-			{
-				perror("Error: unclosed quote");
-				return (NULL);
-			}
-			ft_memmove(temp, temp + 1, ft_strlen(temp));
-		}
 		temp++;
 	}
 	free(copy);
@@ -60,8 +107,11 @@ char	*ft_get_echo2(char *token)
 void	ft_echo(t_shell *shell)
 {
 	char	**ss;
+	char	*str;
 	int		i;
 
+	str = NULL;
+	i = 0;
 	if (ft_strcmp(sstoken, "echo $?") == 0)
 	{
 		printf("%d\n", shell->prev_exitstatus);
@@ -69,17 +119,14 @@ void	ft_echo(t_shell *shell)
 		return ;
 	}
 	ss = ft_split(sstoken, ' ');
-	i = 1;
-	while (ss[i])
+	if (!ft_strncmp(ss[1], "-n", 2))
 	{
-		if (ft_strncmp(ss[i], "-n", 2) != 0)
-			printf("%s", ss[i]);
-		if (ss[i + 1] != NULL)
-			printf(" ");
-		i++;
+		str = ft_substr(sstoken, 7, ft_strlen(sstoken));
+		printf("%s", ft_echo_quote(str, shell));
 	}
-	if (!ss[1] || ft_strncmp(ss[1], "-n", 2) != 0)
-		printf("\n");
 	else
-		printf("\b");
+	{
+		str = ft_substr(sstoken, 5, ft_strlen(sstoken));
+		printf("%s\n", ft_echo_quote(str, shell));
+	}
 }

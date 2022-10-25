@@ -147,5 +147,6 @@ void 			ft_heredoc(t_shell *shell);
 
 /* Echo */
 char 			*ft_get_echo(char *s);
+char			*ft_charjoin(char *s1, char s2);
 
 #endif

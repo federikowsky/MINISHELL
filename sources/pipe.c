@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/21 16:17:29 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:10:25 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,3 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	if (shell->is_subshell)
 		exit(shell->exitstatus);
 }
-
