@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsParser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/25 19:19:39 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 00:37:01 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_get_op(t_shell *shell, int heredoc)
 	i = 0;
 	curr_op = "";
 	res = "";
-	while (shell->operator[i])
+	while (shell->operator && shell->operator[i])
 	{
 		if (i != 0 && !ft_strcmp(shell->operator[i], "|"))
 			curr_op = "pipe ";
