@@ -3,16 +3,24 @@
     "configurations": [
         {
             "name": "(lldb) Launch",
-            "type": "cppdbg",
+            "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/minishell",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": true,
-            "MIMode": "lldb"
         }
+        // {
+        //     "name": "(lldb) Launch",
+        //     "type": "lld",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/minishell",
+        //     "args": [],
+        //     "stopAtEntry": false,
+        //     "cwd": "${fileDirname}",
+        //     "environment": [],
+        //     "externalConsole": true,
+        //     "MIMode": "lldb"
+        // }
 
     ]
 }

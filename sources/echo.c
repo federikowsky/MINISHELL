@@ -3,28 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/25 19:25:10 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 00:32:05 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// char	*ft_dollar_echo(char *cmd, t_shell *shell)
-// {
-// 	char	**mypaths;
-// 	int		i;
+char	*ft_changeword(char *sentence, char *find, char *replace)
+{
+	int		len;
+	char 	*dest;
+    char 	*destptr;
 
-// 	i = 0;
-// 	while (shell->env[i] && ft_strncmp(cmd, shell->env[i], 4) != 0)
-// 		i++;
-// 	if (!shell->env[i])
-// 		return (NULL);
-// 	mypaths = ft_split(shell->env[i], '=');
-// 	return (mypaths[1]);
-// }
+	len = ft_strlen(sentence) - ft_strlen(find) + ft_strlen(replace) + 1;
+	dest = malloc(len);
+	destptr = dest;
+    *dest = 0;
+    while (*sentence)
+    {
+        if (!ft_strncmp(sentence, find, ft_strlen(find)))
+        {
+            strcat (destptr, replace);
+            sentence += ft_strlen(find);
+            destptr += ft_strlen(replace);
+        }
+		else
+        {
+            *destptr = *sentence;
+            destptr++;
+            sentence++;
+        }
+    }
+    *destptr = 0;
+    return dest;
+}
+
+char	*ft_env_var(char *cmd, t_shell *shell)
+{
+	int		i;
+	int		len_key;
+	char	*key;
+	char	*value;
+
+	i = 0;
+	len_key = 1;
+	key = ft_strchr(ft_strdup(cmd), '$');
+	if (!key)
+		return (cmd);
+	while (ft_isalpha(key[len_key]))
+		len_key++;
+	key[len_key] = '\0';
+	while (shell->env[i] && ft_strncmp(key + 1, shell->env[i], ft_strlen(key + 1)) != 0)
+		i++;
+	if (!shell->env[i])
+		return (ft_changeword(cmd, key, ""));
+	value = ft_split(shell->env[i], '=')[1];
+	return (ft_changeword(cmd, key, value));
+}
 
 int	ft_quoteparent(char *s, char c)
 {
@@ -53,13 +91,13 @@ char	*ft_echo_quote(char	*str, t_shell *shell)
 	echo = "";
 	while (str[i])
 	{
-		while (str[i + 1] && str[i + 1] == 32)
+		while (str[i + 1] && str[i] == 32 && str[i + 1] == 32)
 			i++;
 		if (str[i] == 34)
 		{
 			j = ft_quoteparent(str + i, '\"');
 			temp = ft_substr(str, i + 1, j - 1);
-			echo = ft_strjoin(echo, temp);
+			echo = ft_strjoin(echo, ft_env_var(temp, shell));
 			free(temp);
 			i += j;
 		}
@@ -112,10 +150,8 @@ void	ft_echo(t_shell *shell)
 {
 	char	**ss;
 	char	*str;
-	int		i;
 
 	str = NULL;
-	i = 0;
 	if (ft_strcmp(sstoken, "echo $?") == 0)
 	{
 		printf("%d\n", shell->prev_exitstatus);
@@ -123,10 +159,11 @@ void	ft_echo(t_shell *shell)
 		return ;
 	}
 	ss = ft_split(sstoken, ' ');
-	if (!ft_strncmp(ss[1], "-n", 2))
+	if (ss[1] && !ft_strncmp(ss[1], "-n", 2))
 	{
 		str = ft_substr(sstoken, 7, ft_strlen(sstoken));
-		printf("%s", ft_echo_quote(str, shell));
+		char *x = ft_echo_quote(str, shell);
+		printf("%s", ft_strip(&x));
 	}
 	else
 	{
