@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsParser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 12:33:32 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:51:02 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*ft_check_quote(char **token)
 	if (!(*token))
 		return (NULL);
 	if (!ft_strncmp(*(token), "echo", 4))
+		return (*token);
+	if (!ft_strncmp(*(token), "export", 6))
 		return (*token);
 	while ((*token)[i])
 	{

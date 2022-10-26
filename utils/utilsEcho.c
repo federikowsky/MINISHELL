@@ -6,11 +6,25 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:22:48 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/25 19:51:52 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:02:16 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	ft_quoteparent(char *s, char c)
+{
+	int	i;
+
+	i = 1;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return (i);
+		i++;
+	}
+	return (0);
+}
 
 char	*ft_charjoin(char *s1, char s2)
 {

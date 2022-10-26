@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:15:07 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/21 12:11:26 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:17:13 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,25 +70,57 @@ int	ft_and_check(char *cmd)
 
 int	ft_quote_check(char *cmd)
 {
-	int	quote;
-	int	doublequote;
 	int	i;
 
-	quote = 0;
-	doublequote = 0;
 	i = 0;
-	while (cmd[i] != '\0')
+	while (cmd[i])
 	{
-		if (ft_has(cmd[i], "'"))
-			quote += 1;
-		if (ft_has(cmd[i], "\""))
-			doublequote += 1;
+		if (cmd[i] == 34)
+		{
+			if (ft_quoteparent(cmd + i, 34) != 0)
+				i += ft_quoteparent(cmd + i, 34);
+			else
+			{
+				perror("Quote check problem: Minishell");
+				return (1);
+			}
+		}
+		if (cmd[i] == 39)
+		{
+			if (ft_quoteparent(cmd + i, 39) != 0)
+				i += ft_quoteparent(cmd + i, 34);
+			else
+			{
+				perror("Quote check problem: Minishell");
+				return (1);
+			}
+		}
 		i++;
-	}
-	if (quote % 2 != 0 || doublequote % 2 != 0)
-	{
-		perror("Quote check Problem: Minishell");
-		return (1);
 	}
 	return (0);
 }
+
+// int	ft_quote_check(char *cmd)
+// {
+// 	int	quote;
+// 	int	doublequote;
+// 	int	i;
+
+// 	quote = 0;
+// 	doublequote = 0;
+// 	i = 0;
+// 	while (cmd[i] != '\0')
+// 	{
+// 		if (ft_has(cmd[i], "'"))
+// 			quote += 1;
+// 		if (ft_has(cmd[i], "\""))
+// 			doublequote += 1;
+// 		i++;
+// 	}
+// 	if (quote % 2 != 0 || doublequote % 2 != 0)
+// 	{
+// 		perror("Quote check Problem: Minishell");
+// 		return (1);
+// 	}
+// 	return (0);
+// }

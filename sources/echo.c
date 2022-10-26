@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 12:40:31 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:28:46 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,6 @@ char	*ft_env_var(char *cmd, t_shell *shell)
 	return (ft_changeword(cmd, key, value));
 }
 
-int	ft_quoteparent(char *s, char c)
-{
-	int	i;
-
-	i = 1;
-	while (s[i])
-	{
-		if (s[i] == c)
-			return (i);
-		i++;
-	}
-	return (0);
-}
-
 char	*ft_echo_quote(char	*str, t_shell *shell)
 {
 	int		i;
@@ -94,6 +80,14 @@ char	*ft_echo_quote(char	*str, t_shell *shell)
 	{
 		while (str[i + 1] && str[i] == 32 && str[i + 1] == 32)
 			i++;
+		if (str[i] == 36)
+		{
+			j = i;
+			while (str[i] && str[i] != ' ')
+				i++;
+			temp = ft_substr(str, j, i - j - 1);
+			echo = ft_strjoin(echo, ft_env_var(temp, shell));
+		}
 		if (str[i] == 34)
 		{
 			j = ft_quoteparent(str + i, '\"');
@@ -151,6 +145,7 @@ void	ft_echo(t_shell *shell)
 {
 	char	**ss;
 	char	*str;
+	char	*x;
 
 	str = NULL;
 	if (ft_strcmp(sstoken, "echo $?") == 0)
@@ -163,7 +158,7 @@ void	ft_echo(t_shell *shell)
 	if (ss[1] && !ft_strncmp(ss[1], "-n", 2))
 	{
 		str = ft_substr(sstoken, 7, ft_strlen(sstoken));
-		char *x = ft_echo_quote(str, shell);
+		x = ft_echo_quote(str, shell);
 		printf("%s", ft_strip(&x));
 	}
 	else

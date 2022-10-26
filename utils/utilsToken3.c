@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:02:41 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/26 12:32:46 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:17:00 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 int	ft_check_operator(char *cmd)
 {
-	if (ft_get_echo2(cmd) == NULL)
-		return (1);
 	if ((ft_bracket_check(cmd) || ft_quote_check(cmd) || ft_and_check(cmd) \
-			|| ft_pipe_check(cmd) || ft_redir_check(cmd)) \
-			&& ft_get_echo2(cmd) == NULL)
+			|| ft_pipe_check(cmd) || ft_redir_check(cmd)))
 		return (1);
 	return (0);
 }

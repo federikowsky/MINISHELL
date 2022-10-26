@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/26 12:43:54 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:28:55 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,6 @@ void			ft_heredoc(t_shell *shell);
 /* Echo */
 char			*ft_get_echo(char *s);
 char			*ft_charjoin(char *s1, char s2);
+int				ft_quoteparent(char *s, char c);
 
 #endif

@@ -25,3 +25,10 @@ X ps | > ls && echo ciao
 X ps | > f1 echo ciao
 
 X echo ciao && echo bella && echo come || echo che && ls && echo " ciao ' lsls " ' ' "    '   lllll ' "
+
+export ciao="dio cane" bella="porco dio"
+
+
+
+
+PATH=/Users/agenoves/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/usr/share/zsh/5.3/help

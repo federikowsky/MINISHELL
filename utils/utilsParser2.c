@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsParser2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:33:06 by md-aless          #+#    #+#             */
-/*   Updated: 2022/10/26 12:33:44 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:40:48 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ void	ft_creatematrix(t_shell *shell)
 			shell->operator = ft_addelement(shell->operator, operator);
 	}
 	if (shell->token && shell->operator && \
-			ft_mat_lenght(shell->token) == ft_mat_lenght(shell->operator))
+		ft_mat_lenght(shell->token) == ft_mat_lenght(shell->operator))
 		ft_append_cmd(shell);
 }

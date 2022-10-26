@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 13:07:56 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/21 12:14:41 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:20:21 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**ft_addenv(char **matr, char *var)
 
 int	ft_countvar(char **cmds)
 {
-	static int	static_i = 0;
+	static int	static_i = -1;
 	char		*found;
 
 	while (cmds[++static_i])
@@ -70,8 +70,8 @@ int	ft_countvar(char **cmds)
 		if (found != NULL)
 			return (static_i);
 	}
-	static_i = 0;
-	return (0);
+	static_i = -1;
+	return (static_i);
 }
 
 char	*ft_check_export(char **cmds, int i, t_shell *shell)
@@ -100,20 +100,51 @@ char	*ft_check_export(char **cmds, int i, t_shell *shell)
 	return (cmds[i]);
 }
 
+char	**ft_split_export(char *str, int k, int i, int j)
+{
+	char	**cmds;
+
+	cmds = NULL;
+	cmds = ft_addelement(cmds, "");
+	while (str[++i])
+	{
+		while (str[i + 1] && str[i] == 32 && str[i + 1] == 32)
+			i++;
+		if (str[i] == 34 || str[i] == 39)
+		{
+			if (str[i] == 34)
+				j = ft_quoteparent(str + i, 34);
+			else
+				j = ft_quoteparent(str + i, 39);
+			cmds[k] = ft_strjoin(cmds[k], ft_substr(str, i + 1, j - 1));
+			cmds[k] = ft_strip(&cmds[k]);
+			i += j;
+			cmds = ft_addelement(cmds, "");
+			k++;
+		}
+		else
+			cmds[k] = ft_charjoin(cmds[k], str[i]);
+	}
+	cmds[k + 1] = 0;
+	return (cmds);
+}
+
 int	ft_export(char *s, t_shell *shell)
 {
+	char	**cmds;
 	char	*var;
 	int		i;
 
-	i = ft_countvar(ft_split(s, ' '));
-	while (i)
+	cmds = ft_split_export(s + 7, 0, -1, 0);
+	i = ft_countvar(cmds);
+	while (i != -1)
 	{
-		var = ft_check_export(ft_split(s, ' '), i, shell);
+		var = ft_check_export(cmds, i, shell);
 		if (var != NULL)
 			shell->env = ft_addenv(shell->env, var);
 		else
 			printf("Error export variable!\n");
-		i = ft_countvar(ft_split(s, ' '));
+		i = ft_countvar(cmds);
 	}
 	if (shell->exitstatus != 0)
 		return (1);

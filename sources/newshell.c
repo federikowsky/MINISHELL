@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   newshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:01:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 12:36:13 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:33:37 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ void	ft_subshell(t_shell *shell, char *s)
 void	ft_run_new_shell(t_shell *shell)
 {
 	char	**env_copy;
+	t_shell	newshell;
 	int		status;
 	pid_t	pid;
-	char	*path;
 
-	path = ft_strjoin(ft_get_pwd(shell), "/./minishell");
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	pid = fork();
@@ -57,7 +56,7 @@ void	ft_run_new_shell(t_shell *shell)
 	{
 		env_copy = ft_mat_copy(shell->env);
 		ft_increase_shlvl(&env_copy);
-		execve(path, &shell->cmd, env_copy);
+		main_loop(&newshell, env_copy);
 	}
 	else
 	{
