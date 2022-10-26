@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 19:01:28 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/26 19:28:46 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:37:39 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_builtin(char *token, t_shell *shell)
 	else if (ft_strcmp(cmd[0], "echo") == 0)
 		ft_echo(shell);
 	else if (ft_strcmp(cmd[0], "export") == 0)
-		shell->exitstatus = ft_export(sstoken, shell);
+		shell->exitstatus = ft_export(*(shell->tok), shell);
 	else if (ft_strcmp(cmd[0], "unset") == 0)
 		shell->exitstatus = ft_unset(shell);
 	else

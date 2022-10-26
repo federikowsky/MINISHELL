@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:28:46 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:37:36 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_count_pipe(t_shell *shell)
 
 	i = 0;
 	count = 0;
-	while (ft_strcmp((shell->operator)[i], "|") == 0)
+	while (ft_strcmp((shell->op)[i], "|") == 0)
 	{
 		count++;
 		i++;
@@ -56,19 +56,19 @@ void	ft_exec_pipe(t_shell *shell, int nb_pipe)
 	i = 0;
 	j = nb_pipe + 1;
 	open_pipe(pipes, nb_pipe);
-	while (sstoken && j-- > 0)
+	while (*(shell->tok) && j-- > 0)
 	{
 		pid = fork();
 		if (pid == 0)
 		{
-			if (*(shell->token + 1) != NULL && !(!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>")))
+			if (*(shell->tok + 1) != NULL && !(!ft_strcmp(*(shell->op), ">") || !ft_strcmp(*(shell->op), ">>")))
 				dup2(pipes[i + 1], STDOUT_FILENO);
 			if (i != 0)
 				dup2(pipes[i - 2], STDIN_FILENO);
 			close_pipe(pipes, nb_pipe);
-			if (ft_is_subshell(sstoken))
-				ft_subshell(shell, sstoken);
-			if (!ft_strcmp(ssoperator, ">") || !ft_strcmp(ssoperator, ">>"))
+			if (ft_is_subshell(*(shell->tok)))
+				ft_subshell(shell, *(shell->tok));
+			if (!ft_strcmp(*(shell->op), ">") || !ft_strcmp(*(shell->op), ">>"))
 			{
 				ft_exec_cmd(shell);
 				exit(0);
@@ -77,20 +77,20 @@ void	ft_exec_pipe(t_shell *shell, int nb_pipe)
 				ft_exec_cmd_fork(shell);
 		}
 		i += 2;
-		if (ft_strcmp(ssoperator, "<"))
-			shell->token++;
+		if (ft_strcmp(*(shell->op), "<"))
+			shell->tok++;
 		if (j)
 		{
-			shell->last_operator = ssoperator;
-			shell->operator++;
+			shell->last_operator = *(shell->op);
+			shell->op++;
 		}
-		if (sstoken && sstoken[0] == '\0')
+		if (*(shell->tok) && *(shell->tok)[0] == '\0')
 			j = 0;
 	}
 	close_pipe(pipes, nb_pipe);
 	while (i-- > 0)
 		waitpid(-1, &status, 0);
-	if (!ft_strcmp(ssoperator, "<"))
+	if (!ft_strcmp(*(shell->op), "<"))
 		ft_left_redir(shell);
 	shell->exitstatus = WEXITSTATUS(status);
 	shell->prev_exitstatus = shell->exitstatus;

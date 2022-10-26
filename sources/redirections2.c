@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:14:13 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:28:46 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:37:36 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_in_redir(char *cmd, t_shell *shell)
 	int		fd;
 	pid_t	pid;
 
-	fd = open(sstoken, O_RDONLY, 0777);
+	fd = open(*(shell->tok), O_RDONLY, 0777);
 	filein = dup(STDIN_FILENO);
 	dup2(fd, STDIN_FILENO);
 	close(fd);
@@ -50,13 +50,13 @@ void	ft_left_redir(t_shell *shell)
 {
 	char	*curr_cmd;
 
-	curr_cmd = sstoken;
-	while (sstoken && !ft_strcmp(*(shell->operator), "<"))
+	curr_cmd = *(shell->tok);
+	while (*(shell->tok) && !ft_strcmp(*(shell->op), "<"))
 	{
-		shell->token++;
+		shell->tok++;
 		ft_in_redir(curr_cmd, shell);
-		shell->operator++;
+		shell->op++;
 	}
-	if (sstoken)
-		shell->token++;
+	if (*(shell->tok))
+		shell->tok++;
 }

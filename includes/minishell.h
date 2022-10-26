@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/26 19:28:55 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:37:32 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,18 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
-
-# define PROMPT "\e[1;3;37mmi\e[1;3;36mni\e[1;3;37msh\e[1;3;36mel\e[1;3;37ml$ "
 # define LEN_PATH 4096
-# define sstoken *(shell->token)
-# define ssoperator *(shell->operator)
-# define sslastop   (shell->last_operator)
+# define PROMPT "\e[1;3;37mmi\e[1;3;36mni\e[1;3;37msh\e[1;3;36mel\e[1;3;37ml$ "
 
 typedef struct s_shell
 {
 	char	**env;
 	char	*cmd;
 	char	*home;
-	char	**token;
-	char	**token_temp;
-	char	**operator;
-	char	**operator_temp;
+	char	**tok;
+	char	**tok_temp;
+	char	**op;
+	char	**op_temp;
 	char	*last_operator;
 	int		exitstatus;
 	int		prev_exitstatus;

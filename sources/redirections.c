@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 02:49:57 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:28:46 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:37:38 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	ft_redirection(t_shell *shell)
 
 	i = 1;
 	j = 0;
-	while (shell->token[i])
+	while (shell->tok[i])
 	{
-		fname = ft_split(shell->token[i], ' ');
-		if (!ft_strncmp(shell->operator[j], ">>", 2))
+		fname = ft_split(shell->tok[i], ' ');
+		if (!ft_strncmp(shell->op[j], ">>", 2))
 			shell->redirec = open(fname[0], \
 				O_CREAT | O_APPEND | O_WRONLY, 0777);
-		else if (!ft_strncmp(shell->operator[j], ">", 1))
+		else if (!ft_strncmp(shell->op[j], ">", 1))
 			shell->redirec = open(fname[0], \
 				O_CREAT | O_TRUNC | O_WRONLY, 0777);
 		i++;
@@ -49,23 +49,23 @@ void	ft_redirection(t_shell *shell)
 int	ft_right_redir(t_shell *shell)
 {
 	ft_exec_cmd(shell);
-	while (!ft_strcmp(ssoperator, ">") || !ft_strcmp(*(shell->operator), ">>"))
+	while (!ft_strcmp(*(shell->op), ">") || !ft_strcmp(*(shell->op), ">>"))
 	{
-		shell->operator++;
-		shell->token++;
+		shell->op++;
+		shell->tok++;
 	}
-	if (sstoken)
-		shell->token++;
+	if (*(shell->tok))
+		shell->tok++;
 	return (0);
 }
 
 void	ft_skip_redirection(t_shell *shell)
 {
-	while (!ft_strcmp(ssoperator, ">"))
+	while (!ft_strcmp(*(shell->op), ">"))
 	{
-		shell->operator++;
-		shell->token++;
+		shell->op++;
+		shell->tok++;
 	}
-	if (sstoken)
-		shell->token++;
+	if (*(shell->tok))
+		shell->tok++;
 }

@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:33:06 by md-aless          #+#    #+#             */
-/*   Updated: 2022/10/26 17:40:48 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:37:36 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_creatematrix(t_shell *shell)
 			token = ft_get_cmd(shell->cmd, shell->env);
 			token = ft_strip(&token);
 			token = ft_check_quote(&token);
-			shell->token = ft_addelement(shell->token, token);
+			shell->tok = ft_addelement(shell->tok, token);
 		}
 		if (!token)
 			break ;
@@ -35,9 +35,9 @@ void	ft_creatematrix(t_shell *shell)
 		if (!ft_strcmp(operator, "<<"))
 			ft_heredoc(shell);
 		else
-			shell->operator = ft_addelement(shell->operator, operator);
+			shell->op = ft_addelement(shell->op, operator);
 	}
-	if (shell->token && shell->operator && \
-		ft_mat_lenght(shell->token) == ft_mat_lenght(shell->operator))
+	if (shell->tok && shell->op && \
+		ft_mat_lenght(shell->tok) == ft_mat_lenght(shell->op))
 		ft_append_cmd(shell);
 }

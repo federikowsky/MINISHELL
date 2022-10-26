@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 16:20:38 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/26 19:28:47 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:37:36 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_check_cd(t_shell *shell)
 	int	i;
 
 	i = 2;
-	while ((sstoken)[i] != '\0')
+	while ((*(shell->tok))[i] != '\0')
 	{
-		if ((sstoken)[i] != ' ')
+		if ((*(shell->tok))[i] != ' ')
 			return (1);
 		i++;
 	}
@@ -70,7 +70,7 @@ void	ft_cd(t_shell *shell)
 	oldpwd = NULL;
 	oldpwd = getcwd(oldpwd, LEN_PATH);
 	pathdest = malloc(sizeof(char) * LEN_PATH);
-	word = ft_substr(sstoken, 3, ft_strlen(sstoken));
+	word = ft_substr(*(shell->tok), 3, ft_strlen(*(shell->tok)));
 	pathdest = word;
 	if (!ft_check_cd(shell))
 	{

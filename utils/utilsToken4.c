@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:37:59 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/21 12:12:18 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:35:57 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ int	ft_find_redir(t_shell *shell)
 	int	i;
 
 	i = 0;
-	while (shell->operator[i])
+	while (shell->op[i])
 	{
-		if (!ft_strcmp(shell->operator[i], ">") || \
-				!ft_strcmp(shell->operator[i], ">>"))
+		if (!ft_strcmp(shell->op[i], ">") || \
+				!ft_strcmp(shell->op[i], ">>"))
 			return (1);
 		i++;
 	}

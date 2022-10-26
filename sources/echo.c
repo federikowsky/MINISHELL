@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:28:46 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:37:39 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,22 +148,22 @@ void	ft_echo(t_shell *shell)
 	char	*x;
 
 	str = NULL;
-	if (ft_strcmp(sstoken, "echo $?") == 0)
+	if (ft_strcmp(*(shell->tok), "echo $?") == 0)
 	{
 		printf("%d\n", shell->prev_exitstatus);
 		shell->prev_exitstatus = 0;
 		return ;
 	}
-	ss = ft_split(sstoken, ' ');
+	ss = ft_split(*(shell->tok), ' ');
 	if (ss[1] && !ft_strncmp(ss[1], "-n", 2))
 	{
-		str = ft_substr(sstoken, 7, ft_strlen(sstoken));
+		str = ft_substr(*(shell->tok), 7, ft_strlen(*(shell->tok)));
 		x = ft_echo_quote(str, shell);
 		printf("%s", ft_strip(&x));
 	}
 	else
 	{
-		str = ft_substr(sstoken, 5, ft_strlen(sstoken));
+		str = ft_substr(*(shell->tok), 5, ft_strlen(*(shell->tok)));
 		printf("%s\n", ft_echo_quote(str, shell));
 	}
 }

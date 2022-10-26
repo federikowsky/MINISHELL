@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:41:06 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:28:46 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:37:36 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_exit(t_shell *shell)
 	int		check;
 	char	**cmds;
 
-	cmds = ft_split(sstoken, ' ');
+	cmds = ft_split(*(shell->tok), ' ');
 	check = 0;
 	i = 0;
 	printf("exit\n");

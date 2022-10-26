@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 18:58:41 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:28:46 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:37:39 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_check_unset(t_shell *shell)
 	int		i;
 	int		j;
 
-	s = ft_split(sstoken, ' ');
+	s = ft_split(*(shell->tok), ' ');
 	i = 1;
 	while (s[i])
 	{
@@ -74,7 +74,7 @@ int	ft_inenv(t_shell *shell)
 	int		in_env;
 	char	**s;
 
-	s = ft_split(sstoken, ' ');
+	s = ft_split(*(shell->tok), ' ');
 	i = 0;
 	in_env = 0;
 	while (shell->env[i])
@@ -96,7 +96,7 @@ int	ft_unset(t_shell *shell)
 {
 	char	**cmds;
 
-	cmds = ft_split(sstoken, ' ');
+	cmds = ft_split(*(shell->tok), ' ');
 	ft_check_unset(shell);
 	shell->env = ft_remove(shell->env, cmds, ft_inenv(shell), 0);
 	if (!shell->exitstatus)

@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 17:51:02 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:35:55 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ char	*ft_get_op(t_shell *shell, int heredoc)
 	i = 0;
 	curr_op = "";
 	res = "";
-	while (shell->operator && shell->operator[i])
+	while (shell->op && shell->op[i])
 	{
-		if (i != 0 && !ft_strcmp(shell->operator[i], "|"))
+		if (i != 0 && !ft_strcmp(shell->op[i], "|"))
 			curr_op = "pipe ";
-		else if (!ft_strcmp(shell->operator[i], "&&"))
+		else if (!ft_strcmp(shell->op[i], "&&"))
 			curr_op = "cmdand ";
-		else if (!ft_strcmp(shell->operator[i], "||"))
+		else if (!ft_strcmp(shell->op[i], "||"))
 			curr_op = "cmdor ";
 		res = ft_strjoin(res, curr_op);
 		i++;

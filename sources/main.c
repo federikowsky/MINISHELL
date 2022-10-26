@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 17:17:36 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:37:39 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_initializer(t_shell *shell)
 {
-	shell->operator = NULL;
-	shell->token = NULL;
+	shell->op = NULL;
+	shell->tok = NULL;
 	shell->exitstatus = -1;
 	shell->cmd = readline(PROMPT);
 	shell->fd_in = 0;
