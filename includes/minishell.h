@@ -6,7 +6,7 @@
 /*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/26 12:39:46 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:43:54 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int				ft_redir_check(char *cmd);
 char			**ft_addelement(char **ss, char *cmd);
 int				ft_check_builtin(char *input);
 int				ft_findquote(char *s, int start);
+char			*ft_check_quote(char **token);
 
 /* Utils Redirection */
 int				ft_find_redir(t_shell *shell);
