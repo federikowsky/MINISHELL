@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/26 19:37:32 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 20:58:28 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void			ft_printenv(char **envp);
 char			*ft_get_cmd(char *s, char **envp);
 int				ft_start(t_shell *shell);
 void			ft_exec_cmd(t_shell *shell);
+void 			ft_exec_cmd_aux(t_shell *shell, char *arg);
 void			ft_exec_cmd_fork(t_shell *shell);
 void			ft_switch_op(t_shell *shell);
 void			ft_creatematrix(t_shell *shell);
@@ -145,5 +146,8 @@ void			ft_heredoc(t_shell *shell);
 char			*ft_get_echo(char *s);
 char			*ft_charjoin(char *s1, char s2);
 int				ft_quoteparent(char *s, char c);
+
+/* Wildcards */
+void    		ft_wild(t_shell *shell);
 
 #endif

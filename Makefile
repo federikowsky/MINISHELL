@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+         #
+#    By: fefilipp <fefilipp@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/26 12:33:59 by md-aless         ###   ########.fr        #
+#    Updated: 2022/10/26 21:01:17 by fefilipp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,13 +31,13 @@ FILES = 		sources/main \
 				sources/export  \
 				sources/exec_cmd \
 				sources/newshell \
+				sources/wildcards \
 				sources/redirections \
 				sources/redirections2 \
 				utils/utils \
 				utils/utils2 \
 				utils/heredoc \
 				utils/utilsParser \
-				utils/utilsParser2 \
 				utils/utilsEcho \
 				utils/utilsToken \
 				utils/utilsToken2 \

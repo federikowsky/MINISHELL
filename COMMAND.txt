@@ -28,7 +28,4 @@ X echo ciao && echo bella && echo come || echo che && ls && echo " ciao ' lsls "
 
 export ciao="dio cane" bella="porco dio"
 
-
-
-
-PATH=/Users/agenoves/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/usr/share/zsh/5.3/help
+ls so*s incl****sp ut*

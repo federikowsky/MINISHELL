@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 03:16:01 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:37:39 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 20:53:51 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,24 @@ void	ft_exec_cmd_fork(t_shell *shell)
 	exit(0);
 }
 
-void	ft_exec_cmd(t_shell *shell)
+void ft_exec_cmd_aux(t_shell *shell, char *arg)
 {
 	pid_t	pid;
 	int		status;
 	char	**cmd;
-	int		fileout;
-
-	fileout = dup(STDOUT_FILENO);
-	if ((!ft_strcmp(*(shell->op), ">") || !ft_strcmp(*(shell->op), ">>")) && shell->redirec)
-	{
-		dup2(shell->redirec, STDOUT_FILENO);
-		close(shell->redirec);
-	}
-	if (access(ft_split(*(shell->tok), ' ')[0], F_OK) == 0)
-		*(shell->tok) = ft_split(*(shell->tok), '/')[ft_mat_lenght(ft_split(*(shell->tok), '/')) - 1];
-	if (ft_builtin(*(shell->tok), shell))
+	char	**tok;
+	
+	tok = *(shell->tok);
+	if (arg)
+		tok = ft_strjoin(tok, arg);
+	if (access(ft_split(tok, ' ')[0], F_OK) == 0)
+		tok = ft_split(tok, '/')[ft_mat_lenght(ft_split(tok, '/')) - 1];
+	if (ft_builtin(tok, shell))
 	{	
 		pid = fork();
 		if (pid == 0)
 		{
-			cmd = ft_split(*(shell->tok), ' ');
+			cmd = ft_split(tok, ' ');
 			status = execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);
 			exit(127);
 		}
@@ -57,6 +54,19 @@ void	ft_exec_cmd(t_shell *shell)
 			shell->prev_exitstatus = shell->exitstatus;
 		}
 	}
+}
+
+void	ft_exec_cmd(t_shell *shell)
+{
+	int		fileout;
+
+	fileout = dup(STDOUT_FILENO);
+	if ((!ft_strcmp(*(shell->op), ">") || !ft_strcmp(*(shell->op), ">>")) && shell->redirec)
+	{
+		dup2(shell->redirec, STDOUT_FILENO);
+		close(shell->redirec);
+	}
+	ft_exec_cmd_aux(shell, NULL);
 	if ((!ft_strcmp(*(shell->op), ">") || !ft_strcmp(*(shell->op), ">>")) && shell->redirec)
 	{
 		dup2(fileout, STDOUT_FILENO);

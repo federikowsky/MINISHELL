@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:37:39 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 20:58:03 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_switch_op(t_shell *shell)
 {
 	if (ft_strcmp(*(shell->tok), "./minishell") == 0)
 		ft_run_new_shell(shell);
+	else if (ft_strchr(*(shell->tok), '*'))
+		ft_wild(shell);
 	else if (!ft_strcmp(*(shell->op), "|"))
 		ft_exec_pipe(shell, ft_count_pipe(shell));
 	else if (ft_is_subshell(*(shell->tok)))
@@ -34,6 +36,36 @@ void	ft_switch_op(t_shell *shell)
 	if (!ft_strcmp(*(shell->op), ">") || \
 		!ft_strcmp(*(shell->op), ">>"))
 		ft_skip_redirection(shell);
+}
+
+void	ft_creatematrix(t_shell *shell)
+{
+	char	*token;
+	char	*operator;
+
+	token = " ";
+	operator = " ";
+	while (token != NULL && operator != NULL)
+	{
+		if (ft_strcmp(operator, "<<"))
+		{
+			token = ft_get_cmd(shell->cmd, shell->env);
+			token = ft_strip(&token);
+			token = ft_check_quote(&token);
+			shell->tok = ft_addelement(shell->tok, token);
+		}
+		if (!token)
+			break ;
+		operator = ft_get_cmd(shell->cmd, shell->env);
+		operator = ft_strip(&operator);
+		if (!ft_strcmp(operator, "<<"))
+			ft_heredoc(shell);
+		else
+			shell->op = ft_addelement(shell->op, operator);
+	}
+	if (shell->tok && shell->op && \
+		ft_mat_lenght(shell->tok) == ft_mat_lenght(shell->op))
+		ft_append_cmd(shell);
 }
 
 int	ft_start(t_shell *shell)
