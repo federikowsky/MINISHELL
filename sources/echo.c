@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 00:32:05 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:40:31 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,30 @@
 char	*ft_changeword(char *sentence, char *find, char *replace)
 {
 	int		len;
-	char 	*dest;
-    char 	*destptr;
+	char	*dest;
+	char	*destptr;
 
 	len = ft_strlen(sentence) - ft_strlen(find) + ft_strlen(replace) + 1;
 	dest = malloc(len);
 	destptr = dest;
-    *dest = 0;
-    while (*sentence)
-    {
-        if (!ft_strncmp(sentence, find, ft_strlen(find)))
-        {
-            strcat (destptr, replace);
-            sentence += ft_strlen(find);
-            destptr += ft_strlen(replace);
-        }
+	*dest = 0;
+	while (*sentence)
+	{
+		if (!ft_strncmp(sentence, find, ft_strlen(find)))
+		{
+			strcat (destptr, replace);
+			sentence += ft_strlen(find);
+			destptr += ft_strlen(replace);
+		}
 		else
-        {
-            *destptr = *sentence;
-            destptr++;
-            sentence++;
-        }
-    }
-    *destptr = 0;
-    return dest;
+		{
+			*destptr = *sentence;
+			destptr++;
+			sentence++;
+		}
+	}
+	*destptr = 0;
+	return (dest);
 }
 
 char	*ft_env_var(char *cmd, t_shell *shell)
@@ -56,7 +56,8 @@ char	*ft_env_var(char *cmd, t_shell *shell)
 	while (ft_isalpha(key[len_key]))
 		len_key++;
 	key[len_key] = '\0';
-	while (shell->env[i] && ft_strncmp(key + 1, shell->env[i], ft_strlen(key + 1)) != 0)
+	while (shell->env[i] && \
+		ft_strncmp(key + 1, shell->env[i], ft_strlen(key + 1)) != 0)
 		i++;
 	if (!shell->env[i])
 		return (ft_changeword(cmd, key, ""));

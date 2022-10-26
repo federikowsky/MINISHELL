@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:34:45 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/21 12:12:59 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:34:15 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ft_or(t_shell *shell)
 
 void	ft_and(t_shell *shell)
 {
-	// if (ft_strcmp(*(shell->operator + 1), "|") == 0 && sslastop[0] != '\0')
 	if (ft_strcmp(*(shell->operator + 1), "|") == 0)
 	{
 		ft_exec_cmd(shell);

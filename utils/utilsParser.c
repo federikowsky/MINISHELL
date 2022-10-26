@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsParser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 00:37:01 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:33:32 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,34 +147,4 @@ char	*ft_get_cmd(char *s, char **envp)
 	if (*temp)
 		return (ft_arg_check(temp, envp, is_red));
 	return (NULL);
-}
-
-void ft_creatematrix(t_shell *shell)
-{
-	char	*token;
-	char	*operator;
-
-	token = " ";
-	operator = " ";
-	while (token != NULL && operator != NULL)
-	{
-		if (ft_strcmp(operator, "<<"))
-		{
-			token = ft_get_cmd(shell->cmd, shell->env);
-			token = ft_strip(&token);
-			token = ft_check_quote(&token);
-			shell->token = ft_addelement(shell->token, token);
-		}
-		if (!token)
-			break ;
-		operator = ft_get_cmd(shell->cmd, shell->env);
-		operator = ft_strip(&operator);
-		if (!ft_strcmp(operator, "<<"))
-			ft_heredoc(shell);
-		else
-			shell->operator = ft_addelement(shell->operator, operator);
-	}
-	if (shell->token && shell->operator && \
-			ft_mat_lenght(shell->token) == ft_mat_lenght(shell->operator))
-		ft_append_cmd(shell);
 }

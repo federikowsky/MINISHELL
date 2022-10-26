@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md-aless <md-aless@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:02:41 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/21 12:11:53 by md-aless         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:32:46 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	ft_bracket_check(char *cmd)
 		perror("Bracket check Problem: Minishell");
 		return (1);
 	}
-	// return (ft_bracket_aux(cmd));
 	return (0);
 }
 
@@ -103,7 +102,5 @@ char	**ft_addelement(char **ss, char *cmd)
 	}
 	res[i++] = cmd;
 	res[i] = NULL;
-	// if (ss != NULL && *ss != NULL)
-	// 	free(ss);
 	return (res);
 }

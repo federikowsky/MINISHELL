@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
+#    By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/17 14:28:35 by fefilipp         ###   ########.fr        #
+#    Updated: 2022/10/26 12:33:59 by md-aless         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ FILES = 		sources/main \
 				utils/utils2 \
 				utils/heredoc \
 				utils/utilsParser \
+				utils/utilsParser2 \
 				utils/utilsEcho \
 				utils/utilsToken \
 				utils/utilsToken2 \

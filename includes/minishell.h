@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/08 18:511:40 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:39:46 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_shell
 	char	**env;
 	char	*cmd;
 	char	*home;
-	char 	**token;
-	char 	**token_temp;
+	char	**token;
+	char	**token_temp;
 	char	**operator;
 	char	**operator_temp;
 	char	*last_operator;
@@ -46,10 +46,9 @@ typedef struct s_shell
 	int		prev_exitstatus;
 	int		fd_in;
 	int		fd_out;
-	int 	redirec;
+	int		redirec;
 	int		is_subshell;
 }	t_shell;
-
 
 /* Signal */
 void			sig_handling_set(int signals);
@@ -84,14 +83,14 @@ int				ft_bracket_aux(char *cmd);
 int				ft_bracket_check(char *cmd);
 int				ft_check_operator(char *cmd);
 int				ft_redir_check(char *cmd);
-char 			**ft_addelement(char **ss, char *cmd);
+char			**ft_addelement(char **ss, char *cmd);
 int				ft_check_builtin(char *input);
 int				ft_findquote(char *s, int start);
 
 /* Utils Redirection */
 int				ft_find_redir(t_shell *shell);
-void 			ft_redirection(t_shell *shell);
-void 			ft_skip_redirection(t_shell *shell);
+void			ft_redirection(t_shell *shell);
+void			ft_skip_redirection(t_shell *shell);
 
 /* Main */
 int				main_loop(t_shell *s_shell, char **envp);
@@ -113,18 +112,18 @@ void			ft_printenv(char **envp);
 /* Parsing */
 char			*ft_get_cmd(char *s, char **envp);
 int				ft_start(t_shell *shell);
-void 			ft_exec_cmd(t_shell *shell);
+void			ft_exec_cmd(t_shell *shell);
 void			ft_exec_cmd_fork(t_shell *shell);
 void			ft_switch_op(t_shell *shell);
-void 			ft_creatematrix(t_shell *shell);
-void 			ft_append_cmd(t_shell *shell);
+void			ft_creatematrix(t_shell *shell);
+void			ft_append_cmd(t_shell *shell);
 char			*ft_get_op(t_shell *shell, int heredoc);
 char			*ft_get_echo2(char *token);
 
 /* Pipe */
-void 			ft_exec_pipe(t_shell *shell, int nb_pipe);
+void			ft_exec_pipe(t_shell *shell, int nb_pipe);
 void			ft_pipe(t_shell *shell);
-int 			ft_count_pipe(t_shell * shell);
+int				ft_count_pipe(t_shell *shell);
 
 /* Bonus */
 void			ft_or(t_shell *shell);
@@ -133,20 +132,20 @@ void			ft_and(t_shell *shell);
 /* Subshell */
 void			ft_run_new_shell(t_shell *shell);
 int				ft_is_subshell(char *s);
-void 			ft_subshell(t_shell *shell, char *s);
-void 			ft_debug(t_shell *shell, int pipes[], int i);
+void			ft_subshell(t_shell *shell, char *s);
+void			ft_debug(t_shell *shell, int pipes[], int i);
 
 /* Redirection*/
-int 			ft_right_redir(t_shell *shell);
-void 			ft_redir_exec(t_shell *shell);
+int				ft_right_redir(t_shell *shell);
+void			ft_redir_exec(t_shell *shell);
 
-void 			ft_left_redir(t_shell *shell);
+void			ft_left_redir(t_shell *shell);
 
 /* Heredoc*/
-void 			ft_heredoc(t_shell *shell);
+void			ft_heredoc(t_shell *shell);
 
 /* Echo */
-char 			*ft_get_echo(char *s);
+char			*ft_get_echo(char *s);
 char			*ft_charjoin(char *s1, char s2);
 
 #endif

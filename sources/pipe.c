@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md-aless <md-aless@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/25 19:10:25 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:37:19 by md-aless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_count_pipe(t_shell* shell)
+int	ft_count_pipe(t_shell *shell)
 {
 	int	i;
 	int	count;
@@ -38,21 +38,21 @@ void	open_pipe(int pipes[], int no_pipes)
 
 void	close_pipe(int pipes[], int no_pipes)
 {
-    int j;
+	int	j;
 
-    j = 0;
-    while (j < 2 * no_pipes)
-        close(pipes[j++]);
+	j = 0;
+	while (j < 2 * no_pipes)
+		close(pipes[j++]);
 }
 
-void ft_exec_pipe(t_shell *shell, int nb_pipe)
+void	ft_exec_pipe(t_shell *shell, int nb_pipe)
 {
-	int 	i;
+	int		i;
 	int		j;
-	int 	pipes[2 * nb_pipe];
-	int 	status;
+	int		pipes[2 * nb_pipe];
+	int		status;
 	pid_t	pid;
-	
+
 	i = 0;
 	j = nb_pipe + 1;
 	open_pipe(pipes, nb_pipe);
@@ -81,7 +81,7 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 			shell->token++;
 		if (j)
 		{
-			shell->last_operator = ssoperator;	
+			shell->last_operator = ssoperator;
 			shell->operator++;
 		}
 		if (sstoken && sstoken[0] == '\0')
@@ -89,7 +89,7 @@ void ft_exec_pipe(t_shell *shell, int nb_pipe)
 	}
 	close_pipe(pipes, nb_pipe);
 	while (i-- > 0)
-        waitpid(-1, &status, 0);
+		waitpid(-1, &status, 0);
 	if (!ft_strcmp(ssoperator, "<"))
 		ft_left_redir(shell);
 	shell->exitstatus = WEXITSTATUS(status);
