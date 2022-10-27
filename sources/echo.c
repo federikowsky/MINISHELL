@@ -6,40 +6,11 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 10:36:54 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 14:49:22 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	*ft_changeword(char *sentence, char *find, char *replace)
-{
-	int		len;
-	char	*dest;
-	char	*destptr;
-
-	len = ft_strlen(sentence) - ft_strlen(find) + ft_strlen(replace) + 1;
-	dest = malloc(len);
-	destptr = dest;
-	*dest = 0;
-	while (*sentence)
-	{
-		if (!ft_strncmp(sentence, find, ft_strlen(find)))
-		{
-			strcat (destptr, replace);
-			sentence += ft_strlen(find);
-			destptr += ft_strlen(replace);
-		}
-		else
-		{
-			*destptr = *sentence;
-			destptr++;
-			sentence++;
-		}
-	}
-	*destptr = 0;
-	return (dest);
-}
 
 char	*ft_env_var(char *cmd, t_shell *shell)
 {
@@ -65,6 +36,34 @@ char	*ft_env_var(char *cmd, t_shell *shell)
 	return (ft_changeword(cmd, key, value));
 }
 
+char	*ft_echo_quote2(char *str, char *echo, int *i, t_shell *shell)
+{
+	char	*temp;
+	int		j;
+
+	j = 0;
+	if (str[(*i)] == 36)
+	{
+		j = (*i);
+		while (str[(*i)] && str[(*i)] != ' ')
+			(*i)++;
+		temp = ft_substr(str, j, (*i) - j - 1);
+		echo = ft_strjoin(echo, ft_env_var(temp, shell));
+	}
+	if (str[(*i)] == 34 || str[(*i)] == 39)
+	{
+		if (str[(*i)] == 34)
+			j = ft_quoteparent(str + (*i), 34);
+		else
+			j = ft_quoteparent(str + (*i), 39);
+		temp = ft_substr(str, (*i) + 1, j - 1);
+		echo = ft_strjoin(echo, ft_env_var(temp, shell));
+		free(temp);
+		(*i) += j;
+	}
+	return (echo);
+}
+
 char	*ft_echo_quote(char	*str, char *echo, char *temp, t_shell *shell)
 {
 	int		i;
@@ -76,25 +75,9 @@ char	*ft_echo_quote(char	*str, char *echo, char *temp, t_shell *shell)
 	{
 		while (str[i + 1] && str[i] == 32 && str[i + 1] == 32)
 			i++;
-		if (str[i] == 36)
-		{
-			j = i;
-			while (str[i] && str[i] != ' ')
-				i++;
-			temp = ft_substr(str, j, i - j - 1);
-			echo = ft_strjoin(echo, ft_env_var(temp, shell));
-		}
-		if (str[i] == 34 || str[i] == 39)
-		{
-			if (str[i] == 34)
-				j = ft_quoteparent(str + i, 34);
-			else
-				j = ft_quoteparent(str + i, 39);
-			temp = ft_substr(str, i + 1, j - 1);
-			echo = ft_strjoin(echo, ft_env_var(temp, shell));
-			free(temp);
-			i += j;
-		}
+		temp = ft_echo_quote2(str, "", &i, shell);
+		if (temp[0] != '\0')
+			echo = ft_strjoin(echo, temp);
 		else
 			echo = ft_charjoin(echo, str[i]);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 03:16:01 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 10:47:32 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 14:50:46 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_exec_cmd_aux(t_shell *shell, char *arg)
 	pid_t	pid;
 	int		status;
 	char	**cmd;
-	char	**tok;
+	char	*tok;
 
 	tok = *(shell->tok);
 	if (arg)
@@ -48,11 +48,9 @@ void	ft_exec_cmd_aux(t_shell *shell, char *arg)
 			exit(127);
 		}
 		else
-		{
 			waitpid(pid, &status, 0);
-			shell->exitstatus = WEXITSTATUS(status);
-			shell->prev_exitstatus = shell->exitstatus;
-		}
+		shell->exitstatus = WEXITSTATUS(status);
+		shell->prev_exitstatus = shell->exitstatus;
 	}
 }
 

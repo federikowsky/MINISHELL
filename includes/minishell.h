@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/27 10:50:53 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 14:50:05 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void			ft_heredoc(t_shell *shell);
 char			*ft_get_echo(char *s, char *last_quote, char *echo);
 char			*ft_charjoin(char *s1, char s2);
 int				ft_quoteparent(char *s, char c);
+char			*ft_changeword(char *sentence, char *find, char *replace);
 
 /* Wildcards */
 void			ft_wild(t_shell *shell);
