@@ -6,11 +6,26 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:01:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 11:14:25 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:22:00 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_ini_subshell(t_shell *shell, t_shell *newshell, char *s)
+{
+	ft_envhandle(shell->env, newshell);
+	newshell->home = ft_get_home(newshell);
+	sig_handling_set(1);
+	newshell->op = NULL;
+	newshell->tok = NULL;
+	newshell->exitstatus = -1;
+	newshell->cmd = ft_strdup(s);
+	newshell->last_operator = "";
+	newshell->fd_in = shell->fd_out;
+	newshell->is_subshell = 1;
+	exit(ft_start(newshell));
+}
 
 void	ft_subshell(t_shell *shell, char *s)
 {
@@ -20,19 +35,7 @@ void	ft_subshell(t_shell *shell, char *s)
 
 	pid = fork();
 	if (!pid)
-	{
-		ft_envhandle(shell->env, &newshell);
-		newshell.home = ft_get_home(&newshell);
-		sig_handling_set(1);
-		newshell.op = NULL;
-		newshell.tok = NULL;
-		newshell.exitstatus = -1;
-		newshell.cmd = ft_strdup(s);
-		newshell.last_operator = "";
-		newshell.fd_in = shell->fd_out;
-		newshell.is_subshell = 1;
-		exit(ft_start(&newshell));
-	}
+		ft_ini_subshell(shell, &newshell, s);
 	else
 	{
 		waitpid(pid, &status, 0);
