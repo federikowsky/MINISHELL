@@ -1,26 +1,25 @@
 {
     "version": "0.2.0",
     "configurations": [
-        // {
-        //     "name": "(lldb) Launch",
-        //     "type": "lldb",
-        //     "request": "launch",
-        //     "program": "${workspaceFolder}/minishell",
-        //     "args": [],
-        //     "cwd": "${fileDirname}",
-        // }
         {
             "name": "(lldb) Launch",
-            "type": "cppdbg",
+            "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/minishell",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": true,
-            "MIMode": "lldb"
         }
-
+        // {
+        //     "name": "(lldb) Launch",
+        //     "type": "cppdbg",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/minishell",
+        //     "args": [],
+        //     "stopAtEntry": false,
+        //     "cwd": "${fileDirname}",
+        //     "environment": [],
+        //     "externalConsole": true,
+        //     "MIMode": "lldb"
+        // }
     ]
 }

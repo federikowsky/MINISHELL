@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 14:49:22 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/28 00:57:27 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,8 @@ char	*ft_echo_quote2(char *str, char *echo, int *i, t_shell *shell)
 char	*ft_echo_quote(char	*str, char *echo, char *temp, t_shell *shell)
 {
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	while (str[i])
 	{
 		while (str[i + 1] && str[i] == 32 && str[i + 1] == 32)
