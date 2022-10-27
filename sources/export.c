@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 13:07:56 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/26 19:20:21 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:47:32 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**ft_addenv(char **matr, char *var)
 	int		j;
 	int		k;
 
-	lenght = ft_mat_lenght(matr) + 1;
+	lenght = matln(matr) + 1;
 	newmatr = malloc(sizeof(char *) * (lenght));
 	i = 0;
 	j = 0;
@@ -57,21 +57,6 @@ char	**ft_addenv(char **matr, char *var)
 	newmatr[j++] = ft_strdup(var);
 	newmatr[j] = 0;
 	return (newmatr);
-}
-
-int	ft_countvar(char **cmds)
-{
-	static int	static_i = -1;
-	char		*found;
-
-	while (cmds[++static_i])
-	{
-		found = ft_strchr(cmds[static_i], '=');
-		if (found != NULL)
-			return (static_i);
-	}
-	static_i = -1;
-	return (static_i);
 }
 
 char	*ft_check_export(char **cmds, int i, t_shell *shell)

@@ -6,11 +6,26 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:37:59 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/26 19:35:57 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:40:56 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	ft_countvar(char **cmds)
+{
+	static int	static_i = -1;
+	char		*found;
+
+	while (cmds[++static_i])
+	{
+		found = ft_strchr(cmds[static_i], '=');
+		if (found != NULL)
+			return (static_i);
+	}
+	static_i = -1;
+	return (static_i);
+}
 
 int	ft_findquote(char *s, int start)
 {

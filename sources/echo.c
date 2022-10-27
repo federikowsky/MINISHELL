@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:37:39 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:36:54 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,13 @@ char	*ft_env_var(char *cmd, t_shell *shell)
 	return (ft_changeword(cmd, key, value));
 }
 
-char	*ft_echo_quote(char	*str, t_shell *shell)
+char	*ft_echo_quote(char	*str, char *echo, char *temp, t_shell *shell)
 {
 	int		i;
 	int		j;
-	char	*echo;
-	char	*temp;
 
 	i = 0;
 	j = 0;
-	(void) shell;
-	echo = "";
 	while (str[i])
 	{
 		while (str[i + 1] && str[i] == 32 && str[i + 1] == 32)
@@ -88,19 +84,14 @@ char	*ft_echo_quote(char	*str, t_shell *shell)
 			temp = ft_substr(str, j, i - j - 1);
 			echo = ft_strjoin(echo, ft_env_var(temp, shell));
 		}
-		if (str[i] == 34)
+		if (str[i] == 34 || str[i] == 39)
 		{
-			j = ft_quoteparent(str + i, '\"');
+			if (str[i] == 34)
+				j = ft_quoteparent(str + i, 34);
+			else
+				j = ft_quoteparent(str + i, 39);
 			temp = ft_substr(str, i + 1, j - 1);
 			echo = ft_strjoin(echo, ft_env_var(temp, shell));
-			free(temp);
-			i += j;
-		}
-		else if (str[i] == 39)
-		{
-			j = ft_quoteparent(str + i, '\'');
-			temp = ft_substr(str, i + 1, j - 1);
-			echo = ft_strjoin(echo, temp);
 			free(temp);
 			i += j;
 		}
@@ -158,12 +149,12 @@ void	ft_echo(t_shell *shell)
 	if (ss[1] && !ft_strncmp(ss[1], "-n", 2))
 	{
 		str = ft_substr(*(shell->tok), 7, ft_strlen(*(shell->tok)));
-		x = ft_echo_quote(str, shell);
+		x = ft_echo_quote(str, "", NULL, shell);
 		printf("%s", ft_strip(&x));
 	}
 	else
 	{
 		str = ft_substr(*(shell->tok), 5, ft_strlen(*(shell->tok)));
-		printf("%s\n", ft_echo_quote(str, shell));
+		printf("%s\n", ft_echo_quote(str, "", NULL, shell));
 	}
 }

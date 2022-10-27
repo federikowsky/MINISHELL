@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 20:58:03 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:47:31 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,13 @@ void	ft_switch_op(t_shell *shell)
 		ft_or(shell);
 	else if (!ft_strcmp(*(shell->op), "&&"))
 		ft_and(shell);
-	else if (!ft_strcmp(*(shell->op), ">") || \
-		!ft_strcmp(*(shell->op), ">>"))
+	else if (!ft_strcmp(*(shell->op), ">") || !ft_strcmp(*(shell->op), ">>"))
 		ft_right_redir(shell);
 	else if (!ft_strcmp(*(shell->op), "<"))
 		ft_left_redir(shell);
 	else if (*(shell->op) == NULL && *(shell->tok) != NULL)
 		ft_exec_cmd(shell);
-	if (!ft_strcmp(*(shell->op), ">") || \
-		!ft_strcmp(*(shell->op), ">>"))
+	if (!ft_strcmp(*(shell->op), ">") || !ft_strcmp(*(shell->op), ">>"))
 		ft_skip_redirection(shell);
 }
 
@@ -63,8 +61,7 @@ void	ft_creatematrix(t_shell *shell)
 		else
 			shell->op = ft_addelement(shell->op, operator);
 	}
-	if (shell->tok && shell->op && \
-		ft_mat_lenght(shell->tok) == ft_mat_lenght(shell->op))
+	if (shell->tok && shell->op && matln(shell->tok) == matln(shell->op))
 		ft_append_cmd(shell);
 }
 

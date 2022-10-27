@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:35:55 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:51:11 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char	*ft_get_cmd(char *s, char **envp)
 		{
 			int curr_ind = i;
 			in_cmd_mode = 0;
-			i += ft_strlen(ft_get_echo(s + i));
+			i += ft_strlen(ft_get_echo(s + i, "", NULL));
 			return (ft_arg_check(ft_get_echo2(s + curr_ind), envp, is_red));
 		}
 		if (in_cmd_mode && ft_has(s[i], "\"\'"))

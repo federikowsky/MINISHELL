@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/26 20:58:28 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:50:53 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int				ft_strcmp(char *s1, char *s2);
 int				ft_isbuiltin(char *cmd);
 char			*ft_pathfinder(char *cmd, char **envp);
 char			*ft_get_home(t_shell *shell);
-int				ft_mat_lenght(char **s);
+int				matln(char **s);
 void			ft_print_mat(char **ss);
 int				free_matrix(char **matrix);
 char			**ft_mat_copy(char **mat);
@@ -94,7 +94,7 @@ int				main_loop(t_shell *s_shell, char **envp);
 void			ft_initializer(t_shell *shell);
 
 /* Built in */
-int				ft_builtin(char *cmd, t_shell *shell);
+int				ft_builtin(char *token, int i, int check, t_shell *shell);
 int				ft_unset(t_shell *shell);
 int				ft_export(char *s, t_shell *shell);
 char			*ft_pwd(void);
@@ -102,7 +102,7 @@ void			ft_cd(t_shell *shell);
 void			ft_update_env(t_shell *shell, char *path);
 void			ft_envhandle(char **envp, t_shell *shell);
 void			ft_echo(t_shell *shell);
-void			ft_exit(t_shell *shell);
+void			ft_exit(t_shell *shell, int check, int i);
 void			ft_exec_builtin(char *cmd, t_shell *shell);
 void			ft_printenv(char **envp);
 
@@ -110,7 +110,7 @@ void			ft_printenv(char **envp);
 char			*ft_get_cmd(char *s, char **envp);
 int				ft_start(t_shell *shell);
 void			ft_exec_cmd(t_shell *shell);
-void 			ft_exec_cmd_aux(t_shell *shell, char *arg);
+void			ft_exec_cmd_aux(t_shell *shell, char *arg);
 void			ft_exec_cmd_fork(t_shell *shell);
 void			ft_switch_op(t_shell *shell);
 void			ft_creatematrix(t_shell *shell);
@@ -143,11 +143,14 @@ void			ft_left_redir(t_shell *shell);
 void			ft_heredoc(t_shell *shell);
 
 /* Echo */
-char			*ft_get_echo(char *s);
+char			*ft_get_echo(char *s, char *last_quote, char *echo);
 char			*ft_charjoin(char *s1, char s2);
 int				ft_quoteparent(char *s, char c);
 
 /* Wildcards */
-void    		ft_wild(t_shell *shell);
+void			ft_wild(t_shell *shell);
+
+/* Export */
+int				ft_countvar(char **cmds);
 
 #endif

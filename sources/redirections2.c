@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:14:13 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:37:36 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:45:16 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_redir_in_exec(char *token, t_shell *shell)
 {
 	char	**cmd;
 
-	if (ft_builtin(token, shell))
+	if (ft_builtin(token, 0, 0, shell))
 	{	
 		cmd = ft_split(token, ' ');
 		execve(ft_pathfinder(cmd[0], shell->env), cmd, shell->env);

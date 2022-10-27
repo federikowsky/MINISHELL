@@ -6,25 +6,21 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:41:06 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:37:36 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:47:31 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_exit(t_shell *shell)
+void	ft_exit(t_shell *shell, int check, int i)
 {
-	int		i;
-	int		check;
 	char	**cmds;
 
 	cmds = ft_split(*(shell->tok), ' ');
-	check = 0;
-	i = 0;
 	printf("exit\n");
-	if (ft_mat_lenght(cmds) > 2)
+	if (matln(cmds) > 2)
 		printf("too many arguments\n");
-	else if (ft_mat_lenght(cmds) == 2)
+	else if (matln(cmds) == 2)
 	{
 		while (cmds[1][i])
 		{
@@ -36,8 +32,7 @@ void	ft_exit(t_shell *shell)
 			i++;
 		}
 		if (check)
-			printf("minishell: exit: %s: numeric argument required\n", \
-			cmds[1]);
+			printf("minishell: exit: %s: numeric arg required\n", cmds[1]);
 		exit(ft_atoi(cmds[1]));
 	}
 	exit(0);

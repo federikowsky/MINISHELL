@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 18:58:41 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:37:39 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:47:31 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_remove(char **matr, char **cmds, int to_remove, int bool)
 	int		j;
 	int		k;
 
-	newmatr = malloc(sizeof(char *) * (ft_mat_lenght(matr) - to_remove));
+	newmatr = malloc(sizeof(char *) * (matln(matr) - to_remove));
 	i = 0;
 	j = 0;
 	while (matr[i])

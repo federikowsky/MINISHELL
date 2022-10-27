@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:15:07 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 17:17:13 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:10:09 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,59 +68,37 @@ int	ft_and_check(char *cmd)
 	return (0);
 }
 
-int	ft_quote_check(char *cmd)
+int	ft_quote_check_aux(char *cmd, int i)
 {
-	int	i;
-
-	i = 0;
-	while (cmd[i])
+	while (cmd[++i])
 	{
 		if (cmd[i] == 34)
 		{
 			if (ft_quoteparent(cmd + i, 34) != 0)
 				i += ft_quoteparent(cmd + i, 34);
 			else
-			{
-				perror("Quote check problem: Minishell");
-				return (1);
-			}
+				return (-1);
 		}
 		if (cmd[i] == 39)
 		{
 			if (ft_quoteparent(cmd + i, 39) != 0)
-				i += ft_quoteparent(cmd + i, 34);
+				i += ft_quoteparent(cmd + i, 39);
 			else
-			{
-				perror("Quote check problem: Minishell");
-				return (1);
-			}
+				return (-1);
 		}
-		i++;
 	}
 	return (0);
 }
 
-// int	ft_quote_check(char *cmd)
-// {
-// 	int	quote;
-// 	int	doublequote;
-// 	int	i;
+int	ft_quote_check(char *cmd)
+{
+	int	i;
 
-// 	quote = 0;
-// 	doublequote = 0;
-// 	i = 0;
-// 	while (cmd[i] != '\0')
-// 	{
-// 		if (ft_has(cmd[i], "'"))
-// 			quote += 1;
-// 		if (ft_has(cmd[i], "\""))
-// 			doublequote += 1;
-// 		i++;
-// 	}
-// 	if (quote % 2 != 0 || doublequote % 2 != 0)
-// 	{
-// 		perror("Quote check Problem: Minishell");
-// 		return (1);
-// 	}
-// 	return (0);
-// }
+	i = -1;
+	if (ft_quote_check_aux(cmd, i) == -1)
+	{
+		perror("Quote Check Problem: Minishell");
+		return (1);
+	}
+	return (0);
+}

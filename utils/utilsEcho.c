@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:22:48 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 17:02:16 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:50:33 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,9 @@ char	*return_s(char *temp, char *last_quote, char *echo, char *copy)
 	return (getsub(echo, 0, i));
 }
 
-char	*ft_get_echo(char *s)
+char	*ft_get_echo(char *s, char *last_quote, char *echo)
 {
-	char	*echo;
 	char	*temp;
-	char	*last_quote;
 	char	*copy;
 
 	copy = ft_strdup(s);
@@ -87,7 +85,6 @@ char	*ft_get_echo(char *s)
 	if (!echo)
 		return (NULL);
 	temp = echo;
-	last_quote = "";
 	while (*temp)
 	{
 		if (*temp == 34)

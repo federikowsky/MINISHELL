@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:10:33 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/08 03:25:41 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:47:31 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_envhandle(char **envp, t_shell *shell)
 {
 	int		i;
 
-	shell->env = malloc(sizeof(char *) * (ft_mat_lenght(envp) + 1));
+	shell->env = malloc(sizeof(char *) * (matln(envp) + 1));
 	i = -1;
 	if (!shell->env)
 		exit(printf("Error allocating env\n"));

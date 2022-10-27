@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 19:01:28 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/26 19:37:39 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:47:32 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_check_builtin(char *input)
 		return (1);
 }
 
-int	ft_builtin(char *token, t_shell *shell)
+int	ft_builtin(char *token, int i, int check, t_shell *shell)
 {
 	char	**cmd;
 
@@ -35,7 +35,7 @@ int	ft_builtin(char *token, t_shell *shell)
 	if (ft_strcmp(cmd[0], "pwd") == 0)
 		ft_pwd();
 	else if (ft_strcmp(cmd[0], "exit") == 0)
-		ft_exit(shell);
+		ft_exit(shell, i, check);
 	else if (ft_strcmp(cmd[0], "cd") == 0)
 		ft_cd(shell);
 	else if (ft_strcmp(cmd[0], "env") == 0)
@@ -69,7 +69,7 @@ char	**ft_mat_copy(char **mat)
 	char	**res;
 	int		i;
 
-	res = (char **)malloc(sizeof(char *) * ft_mat_lenght(mat));
+	res = (char **)malloc(sizeof(char *) * matln(mat));
 	i = 0;
 	while (mat[i])
 	{
