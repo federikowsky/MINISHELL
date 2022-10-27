@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 14:58:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 10:32:11 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 19:21:31 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,81 @@
 #define DIRECTORY  4
 #define FILE       8
 
-void	ft_wild(t_shell *shell)
+int	ft_wild_match(char *src, char *to_check)
+{
+	if (!*src)
+		return (1);
+	if (*src == '*')
+		return (ft_wild_match(src + 1, to_check));
+	if (*src == *to_check)
+		return (ft_wild_match(src + 1, to_check + 1));
+	if (ft_has(*src, to_check))
+		return (ft_wild_match(src, to_check + 1));
+	else
+		return (0);
+}
+
+char	*ft_wild_cmd(t_shell *shell, char *arg)
+{
+	char	*temp;
+
+	temp = "";
+	temp = ft_strjoin(temp, ft_split(*(shell->tok), ' ')[0]);
+	temp = ft_strjoin(temp, " ");
+	temp = ft_strjoin(temp, arg);
+	return (temp);
+}
+
+void	ft_wild_file(char *s, t_shell *shell)
 {
 	DIR				*folder;
 	struct dirent	*entry;
-	char			*arg;
 
-	arg = ft_split(*(shell->tok), ' ')[1];
-	if (!arg)
-		folder = opendir(".");
-	else
-		folder = opendir(arg);
+	folder = opendir("../");
 	entry = readdir(folder);
 	while (entry)
 	{
-		if (ft_isalpha(entry->d_name[0]))
-		{
-			printf("%s\n", entry->d_name);
-			ft_exec_cmd_aux(shell, entry->d_name);
-			entry = readdir(folder);
-		}
+		if (ft_isalpha(entry->d_name[0]) && entry->d_type == FILE && \
+				ft_wild_match(s, entry->d_name))
+			ft_exec_cmd_aux(shell, ft_wild_cmd(shell, entry->d_name));
+		entry = readdir(folder);
 	}
 	closedir(folder);
+}
+
+void	ft_wild_dir(char *s, t_shell *shell)
+{
+	DIR				*folder;
+	struct dirent	*entry;
+
+	folder = opendir("../");
+	entry = readdir(folder);
+	while (entry)
+	{
+		if (ft_isalpha(entry->d_name[0]) && entry->d_type == DIRECTORY && \
+				ft_wild_match(s, entry->d_name))
+		{
+			printf("%s:\n", entry->d_name);
+			ft_exec_cmd_aux(shell, ft_wild_cmd(shell, entry->d_name));
+		}
+		entry = readdir(folder);
+	}
+	closedir(folder);
+}
+
+void	ft_wild(t_shell *shell)
+{
+	char			**arg;
+	int				i;
+
+	i = 0;
+	arg = ft_split(*(shell->tok), ' ');
+	while (arg[++i])
+	{
+		ft_wild_file(arg[i], shell);
+		ft_wild_dir(arg[i], shell);
+	}
+	shell->last_operator = *(shell->op);
+	shell->tok++;
+	shell->op++;
 }

@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/27 14:50:05 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:57:57 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,21 @@
 
 typedef struct s_shell
 {
-	char	**env;
 	char	*cmd;
+	char	**op;
+	char	**env;
 	char	*home;
 	char	**tok;
-	char	**tok_temp;
-	char	**op;
 	char	**op_temp;
+	char	**tok_temp;
 	char	*last_operator;
-	int		exitstatus;
-	int		prev_exitstatus;
 	int		fd_in;
+	int		start;
 	int		fd_out;
 	int		redirec;
+	int		exitstatus;
 	int		is_subshell;
+	int		prev_exitstatus;
 }	t_shell;
 
 /* Signal */
@@ -83,6 +84,7 @@ char			**ft_addelement(char **ss, char *cmd);
 int				ft_check_builtin(char *input);
 int				ft_findquote(char *s, int start);
 char			*ft_check_quote(char **token);
+int				ft_checkall(char *cmd, int i);
 
 /* Utils Redirection */
 int				ft_find_redir(t_shell *shell);
@@ -107,16 +109,23 @@ void			ft_exec_builtin(char *cmd, t_shell *shell);
 void			ft_printenv(char **envp);
 
 /* Parsing */
-char			*ft_get_cmd(char *s, char **envp);
+char			*ft_get_cmd(t_shell *shell);
 int				ft_start(t_shell *shell);
 void			ft_exec_cmd(t_shell *shell);
 void			ft_exec_cmd_aux(t_shell *shell, char *arg);
 void			ft_exec_cmd_fork(t_shell *shell);
 void			ft_switch_op(t_shell *shell);
-void			ft_creatematrix(t_shell *shell);
+void			ft_creatematrix(t_shell *shell, char *token, char *operator);
 void			ft_append_cmd(t_shell *shell);
 char			*ft_get_op(t_shell *shell, int heredoc);
 char			*ft_get_echo2(char *token);
+char			*ft_cmd1(t_shell *shell, int *i, int *in_cmd_mode, int *is_red);
+char			*ft_cmd2(t_shell *shell, int *i, int *in_cmd_mode, int *is_red);
+char			*ft_cmd3(t_shell *shell, int *i, int *in_cmd_mode, int *is_red);
+char			*ft_cmd4(t_shell *shell, int *i, int *in_cmd_mode, int *is_red);
+char			*ft_cmd5(t_shell *shell, int *i, int *in_cmd_mode);
+char			*ft_get_cmd2(t_shell *shell, int *i, \
+				int *in_cmd_mode, int *is_red);
 
 /* Pipe */
 void			ft_exec_pipe(t_shell *shell, int nb_pipe);
@@ -129,7 +138,7 @@ void			ft_and(t_shell *shell);
 
 /* Subshell */
 void			ft_run_new_shell(t_shell *shell);
-int				ft_is_subshell(char *s);
+int				ft_is_subshell(char **s);
 void			ft_subshell(t_shell *shell, char *s);
 void			ft_debug(t_shell *shell, int pipes[], int i);
 

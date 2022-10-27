@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:37:59 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/27 10:40:56 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:57:58 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	ft_redir_check(char *cmd)
 	i = 0;
 	while (cmd[i] != '\0')
 	{
+		i = ft_checkall(cmd, i);
 		if ((cmd[i] == '>' && cmd[i + 1] == '>') || \
 			(cmd[i] == '<' && cmd[i + 1] == '<'))
 		{

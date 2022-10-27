@@ -6,26 +6,20 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:05:08 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/27 10:47:31 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:32:45 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_is_subshell(char *token)
+int	ft_is_subshell(char **token)
 {
-	int	i;
-
-	if (!ft_strncmp(token, "echo", 4))
+	if ((*token)[0] != 40)
 		return (0);
-	i = 0;
-	while (token[i])
-	{
-		if (ft_has(token[i], "|&"))
-			return (1);
-		i++;
-	}
-	return (0);
+	ft_memmove((*token), (*token) + 1, ft_strlen((*token)));
+	ft_memmove(&(*token)[ft_strlen((*token)) - 1], \
+		&(*token)[ft_strlen((*token))], ft_strlen((*token)));
+	return (1);
 }
 
 int	free_matrix(char **matrix)

@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 10:47:31 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:06:19 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_switch_op(t_shell *shell)
 		ft_wild(shell);
 	else if (!ft_strcmp(*(shell->op), "|"))
 		ft_exec_pipe(shell, ft_count_pipe(shell));
-	else if (ft_is_subshell(*(shell->tok)))
+	else if (ft_is_subshell(&(*(shell->tok))))
 		ft_subshell(shell, *(shell->tok));
 	else if (!ft_strcmp(*(shell->op), "||"))
 		ft_or(shell);
@@ -36,25 +36,20 @@ void	ft_switch_op(t_shell *shell)
 		ft_skip_redirection(shell);
 }
 
-void	ft_creatematrix(t_shell *shell)
+void	ft_creatematrix(t_shell *shell, char *token, char *operator)
 {
-	char	*token;
-	char	*operator;
-
-	token = " ";
-	operator = " ";
 	while (token != NULL && operator != NULL)
 	{
 		if (ft_strcmp(operator, "<<"))
 		{
-			token = ft_get_cmd(shell->cmd, shell->env);
+			token = ft_get_cmd(shell);
 			token = ft_strip(&token);
 			token = ft_check_quote(&token);
 			shell->tok = ft_addelement(shell->tok, token);
 		}
 		if (!token)
 			break ;
-		operator = ft_get_cmd(shell->cmd, shell->env);
+		operator = ft_get_cmd(shell);
 		operator = ft_strip(&operator);
 		if (!ft_strcmp(operator, "<<"))
 			ft_heredoc(shell);
@@ -67,7 +62,7 @@ void	ft_creatematrix(t_shell *shell)
 
 int	ft_start(t_shell *shell)
 {
-	ft_creatematrix(shell);
+	ft_creatematrix(shell, " ", " ");
 	shell->op_temp = shell->op;
 	shell->tok_temp = shell->tok;
 	ft_redirection(shell);

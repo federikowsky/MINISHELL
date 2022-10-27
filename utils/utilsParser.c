@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:24:09 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 14:26:45 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:58:41 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,64 +89,21 @@ void	ft_append_cmd(t_shell *shell)
 	shell->cmd = readline(prompt);
 	while (*(shell->cmd) == '\0')
 		shell->cmd = readline(prompt);
-	ft_creatematrix(shell);
+	ft_creatematrix(shell, " ", " ");
 }
 
-char	*ft_get_cmd(char *s, char **envp)
+char	*ft_get_cmd(t_shell *shell)
 {
-	int				start;
-	char			*temp;
 	static int		i = 0;
 	static int		in_cmd_mode = 1;
 	static int		is_red = 0;
 
-	if (i == -2 || i == ft_strlen(s))
+	if (i == -2 || i == ft_strlen(shell->cmd))
 	{
 		i = 0;
 		in_cmd_mode = 1;
 		return (NULL);
 	}
-	start = ft_get_cmd_aux(s, &i);
-	while (s[i])
-	{
-		if (ft_has(s[i], "<>"))
-			is_red = 1;
-		if (in_cmd_mode && !ft_strncmp(s + i, "echo", 4) && ft_get_echo2(s + i) != NULL)
-		{
-			int curr_ind = i;
-			in_cmd_mode = 0;
-			i += ft_strlen(ft_get_echo(s + i, "", NULL));
-			return (ft_arg_check(ft_get_echo2(s + curr_ind), envp, is_red));
-		}
-		if (in_cmd_mode && ft_has(s[i], "\"\'"))
-		{
-			in_cmd_mode = 0;
-			is_red = 0;
-			i = findparenth(s, start, "\"\'") + 1;
-			return (ft_arg_check(getsub(s, start, i), envp, is_red));
-		}
-		if (in_cmd_mode && ft_has(s[i], "("))
-		{
-			in_cmd_mode = 0;
-			is_red = 0;
-			i = findparenth(s, start, ")") + 1;
-			return (ft_arg_check(getsub(s, start + 1, i - 1), envp, is_red));
-		}
-		else if (in_cmd_mode && !ft_isdigit(s[i]) && !ft_isalpha(s[i]) && ft_has(s[i], "|&><"))
-		{
-			in_cmd_mode = 0;
-			return (ft_arg_check(getsub(s, start, i), envp, is_red));
-		}
-		else if (!in_cmd_mode && !ft_has(s[i], "|&><"))
-		{
-			in_cmd_mode = 1;
-			return (getsub(s, start, i));
-		}
-		i++;
-	}
-	i = -2;
-	temp = getsub(s, start, ft_strlen(s));
-	if (*temp)
-		return (ft_arg_check(temp, envp, is_red));
-	return (NULL);
+	shell->start = ft_get_cmd_aux(shell->cmd, &i);
+	return (ft_get_cmd2(shell, &i, &in_cmd_mode, &is_red));
 }

@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 03:16:01 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 14:50:46 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 19:42:33 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_exec_cmd_aux(t_shell *shell, char *arg)
 
 	tok = *(shell->tok);
 	if (arg)
-		tok = ft_strjoin(tok, arg);
+		tok = arg;
 	if (access(ft_split(tok, ' ')[0], F_OK) == 0)
 		tok = ft_split(tok, '/')[matln(ft_split(tok, '/')) - 1];
 	if (ft_builtin(tok, 0, 0, shell))

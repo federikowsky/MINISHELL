@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   utilsToken5.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 14:18:38 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 15:23:23 by agenoves         ###   ########.fr       */
+/*   Created: 2022/10/27 16:54:34 by agenoves          #+#    #+#             */
+/*   Updated: 2022/10/27 16:55:26 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_heredoc(t_shell *shell)
+int	ft_checkall(char *cmd, int i)
 {
-	char	*prompt;
-	char	*input;
-	char	*next_tok;
-
-	next_tok = ft_get_cmd(shell);
-	next_tok = ft_strip(&next_tok);
-	prompt = ft_get_op(shell, 1);
-	input = readline(prompt);
-	while (ft_strcmp(input, next_tok))
-		input = readline(prompt);
+	if (cmd[i] == 34)
+	{
+		if (ft_quoteparent(cmd + i, 34) != 0)
+			i += ft_quoteparent(cmd + i, 34);
+		else
+			return (-1);
+	}
+	if (cmd[i] == 39)
+	{
+		if (ft_quoteparent(cmd + i, 39) != 0)
+			i += ft_quoteparent(cmd + i, 39);
+		else
+			return (-1);
+	}
+	return (i);
 }

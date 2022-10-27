@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/26 19:37:36 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:34:02 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_exec_pipe(t_shell *shell, int nb_pipe)
 			if (i != 0)
 				dup2(pipes[i - 2], STDIN_FILENO);
 			close_pipe(pipes, nb_pipe);
-			if (ft_is_subshell(*(shell->tok)))
+			if (ft_is_subshell(&(*(shell->tok))))
 				ft_subshell(shell, *(shell->tok));
 			if (!ft_strcmp(*(shell->op), ">") || !ft_strcmp(*(shell->op), ">>"))
 			{

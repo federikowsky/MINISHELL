@@ -26,11 +26,6 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-int find_arg(char *s)
-{
-
-}
-
 int main(int argc, char **argv)
 {
     DIR *folder;
@@ -41,11 +36,8 @@ int main(int argc, char **argv)
 
     if (argc < 2)
         folder = opendir(".");
-    else if (find_arg(argv[1]))
-        return;
-    else
-        return ;
-    folder = opendir(argv[1]);
+	else
+    	folder = opendir(argv[1]);
     entry = readdir(folder);
     while(entry)
     {

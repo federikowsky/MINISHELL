@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:02:41 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/27 10:47:31 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:56:20 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_bracket_check(char *cmd)
 	i = 0;
 	while (cmd[i] != '\0')
 	{
+		i = ft_checkall(cmd, i);
 		if (ft_has(cmd[i], "("))
 			open += 1;
 		if (ft_has(cmd[i], ")"))
@@ -45,28 +46,28 @@ int	ft_bracket_check(char *cmd)
 	return (0);
 }
 
-int	ft_bracket_aux(char *cmd)
-{
-	int	is_op;
-	int	i;
+// int	ft_bracket_aux(char *cmd)
+// {
+// 	int	is_op;
+// 	int	i;
 
-	is_op = 0;
-	i = 0;
-	while (cmd[i])
-	{
-		if (ft_has(cmd[i], "|&\"'"))
-			is_op = 1;
-		if (ft_has(cmd[i], "(") && !is_op)
-		{
-			perror("Bracket check Problem (aux): Minishell");
-			return (1);
-		}
-		if (ft_isalpha(cmd[i]) && is_op)
-			is_op = 0;
-		i++;
-	}
-	return (0);
-}
+// 	is_op = 0;
+// 	i = 0;
+// 	while (cmd[i])
+// 	{
+// 		if (ft_has(cmd[i], "|&\"'"))
+// 			is_op = 1;
+// 		if (ft_has(cmd[i], "(") && !is_op)
+// 		{
+// 			perror("Bracket check Problem (aux): Minishell");
+// 			return (1);
+// 		}
+// 		if (ft_isalpha(cmd[i]) && is_op)
+// 			is_op = 0;
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 int	ft_isbuiltin(char *cmd)
 {
