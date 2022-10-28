@@ -6,7 +6,7 @@
 #    By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 09:56:09 by agenoves          #+#    #+#              #
-#    Updated: 2022/10/28 02:02:05 by fefilipp         ###   ########.fr        #
+#    Updated: 2022/10/28 02:36:22 by fefilipp         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ FILES = 		sources/main \
 				utils/utilsToken3 \
 				utils/utilsToken4 \
 				utils/utilsToken5 \
+				utils/utilsWildcard \
 				# sources/builtin \
 				# sources/cmd_exec \
 				# sources/pipe \

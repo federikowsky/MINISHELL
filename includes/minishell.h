@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/27 17:57:57 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/28 03:09:27 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <stdio.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 # include <dirent.h>
 # include <termios.h>
 # include <readline/readline.h>
@@ -159,6 +161,9 @@ char			*ft_changeword(char *sentence, char *find, char *replace);
 
 /* Wildcards */
 void			ft_wild(t_shell *shell);
+int 			ft_is_dir(const char* fileName);
+char			*ft_wild_cmd(t_shell *shell, char *arg);
+char			*ft_ret_dir(char **dir);
 
 /* Export */
 int				ft_countvar(char **cmds);

@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 14:58:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/28 02:17:25 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:01:54 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,19 @@ int	ft_wild_match(char *src, char *to_check)
 		return (0);
 }
 
-char	*ft_wild_cmd(t_shell *shell, char *arg)
-{
-	char	*temp;
-	char	**splitted;
-
-	temp = "";
-	splitted = ft_split(*(shell->tok), ' ');
-	temp = ft_strjoin(temp, splitted[0]);
-	if (splitted[1][0] == '-')
-	{
-		temp = ft_strjoin(temp, " ");
-		temp = ft_strjoin(temp, splitted[1]);
-	}
-	temp = ft_strjoin(temp, " ");
-	temp = ft_strjoin(temp, arg);
-	return (temp);
-}
-
-int	ft_wild_file(char *s, t_shell *shell)
+void	ft_wild_file(char *s, t_shell *shell, int *exist)
 {
 	DIR				*folder;
 	struct dirent	*entry;
-	int				exist;
+	char			*dir;
 
-	folder = opendir(".");
+	dir = ft_ret_dir(&s);
+	folder = opendir(dir);
 	entry = readdir(folder);
-	exist = 0;
+	if (ft_strcmp(dir, "."))
+		dir = ft_strjoin(dir, "/");
+	else
+		dir = "";
 	while (entry)
 	{
 		if (ft_isalpha(entry->d_name[0]) && entry->d_type == FILE && \
@@ -63,43 +49,43 @@ int	ft_wild_file(char *s, t_shell *shell)
 		{
 			if (s[0] == entry->d_name[0] || !ft_strncmp(s, "*", 1))
 			{
-				ft_exec_cmd_aux(shell, ft_wild_cmd(shell, entry->d_name));
-				exist = 1;
+				ft_exec_cmd_aux(shell, ft_wild_cmd(shell, ft_strjoin(dir, entry->d_name)));
+				*exist = 1;
 			}
 		}
 		entry = readdir(folder);
 	}
 	closedir(folder);
-	return (exist);
 }
 
-int	ft_wild_dir(char *s, t_shell *shell, int num_arg)
+void	ft_wild_dir(char *s, t_shell *shell, int num_arg, int *exist)
 {
 	DIR				*folder;
 	struct dirent	*entry;
-	int				exist;
+	char			*dir;
 
-	folder = opendir(".");
+	dir = ft_ret_dir(&s);
+	folder = opendir(dir);
 	entry = readdir(folder);
-	exist = 0;
+	if (ft_strcmp(dir, "."))
+		dir = ft_strjoin(dir, "/");
+	else
+		dir = "";
 	while (entry)
 	{
 		if (ft_isalpha(entry->d_name[0]) && entry->d_type == DIRECTORY && \
-				ft_wild_match(s, entry->d_name))
+			ft_wild_match(s, entry->d_name) && 							   \
+			(s[0] == entry->d_name[0] || !ft_strncmp(s, "*", 1)))
 		{
-			if (s[0] == entry->d_name[0] || !ft_strncmp(s, "*", 1))
-			{
-				if (num_arg > 2 || *s == '*')
-					printf("%s:\n", entry->d_name);
-				ft_exec_cmd_aux(shell, ft_wild_cmd(shell, entry->d_name));
 				printf("\n");
-				exist = 1;
-			}
+				if (num_arg > 2 || *s == '*')
+					printf("%s:\n", ft_strjoin(dir, entry->d_name));
+				ft_exec_cmd_aux(shell, ft_wild_cmd(shell, ft_strjoin(dir, entry->d_name)));
+				*exist = 1;
 		}
 		entry = readdir(folder);
 	}
 	closedir(folder);
-	return (exist);
 }
 
 void	ft_wild(t_shell *shell)
@@ -109,14 +95,14 @@ void	ft_wild(t_shell *shell)
 	int				exist;
 
 	i = 0;
-	exist = 0;
 	arg = ft_split(*(shell->tok), ' ');
 	while (arg[++i])
 	{
 		if (arg[i][0] == '-')
 			continue ;
-		exist = ft_wild_file(arg[i], shell);
-		exist = exist | ft_wild_dir(arg[i], shell, matln(arg));
+		exist = 0;
+		ft_wild_file(arg[i], shell, &exist);
+		ft_wild_dir(arg[i], shell, matln(arg), &exist);
 		if (!exist)
 			printf("%s: %s: No such file or directory\n", arg[0], arg[i]);
 	}
