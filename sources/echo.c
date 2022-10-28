@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/28 00:57:27 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/28 01:55:18 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*ft_get_echo2(char *token)
 			break ;
 		temp++;
 	}
-	free(copy);
+	// free(copy);
 	return (ft_substr(cmd, 0, temp - cmd));
 }
 

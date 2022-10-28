@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 14:58:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/28 01:40:58 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/28 02:10:34 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ int	ft_wild_file(char *s, t_shell *shell)
 		if (ft_isalpha(entry->d_name[0]) && entry->d_type == FILE && \
 				ft_wild_match(s, entry->d_name))
 		{
-			ft_exec_cmd_aux(shell, ft_wild_cmd(shell, entry->d_name));
-			exist = 1;
+			if (s[0] == entry->d_name[0])
+			{
+				ft_exec_cmd_aux(shell, ft_wild_cmd(shell, entry->d_name));
+				exist = 1;
+			}
 		}
 		entry = readdir(folder);
 	}
@@ -84,11 +87,14 @@ int	ft_wild_dir(char *s, t_shell *shell, int num_arg)
 		if (ft_isalpha(entry->d_name[0]) && entry->d_type == DIRECTORY && \
 				ft_wild_match(s, entry->d_name))
 		{
-			if (num_arg > 2 || *s == '*')
-				printf("%s:\n", entry->d_name);
-			ft_exec_cmd_aux(shell, ft_wild_cmd(shell, entry->d_name));
-			printf("\n");
-			exist = 1;
+			if (s[0] == entry->d_name[0])
+			{
+				if (num_arg > 2 || *s == '*')
+					printf("%s:\n", entry->d_name);
+				ft_exec_cmd_aux(shell, ft_wild_cmd(shell, entry->d_name));
+				printf("\n");
+				exist = 1;
+			}
 		}
 		entry = readdir(folder);
 	}
