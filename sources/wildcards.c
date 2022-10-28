@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 14:58:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/28 02:10:34 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/28 02:17:25 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_wild_file(char *s, t_shell *shell)
 		if (ft_isalpha(entry->d_name[0]) && entry->d_type == FILE && \
 				ft_wild_match(s, entry->d_name))
 		{
-			if (s[0] == entry->d_name[0])
+			if (s[0] == entry->d_name[0] || !ft_strncmp(s, "*", 1))
 			{
 				ft_exec_cmd_aux(shell, ft_wild_cmd(shell, entry->d_name));
 				exist = 1;
@@ -87,7 +87,7 @@ int	ft_wild_dir(char *s, t_shell *shell, int num_arg)
 		if (ft_isalpha(entry->d_name[0]) && entry->d_type == DIRECTORY && \
 				ft_wild_match(s, entry->d_name))
 		{
-			if (s[0] == entry->d_name[0])
+			if (s[0] == entry->d_name[0] || !ft_strncmp(s, "*", 1))
 			{
 				if (num_arg > 2 || *s == '*')
 					printf("%s:\n", entry->d_name);
