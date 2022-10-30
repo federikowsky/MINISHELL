@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 18:16:40 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 18:06:19 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/30 12:56:56 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_switch_op(t_shell *shell)
 {
 	if (ft_strcmp(*(shell->tok), "./minishell") == 0)
 		ft_run_new_shell(shell);
-	else if (ft_strchr(*(shell->tok), '*'))
+	else if (ft_strchr(*(shell->tok), '*') && ft_strcmp(*(shell->op), "|") != 0)
 		ft_wild(shell);
 	else if (!ft_strcmp(*(shell->op), "|"))
 		ft_exec_pipe(shell, ft_count_pipe(shell));

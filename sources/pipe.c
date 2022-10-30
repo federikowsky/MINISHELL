@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 16:34:02 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/10/30 12:54:45 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ void	ft_exec_pipe(t_shell *shell, int nb_pipe)
 			if (!ft_strcmp(*(shell->op), ">") || !ft_strcmp(*(shell->op), ">>"))
 			{
 				ft_exec_cmd(shell);
+				exit(0);
+			}
+			else if (ft_strchr(*(shell->tok), '*'))
+			{
+				ft_wild(shell);
 				exit(0);
 			}
 			else
