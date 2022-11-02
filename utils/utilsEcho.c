@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsEcho.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:22:48 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 10:50:33 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/11/02 19:20:17 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*return_s(char *temp, char *last_quote, char *echo, char *copy)
 {
 	int	i;
 
-	free(copy);
+	// free(copy);
 	(void) last_quote;
 	(void) temp;
 	if (!ft_strcmp(echo, "echo $?"))

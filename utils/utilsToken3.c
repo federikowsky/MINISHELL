@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsToken3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:02:41 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/27 16:56:20 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/11/02 19:30:44 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_bracket_check(char *cmd)
 	open = 0;
 	close = 0;
 	i = 0;
-	while (cmd[i] != '\0')
+	while (cmd[i] != '\0' && i != -1)
 	{
 		i = ft_checkall(cmd, i);
 		if (ft_has(cmd[i], "("))
