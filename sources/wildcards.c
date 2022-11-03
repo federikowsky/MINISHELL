@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 14:58:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/28 14:13:48 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:54:31 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,11 @@ void	ft_wild(t_shell *shell)
 	{
 		if (arg[i][0] == '-')
 			continue ;
+		if (!ft_is_dir(arg[i]))
+		{
+			ft_exec_cmd_aux(shell, ft_wild_cmd(shell, arg[i]));
+			continue;
+		}
 		exist = 0;
 		ft_wild_file(arg[i], shell, &exist);
 		ft_wild_dir(arg[i], shell, matln(arg), &exist);
