@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/28 03:09:27 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:23:41 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ typedef struct s_shell
 {
 	char	*cmd;
 	char	**op;
+	char	**gc;
 	char	**env;
 	char	*home;
 	char	**tok;
+	char	***gc2;
 	char	**op_temp;
 	char	**tok_temp;
 	char	*last_operator;
@@ -167,5 +169,9 @@ char			*ft_ret_dir(char **dir);
 
 /* Export */
 int				ft_countvar(char **cmds);
+
+/* Garbage Collector */
+char 			*gc(t_shell *shell, char *s);
+char			**gc2(t_shell *shell, char **ss); 
 
 #endif

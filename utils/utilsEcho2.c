@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsEcho2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:49:32 by agenoves          #+#    #+#             */
-/*   Updated: 2022/10/27 14:49:52 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:23:34 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@ char	*ft_changeword(char *sentence, char *find, char *replace)
 	}
 	*destptr = 0;
 	return (dest);
+	// return (gc(shell, dest));
 }

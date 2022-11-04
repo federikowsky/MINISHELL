@@ -6,7 +6,7 @@
 /*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 12:02:41 by agenoves          #+#    #+#             */
-/*   Updated: 2022/11/02 19:30:44 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/11/04 12:59:51 by fefilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,6 @@ int	ft_bracket_check(char *cmd)
 	return (0);
 }
 
-// int	ft_bracket_aux(char *cmd)
-// {
-// 	int	is_op;
-// 	int	i;
-
-// 	is_op = 0;
-// 	i = 0;
-// 	while (cmd[i])
-// 	{
-// 		if (ft_has(cmd[i], "|&\"'"))
-// 			is_op = 1;
-// 		if (ft_has(cmd[i], "(") && !is_op)
-// 		{
-// 			perror("Bracket check Problem (aux): Minishell");
-// 			return (1);
-// 		}
-// 		if (ft_isalpha(cmd[i]) && is_op)
-// 			is_op = 0;
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
 int	ft_isbuiltin(char *cmd)
 {
 	if (ft_strcmp(cmd, "echo") == 0 || ft_strcmp(cmd, "pwd") == 0 \
@@ -94,9 +71,11 @@ char	**ft_addelement(char **ss, char *cmd)
 		res = malloc(sizeof(char *) * (matln(ss) + 2));
 		while (ss[i])
 		{
-			res[i] = ss[i];
+			res[i] = ft_strdup(ss[i]);
+			free(ss[i]);
 			i++;
 		}
+		free(ss);
 	}
 	res[i++] = cmd;
 	res[i] = NULL;
