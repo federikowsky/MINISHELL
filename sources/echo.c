@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:10:42 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/11/04 14:24:05 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/11/08 11:46:18 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ char	*ft_env_var(char *cmd, t_shell *shell)
 
 	i = 0;
 	len_key = 1;
-	// key = ft_strchr(ft_strdup(cmd), '$');
-	key = ft_strchr(gc(shell, ft_strdup(cmd)), '$');
+	key = ft_strchr(ft_strdup(cmd), '$');
 	if (!key)
 		return (cmd);
 	while (ft_isalpha(key[len_key]))
@@ -32,11 +31,9 @@ char	*ft_env_var(char *cmd, t_shell *shell)
 		ft_strncmp(key + 1, shell->env[i], ft_strlen(key + 1)) != 0)
 		i++;
 	if (!shell->env[i])
-		// return (ft_changeword(shell, cmd, key, ""));
-		return (gc(shell, ft_changeword(cmd, key, "")));
+		return (ft_changeword(cmd, key, ""));
 	value = ft_split(shell->env[i], '=')[1];
-	// return (ft_changeword(shell, cmd, key, value));
-	return (gc(shell, ft_changeword(cmd, key, value)));
+	return (ft_changeword(cmd, key, value));
 }
 
 char	*ft_echo_quote2(char *str, char *echo, int *i, t_shell *shell)
@@ -66,8 +63,6 @@ char	*ft_echo_quote2(char *str, char *echo, int *i, t_shell *shell)
 	}
 	return (echo);
 }
-
-
 
 char	*ft_echo_quote(char	*str, char *echo, char *temp, t_shell *shell)
 {
@@ -114,7 +109,6 @@ char	*ft_get_echo2(char *token)
 			break ;
 		temp++;
 	}
-	// free(copy);
 	return (ft_substr(cmd, 0, temp - cmd));
 }
 
@@ -131,16 +125,16 @@ void	ft_echo(t_shell *shell)
 		shell->prev_exitstatus = 0;
 		return ;
 	}
-	ss = gc2(shell, ft_split(*(shell->tok), ' '));
+	ss = ft_split(*(shell->tok), ' ');
 	if (ss[1] && !ft_strncmp(ss[1], "-n", 2))
 	{
-		str = gc(shell, ft_substr(*(shell->tok), 7, ft_strlen(*(shell->tok))));
+		str = ft_substr(*(shell->tok), 7, ft_strlen(*(shell->tok)));
 		x = ft_echo_quote(str, "", NULL, shell);
 		printf("%s", ft_strip(&x));
 	}
 	else
 	{
-		str = gc(shell, ft_substr(*(shell->tok), 5, ft_strlen(*(shell->tok))));
+		str = ft_substr(*(shell->tok), 5, ft_strlen(*(shell->tok)));
 		printf("%s\n", ft_echo_quote(str, "", NULL, shell));
 	}
 }

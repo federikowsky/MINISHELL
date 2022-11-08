@@ -1,39 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   pipe2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/23 16:41:06 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 10:47:31 by agenoves         ###   ########.fr       */
+/*   Created: 2022/11/08 11:52:46 by agenoves          #+#    #+#             */
+/*   Updated: 2022/11/08 11:53:02 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_exit(t_shell *shell, int check, int i)
+int	ft_count_pipe(t_shell *shell)
 {
-	char	**cmds;
+	int	i;
+	int	count;
 
-	cmds = ft_split(*(shell->tok), ' ');
-	printf("exit\n");
-	if (matln(cmds) > 2)
-		printf("too many arguments\n");
-	else if (matln(cmds) == 2)
+	i = 0;
+	count = 0;
+	while (ft_strcmp((shell->op)[i], "|") == 0)
 	{
-		while (cmds[1][i])
-		{
-			if (!ft_isdigit(cmds[1][i]))
-			{
-				check = 1;
-				break ;
-			}
-			i++;
-		}
-		if (check)
-			printf("minishell: exit: %s: numeric arg required\n", cmds[1]);
-		exit(ft_atoi(cmds[1]));
+		count++;
+		i++;
 	}
-	exit(0);
+	return (count);
+}
+
+void	open_pipe(int pipes[], int no_pipes)
+{
+	int	i;
+
+	i = -1;
+	while (++i < no_pipes)
+		pipe(pipes + i * 2);
+}
+
+void	close_pipe(int pipes[], int no_pipes)
+{
+	int	j;
+
+	j = 0;
+	while (j < 2 * no_pipes)
+		close(pipes[j++]);
 }

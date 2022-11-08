@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:43:36 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/11/04 14:16:30 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:11:59 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	ft_initializer(t_shell *shell)
 {
 	shell->op = NULL;
 	shell->tok = NULL;
-	shell->gc = NULL;
-	shell->gc2 = NULL;
 	shell->exitstatus = -1;
 	shell->cmd = readline(PROMPT);
 	shell->fd_in = 0;

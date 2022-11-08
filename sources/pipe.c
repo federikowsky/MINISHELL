@@ -3,51 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 16:44:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/11/03 19:36:14 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/11/08 11:53:52 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_count_pipe(t_shell *shell)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (ft_strcmp((shell->op)[i], "|") == 0)
-	{
-		count++;
-		i++;
-	}
-	return (count);
-}
-
-void	open_pipe(int pipes[], int no_pipes)
-{
-	int	i;
-
-	i = -1;
-	while (++i < no_pipes)
-		pipe(pipes + i * 2);
-}
-
-void	close_pipe(int pipes[], int no_pipes)
-{
-	int	j;
-
-	j = 0;
-	while (j < 2 * no_pipes)
-		close(pipes[j++]);
-}
-
 void	ft_pipe1(t_shell *shell, int pipes[], int i, int nb_pipe)
 {
-	if (*(shell->tok + 1) != NULL && !(!ft_strcmp(*(shell->op), ">") || !ft_strcmp(*(shell->op), ">>")))
+	if (*(shell->tok + 1) != NULL && !(!ft_strcmp(*(shell->op), \
+		">") || !ft_strcmp(*(shell->op), ">>")))
 		dup2(pipes[i + 1], STDOUT_FILENO);
 	if (i != 0)
 		dup2(pipes[i - 2], STDIN_FILENO);
@@ -96,11 +64,12 @@ void	ft_pipe3(t_shell *shell, int pipes[], int nb_pipe, int i)
 	if (shell->is_subshell)
 		exit(shell->exitstatus);
 }
+
 void	ft_exec_pipe(t_shell *shell, int nb_pipe)
 {
 	int		i;
 	int		j;
-	int		pipes[2 * nb_pipe];
+	int		pipes[2 * 99999];
 	pid_t	pid;
 
 	i = 0;

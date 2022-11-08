@@ -6,7 +6,7 @@
 /*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 03:16:01 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/27 19:42:33 by agenoves         ###   ########.fr       */
+/*   Updated: 2022/11/08 11:47:59 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_exec_cmd_fork(t_shell *shell)
 	exit(0);
 }
 
-void	ft_exec_cmd_aux(t_shell *shell, char *arg)
+void	ft_ex_aux(t_shell *shell, char *arg)
 {
 	pid_t	pid;
 	int		status;
@@ -65,7 +65,7 @@ void	ft_exec_cmd(t_shell *shell)
 		dup2(shell->redirec, STDOUT_FILENO);
 		close(shell->redirec);
 	}
-	ft_exec_cmd_aux(shell, NULL);
+	ft_ex_aux(shell, NULL);
 	if ((!ft_strcmp(*(shell->op), ">") || \
 		!ft_strcmp(*(shell->op), ">>")) && shell->redirec)
 	{

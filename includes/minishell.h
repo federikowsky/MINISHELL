@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:50:23 by agenoves          #+#    #+#             */
-/*   Updated: 2022/11/04 14:23:41 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/11/08 11:57:09 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@
 
 typedef struct s_shell
 {
+	DIR		*folder;
 	char	*cmd;
 	char	**op;
-	char	**gc;
 	char	**env;
 	char	*home;
 	char	**tok;
-	char	***gc2;
 	char	**op_temp;
 	char	**tok_temp;
 	char	*last_operator;
@@ -116,7 +115,7 @@ void			ft_printenv(char **envp);
 char			*ft_get_cmd(t_shell *shell);
 int				ft_start(t_shell *shell);
 void			ft_exec_cmd(t_shell *shell);
-void			ft_exec_cmd_aux(t_shell *shell, char *arg);
+void			ft_ex_aux(t_shell *shell, char *arg);
 void			ft_exec_cmd_fork(t_shell *shell);
 void			ft_switch_op(t_shell *shell);
 void			ft_creatematrix(t_shell *shell, char *token, char *operator);
@@ -135,6 +134,9 @@ char			*ft_get_cmd2(t_shell *shell, int *i, \
 void			ft_exec_pipe(t_shell *shell, int nb_pipe);
 void			ft_pipe(t_shell *shell);
 int				ft_count_pipe(t_shell *shell);
+int				ft_count_pipe(t_shell *shell);
+void			open_pipe(int pipes[], int no_pipes);
+void			close_pipe(int pipes[], int no_pipes);
 
 /* Bonus */
 void			ft_or(t_shell *shell);
@@ -163,15 +165,11 @@ char			*ft_changeword(char *sentence, char *find, char *replace);
 
 /* Wildcards */
 void			ft_wild(t_shell *shell);
-int 			ft_is_dir(const char* fileName);
-char			*ft_wild_cmd(t_shell *shell, char *arg);
+int				ft_is_dir(const char *fileName);
+char			*ft_wlcmd(t_shell *shell, char *arg);
 char			*ft_ret_dir(char **dir);
 
 /* Export */
 int				ft_countvar(char **cmds);
-
-/* Garbage Collector */
-char 			*gc(t_shell *shell, char *s);
-char			**gc2(t_shell *shell, char **ss); 
 
 #endif

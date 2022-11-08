@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 14:58:58 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/11/03 19:54:31 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/11/08 11:57:31 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,41 +32,40 @@ int	ft_wild_match(char *src, char *to_check)
 void	ft_wild_file(char *s, t_shell *shell, int *exist)
 {
 	DIR				*folder;
-	struct dirent	*entry;
+	struct dirent	*en;
 	char			*dir;
 
 	dir = ft_ret_dir(&s);
 	folder = opendir(dir);
-	entry = readdir(folder);
+	en = readdir(folder);
 	if (ft_strcmp(dir, "."))
 		dir = ft_strjoin(dir, "/");
 	else
 		dir = "";
-	while (entry)
+	while (en)
 	{
-		if (ft_isalpha(entry->d_name[0]) && entry->d_type == FILE && \
-				ft_wild_match(s, entry->d_name))
+		if (ft_isalpha(en->d_name[0]) && en->d_type == FILE && \
+				ft_wild_match(s, en->d_name))
 		{
-			if (s[0] == entry->d_name[0] || !ft_strncmp(s, "*", 1))
+			if (s[0] == en->d_name[0] || !ft_strncmp(s, "*", 1))
 			{
-				ft_exec_cmd_aux(shell, ft_wild_cmd(shell, ft_strjoin(dir, entry->d_name)));
+				ft_ex_aux(shell, ft_wlcmd(shell, ft_strjoin(dir, en->d_name)));
 				*exist = 1;
 			}
 		}
-		entry = readdir(folder);
+		en = readdir(folder);
 	}
 	closedir(folder);
 }
 
 void	ft_wild_dir(char *s, t_shell *shell, int num_arg, int *exist)
 {
-	DIR				*folder;
 	struct dirent	*entry;
 	char			*dir;
 
 	dir = ft_ret_dir(&s);
-	folder = opendir(dir);
-	entry = readdir(folder);
+	shell->folder = opendir(dir);
+	entry = readdir(shell->folder);
 	if (ft_strcmp(dir, "."))
 		dir = ft_strjoin(dir, "/");
 	else
@@ -74,18 +73,18 @@ void	ft_wild_dir(char *s, t_shell *shell, int num_arg, int *exist)
 	while (entry)
 	{
 		if (ft_isalpha(entry->d_name[0]) && entry->d_type == DIRECTORY && \
-			ft_wild_match(s, entry->d_name) && 							   \
+			ft_wild_match(s, entry->d_name) && \
 			(s[0] == entry->d_name[0] || !ft_strncmp(s, "*", 1)))
 		{
-				printf("\n");
-				if (num_arg > 2 || *s == '*')
-					printf("%s:\n", ft_strjoin(dir, entry->d_name));
-				ft_exec_cmd_aux(shell, ft_wild_cmd(shell, ft_strjoin(dir, entry->d_name)));
-				*exist = 1;
+			printf("\n");
+			if (num_arg > 2 || *s == '*')
+				printf("%s:\n", ft_strjoin(dir, entry->d_name));
+			ft_ex_aux(shell, ft_wlcmd(shell, ft_strjoin(dir, entry->d_name)));
+			*exist = 1;
 		}
-		entry = readdir(folder);
+		entry = readdir(shell->folder);
 	}
-	closedir(folder);
+	closedir(shell->folder);
 }
 
 void	ft_wild(t_shell *shell)
@@ -102,8 +101,8 @@ void	ft_wild(t_shell *shell)
 			continue ;
 		if (!ft_is_dir(arg[i]))
 		{
-			ft_exec_cmd_aux(shell, ft_wild_cmd(shell, arg[i]));
-			continue;
+			ft_ex_aux(shell, ft_wlcmd(shell, arg[i]));
+			continue ;
 		}
 		exist = 0;
 		ft_wild_file(arg[i], shell, &exist);

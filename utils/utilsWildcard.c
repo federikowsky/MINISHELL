@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsWildcard.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefilipp <fefilipp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agenoves <agenoves@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 02:32:16 by fefilipp          #+#    #+#             */
-/*   Updated: 2022/10/28 13:33:04 by fefilipp         ###   ########.fr       */
+/*   Updated: 2022/11/08 11:48:25 by agenoves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_ret_dir(char **dir)
 	char	*temp;
 	char	**sub_dir;
 	int		i;
-	
+
 	res = "";
 	i = 0;
 	if (!ft_is_dir(*dir))
@@ -37,14 +37,11 @@ char	*ft_ret_dir(char **dir)
 	return (temp);
 }
 
-int ft_is_dir(const char* fileName)
+int	ft_is_dir(const char *fileName)
 {
-    // struct stat path;
+	DIR	*dir;
 
-    // stat(fileName, &path);
-
-    // return S_ISREG(path.st_mode);
-	DIR* dir = opendir(fileName);
+	dir = opendir(fileName);
 	if (dir)
 	{
 		closedir(dir);
@@ -54,7 +51,7 @@ int ft_is_dir(const char* fileName)
 		return (1);
 }
 
-char	*ft_wild_cmd(t_shell *shell, char *arg)
+char	*ft_wlcmd(t_shell *shell, char *arg)
 {
 	char	*temp;
 	char	**splitted;
